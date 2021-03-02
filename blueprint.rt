@@ -1,0 +1,29 @@
+# This file can be in any order
+# Below is an example
+
+# Resolution
+R 1920 1080
+# Indentifier = R
+# x render size = 1920
+# y render size = 1080
+
+# Ambient lighting
+A 0.2 255, 255, 255
+# Indentifier = A
+# light ratio, range [0.0 - 1.0] = 0.2
+# R,G,B colours, range[0-255]
+
+# Camera
+c -50.0,0,20.6   0,0,1  70
+# Indentifier = C
+# x,y,z coordinates of the pov = 0,0,20.6
+# 3d normalized orientation vector, range [-1,1] for each x,y,z axis = 0,0,1          ???????? Whaaaaa  ????????
+# horizontal fov in degrees, range [0 - 180] = 70
+
+# Light
+l -40.0,50.0,0.0   0.6   10,0,255
+# ID = L
+# x,y,z coord of light source = 0,50.0,0
+# light brightness ratio, range [0.0-1.0] = 0.6
+# RGB colors, range [0-255] = 10, 0, 255
+
