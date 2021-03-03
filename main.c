@@ -1,9 +1,16 @@
-#include "gnl/get_next_line.h"
-#include "libft/libft.h"
-#include <math.h>
-#include "mlx/mlx.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   main.c                                             :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2021/03/03 13:28:19 by rmeiboom      #+#    #+#                 */
+/*   Updated: 2021/03/03 13:44:38 by rmeiboom      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt.h"
-#include <stdio.h>
 #include <fcntl.h>
 
 
@@ -12,13 +19,6 @@
 		// Raytracing calculations
 		// Writing to the window or to a .bmp
 
-int		parse(char *line, t_env *env)
-{
-	printf("%s\n", line);
-	env->res.id += 1;
-	printf("%d\n", env->res.id);
-	return (0);
-}
 
 int	main(int argc, char *argv[])
 {
@@ -37,7 +37,7 @@ int	main(int argc, char *argv[])
 	while(ret > 0)
 	{
 		ret = get_next_line(fd, &line);
-		parse(line, &env);
+		// parse(line, &env);
 		free(line);
 	}
 	// Use GNL to read from the .rt file
@@ -48,4 +48,5 @@ int	main(int argc, char *argv[])
 		// struct for containing all shapes?
 	
 	// ** Use the example the to see which data types are usd for the numbers ex. int, float, etc 
+	// while(1);
 }

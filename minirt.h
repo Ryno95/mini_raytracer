@@ -6,16 +6,22 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/03 10:09:33 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/03/03 12:28:48 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/03/03 13:41:19 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-// Includes to be added
+#include "gnl/get_next_line.h"
+#include "libft/libft.h"
+#include <math.h>
+#include "mlx/mlx.h"
+#include <stdio.h>
 
-// What is ambient lighting??
-// What is 3d normalized vector??
+// What is ambient lighting?? (kinda like the sun, awlways constant, present lighting)
+// What is 3d normalized vector?? Normalizes the vector distance ex. point x:1,y:0 & x:0,y:1 nrm3dvec = x:0,7,y:0,7 (draw it out)
 // Using ENUM for the project??
 enum shapes{sp, pl, sq, cy, tr};
+
+
 // Defining of structs
 	// Structs for the enviroment
 		// Resolution
@@ -96,9 +102,9 @@ typedef struct s_plane
 	float			x;
 	float			y;
 	float			z;
-	float			vec_x:
-	float			vec_y:
-	float			vec_z:
+	float			vec_x;
+	float			vec_y;
+	float			vec_z;
 	unsigned char	r;
 	unsigned char	g;
 	unsigned char	b;
@@ -111,9 +117,9 @@ typedef struct s_square
 	float			x;
 	float			y;
 	float			z;
-	float			vec_x:
-	float			vec_y:
-	float			vec_z:
+	float			vec_x;
+	float			vec_y;
+	float			vec_z;
 	unsigned char	r;
 	unsigned char	g;
 	unsigned char	b;
@@ -126,9 +132,9 @@ typedef struct s_cylinder
 	float			x;
 	float			y;
 	float			z;
-	float			vec_x:
-	float			vec_y:
-	float			vec_z:
+	float			vec_x;
+	float			vec_y;
+	float			vec_z;
 	unsigned char	r;
 	unsigned char	g;
 	unsigned char	b;
@@ -140,4 +146,9 @@ typedef struct	s_shapes
 	t_plane		plane;
 	t_square	square;
 	t_cylinder	cyl;
-}
+}				t_shapes;
+
+
+
+int		parse(char *line, t_env *env);
+char	**ft_split_sset(char const *s, char *set);

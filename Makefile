@@ -7,7 +7,7 @@ NAME = minirt
 # HEADER = minirt.h
 LIBS = libft/libft.a
 
-OBJ = main.o gnl/get_next_line.o gnl/get_next_line_utils.o 
+OBJ = main.o gnl/get_next_line.o gnl/get_next_line_utils.o parse/parse.o
 
 all: $(NAME)
 
