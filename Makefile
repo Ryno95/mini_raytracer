@@ -2,27 +2,29 @@ CC = gcc
 
 CFLAGS = -Wall -Werror -Wextra
 
-NAME = scene.rt
+NAME = minirt
 
 # HEADER = minirt.h
+LIBS = libft/libft.a
 
-OBJ = main.o
+OBJ = main.o gnl/get_next_line.o gnl/get_next_line_utils.o 
 
 all: $(NAME)
 
 # Move the dynamic lib to root dir and compile
 $(NAME): $(OBJ)
 		cd mlx && $(MAKE)
-		$(CC) $(CFLAGS) $(OBJ) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+		cd libft && $(MAKE)
+		$(CC) $(CFLAGS) $(OBJ) $(LIBS)  -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 
 %.o: %.c
 		$(CC) -c -o $@ $<
 
 clean: 
-		rm -f $(OBJ)
+		rm -f $(OBJ) libft/*.o
 
 fclean: clean
-		rm -f $(NAME)
+		rm -f $(NAME) libft/libft.a
 
 re: fclean all
 

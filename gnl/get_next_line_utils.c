@@ -6,7 +6,7 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/25 15:38:30 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2020/12/12 11:09:38 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/03/03 11:33:59 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ char	*ft_strdup(const char *s1)
 	return (ptr);
 }
 
-char	*ft_strjoin(char *s1, char *s2)
+char	*ft_gnl_strjoin(char *s1, char *s2)
 {
 	size_t	len1;
 	size_t	i;

@@ -6,7 +6,7 @@
 /*   By: rmeiboom <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/29 17:34:18 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2020/12/13 10:41:00 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/03/03 11:34:19 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static int	check_leftovers(char **leftovers, char **line, char **strt)
 		return (0);
 	if (ft_strchr(*leftovers, '\n'))
 	{
-		*line = ft_strjoin(*line, *leftovers);
+		*line = ft_gnl_strjoin(*line, *leftovers);
 		if (!*line)
 			return (-1);
 		*leftovers += ft_strlen(*line) + 1;
@@ -88,7 +88,7 @@ static int	read_until_nl(int fd, char **line, char **leftovers, char **start)
 		else if (read_bytes == 0 && ft_strlen(*line) > 0)
 			return (0);
 		buffer[read_bytes] = '\0';
-		*line = ft_strjoin(*line, buffer);
+		*line = ft_gnl_strjoin(*line, buffer);
 		if (!line)
 			return (-1);
 	}

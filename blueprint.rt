@@ -27,3 +27,16 @@ l -40.0,50.0,0.0   0.6   10,0,255
 # light brightness ratio, range [0.0-1.0] = 0.6
 # RGB colors, range [0-255] = 10, 0, 255
 
+# Sphere
+sp 33.0,22.0,20.6 12.6 10,0,255
+# ID = sp
+# x,y,z coord of light point = 33, 22, 20.6
+# diameter = 12.6
+# RGB colors, range [0-255] = 10,0,255
+
+# Sqaure
+sq 33.0,22.0,20.6 0.0,1.0,0.7 12.6 255,0,255
+# ID = sq
+# x,y,z coord = 33,22,20.6
+# 3d normalized vector, range [-1,1], for each x,y,z axis = 0,1,0.7 
+# RGB colors, range [0-255] = 255,0,255

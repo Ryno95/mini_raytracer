@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
+/*   example.c                                          :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: rmeiboom <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/24 19:19:52 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/02/26 10:36:51 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/03/03 10:31:28 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ typedef struct 	s_img
 	int		width;
 	int		x;
 	int		y;
-	
 }				t_img;
 
 // faster version to write pixel to the image file
@@ -50,7 +49,6 @@ void	my_pixel_put(t_img *img, int x, int y, unsigned int colour)
 	offset = y * img->line_size + x * (img->bits_per_pixel / 8);
 	dst = img->address + offset;
 	*(unsigned int *)dst = colour;
-	
 }
 
 // function to close the window and exit the program
