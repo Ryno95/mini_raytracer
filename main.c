@@ -6,7 +6,7 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/03 13:28:19 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/03/03 13:44:38 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/03/04 21:23:18 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ int	main(int argc, char *argv[])
 	while(ret > 0)
 	{
 		ret = get_next_line(fd, &line);
-		// parse(line, &env);
+		printf("parse: %d\n", parse(line, &env));
+		printf("ID: %c\nX: %d\nY: %d\n", env.res.id, env.res.x, env.res.y);
 		free(line);
 	}
 	// Use GNL to read from the .rt file

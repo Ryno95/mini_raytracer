@@ -6,7 +6,7 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/03 10:09:33 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/03/03 13:41:19 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/03/04 21:49:34 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,38 @@
 #include "mlx/mlx.h"
 #include <stdio.h>
 
+# define IDS "RAcl"
+
 // What is ambient lighting?? (kinda like the sun, awlways constant, present lighting)
 // What is 3d normalized vector?? Normalizes the vector distance ex. point x:1,y:0 & x:0,y:1 nrm3dvec = x:0,7,y:0,7 (draw it out)
 // Using ENUM for the project??
-enum shapes{sp, pl, sq, cy, tr};
+enum shapes{sphere, plane, sqaure, cylinder, triangle};
 
 
 // Defining of structs
+	// Basics
+typedef struct	s_rgb
+{
+	unsigned char	r;
+	unsigned char	g;
+	unsigned char	b;
+}				t_rgb;
+
+typedef struct	s_coord
+{
+	float			x;
+	float			y;
+	float			z;
+}				t_coord;
+
+
 	// Structs for the enviroment
 		// Resolution
 typedef struct   s_res
 {
 	unsigned char	id; // R
-	const float     x;
-	const float     y;
+	int			    x;
+	int			    y;
 }               t_res;
 
 		// Ambient lighting
@@ -38,9 +56,7 @@ typedef struct   s_amb_light
 	unsigned char    id; // A
 	float			ratio; // [0.0 - 1.0]
 	// colors, rgb, [0-255]
-	unsigned char	r;
-	unsigned char	g;
-	unsigned char	b;
+	t_rgb			colors;
 }				t_amb_light;
 
 		// Camera
@@ -48,13 +64,9 @@ typedef struct	s_camera
 {
 	unsigned char	id; // c
 	// coord of camera 
-	float			x;
-	float			y;
-	float			z;
+	t_coord			coords;
 	float			ratio;
-	unsigned char	r;
-	unsigned char	g;
-	unsigned char	b;
+	t_rgb			colors;
 	unsigned char	fov; // [0 - 180]
 }				t_camera;
 	
@@ -62,13 +74,9 @@ typedef struct	s_camera
 typedef struct	s_light_src
 {
 	unsigned char	id; // l
-	float			x;
-	float			y;
-	float			z;
+	t_coord			coords;
 	float			brightness;
-	unsigned char	r;
-	unsigned char	g;
-	unsigned char	b;
+	t_rgb			colors;
 	
 }				t_light_src;
 
@@ -86,69 +94,48 @@ typedef struct	s_env
 typedef struct s_sphere
 {
 	unsigned char	id;
-	float			x;
-	float			y;
-	float			z;
 	float			diam;
-	unsigned char	r;
-	unsigned char	g;
-	unsigned char	b;
+	t_coord			coords;
+	t_rgb			colors;
 }				t_sphere;
 
 		// Plane
 typedef struct s_plane
 {
 	unsigned char	id;
-	float			x;
-	float			y;
-	float			z;
-	float			vec_x;
-	float			vec_y;
-	float			vec_z;
-	unsigned char	r;
-	unsigned char	g;
-	unsigned char	b;
+	t_coord			coords;
+	t_coord			vect_coords;
+	t_rgb			colors;
 }				t_plane;
 
 		// Square
 typedef struct s_square
 {
 	unsigned char	id;
-	float			x;
-	float			y;
-	float			z;
-	float			vec_x;
-	float			vec_y;
-	float			vec_z;
-	unsigned char	r;
-	unsigned char	g;
-	unsigned char	b;
+	t_coord			coords;
+	t_coord			vect_coords;
+	t_rgb			colors;
 }				t_square;
 
 
 typedef struct s_cylinder
 {
 	unsigned char	id;
-	float			x;
-	float			y;
-	float			z;
-	float			vec_x;
-	float			vec_y;
-	float			vec_z;
-	unsigned char	r;
-	unsigned char	g;
-	unsigned char	b;
+	t_coord			coords;
+	t_coord			vect_coords;
+	t_rgb			colors;
 }				t_cylinder;
 
 typedef struct	s_shapes
 {
-	t_sphere 	sphere;
-	t_plane		plane;
-	t_square	square;
-	t_cylinder	cyl;
+	t_sphere 	*sphere;
+	t_plane		*plane;
+	t_square	*square;
+	t_cylinder	*cyl;
 }				t_shapes;
 
 
 
 int		parse(char *line, t_env *env);
 char	**ft_split_sset(char const *s, char *set);
+void	free_split(char **split_array);
