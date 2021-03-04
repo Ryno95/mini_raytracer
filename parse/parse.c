@@ -6,7 +6,7 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/03 13:27:17 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/03/04 21:40:56 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/03/04 21:55:15 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,20 @@ static int	parse_res(char *line, t_res *res)
 
 static int	parse_amb_light(char *line, t_amb_light *am_lt)
 {
+	char **sl;
+	sl = ft_split(line, ' ');
+	if (!sl)
+		return (-1);
+	else
+	{
+		am_lt->id = sl[0][0];
+		// TODO: Right ft_atof();
+		am_lt->ratio = ft_atof(line);
+		while (ft_isdigit(*line))
+			line++;
+		// TODO: Assignation of RGB struct
+	}
+	free_split(sl);
 	return (0);
 }
 
