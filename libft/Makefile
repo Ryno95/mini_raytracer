@@ -6,7 +6,7 @@
 #    By: rmeiboom <marvin@codam.nl>                   +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/10/27 21:14:05 by rmeiboom      #+#    #+#                  #
-#    Updated: 2020/11/17 19:10:20 by rmeiboom      ########   odam.nl          #
+#    Updated: 2021/03/05 16:54:32 by rmeiboom      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,7 @@ BASIC_OBJ_FILES = 	ft_toupper.o\
 					ft_strncmp.o\
 					ft_strnstr.o\
 					ft_atoi.o\
+					ft_atof.o\
 					ft_substr.o\
 					ft_strjoin.o\
 					ft_strtrim.o\

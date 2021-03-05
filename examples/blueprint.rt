@@ -8,7 +8,7 @@ R 1920 1080
 # y render size = 1080
 
 # Ambient lighting
-A 0.2 255, 255, 255
+A 0.2 255,255,255
 # Indentifier = A
 # light ratio, range [0.0 - 1.0] = 0.2
 # R,G,B colours, range[0-255]

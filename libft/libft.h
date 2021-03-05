@@ -6,7 +6,7 @@
 /*   By: rmeiboom <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/28 13:42:48 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2020/11/16 19:37:36 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/03/05 16:56:58 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,5 +67,6 @@ t_list			*ft_lstlast(t_list *lst);
 void			ft_lstadd_back(t_list **lst, t_list *new);
 void			ft_lstdelone(t_list *lst, void (*del)(void*));
 void			ft_lstclear(t_list **lst, void (*del)(void*));
+float			ft_atof(char *str);
 
 #endif
