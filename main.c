@@ -6,7 +6,7 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/03 13:28:19 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/03/05 22:06:28 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/03/06 21:47:02 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,6 @@ int	main(int argc, char *argv[])
 	char	*line;
 	int		ret = 1;
 	static	t_env	env;
-	static	t_data	data;
-
-	ft_lstadd_back(&list[0], ft_lstnew(data.camera));
-	check_content(data.list[0]->content);
 
 	if (argc != 2)
 	{
@@ -49,12 +45,20 @@ int	main(int argc, char *argv[])
 	while(ret > 0)
 	{
 		ret = get_next_line(fd, &line);
-		printf("parse: %d\n", parse(line, &env));
+		env.spl_str = ft_split(line, ' ');
+		if (!env.spl_str)
+			return (-1);
+		printf("parse: %d\n", parse(&env));
 		free(line);
+		// printf("VEC_COORDS: %d\n", ((t_camera*)(env.camera->content))->fov);
 	}
-	printf("VEC_COORDS: %f\n", env.camera->vect_coords.x);
-	printf("VEC_COORDS: %f\n", env.camera->vect_coords.y);
-	printf("VEC_COORDS: %f\n", env.camera->vect_coords.z);
+	
+	// printf("HERE\n");
+	printf("FOV: %d\n", ((t_camera*)(env.camera->next->next->content))->fov);
+	printf("RGB: %d\n", env.amb_light.colors.r);
+	printf("RESX: %d\n", env.res.x);
+	// printf("VEC_COORDS: %f\n", ((t_camera*)(env.camera->content))->vect_coords.y);
+	// printf("VEC_COORDS: %f\n", ((t_camera*)(env.camera->content))->vect_coords.z);
 	// Use GNL to read from the .rt file
 	// With each line check the indentifier, parseing similair to printf 
 		// When parsing assign data to fitting struct

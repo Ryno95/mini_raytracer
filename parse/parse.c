@@ -6,102 +6,75 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/03 13:27:17 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/03/05 22:19:41 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/03/06 21:55:21 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minirt.h"
 
 // check that values are positive where needed
-int	parse_res(char *line, t_res *res)
+int	parse_res(char **spl_str, t_res *res)
 {
 	// R 1920 1080
 
-	char **split_line;
-	split_line = ft_split(line, ' ');
-	if (!split_line)
+	if (!spl_str || !res)
 		return (-1);
-	else
-	{
-		res->id = split_line[0][0];
-		res->x = ft_atoi(split_line[1]);
-		res->y = ft_atoi(split_line[2]);
-	}
-	free_split(split_line);
+	res->id = spl_str[0][0];
+	res->x = ft_atoi(spl_str[1]);
+	res->y = ft_atoi(spl_str[2]);
 	return (0);
 }
 
-int	parse_amb_light(char *line, t_amb_light *am_lt)
+int	parse_amb_light(char **spl_str, t_amb_light *am_lt)
 {
 	char **sl;
-	sl = ft_split(line, ' ');
-	if (!sl)
+	if (!spl_str || !am_lt)
 		return (-1);
-	am_lt->id = sl[0][0];
-	am_lt->ratio = ft_atof(sl[1]);
-	while (ft_isdigit(*line))
-		line++;
-	ass_colors(sl[2], &am_lt->colors);
-	free_split(sl);
+	am_lt->id = spl_str[0][0];
+	am_lt->ratio = ft_atof(spl_str[1]);
+	ass_colors(spl_str[2], &am_lt->colors);
 	
 	return (0);
 }
 
-
-// t_camera cam_list(void *content)
-// {
-// 	 t_list *node;
-
-	 
-// }
-
-int	parse_cam(char *line, t_camera *cam)
+int	parse_cam(char **spl_str, t_list **cam)
 {
 	// c   -50.0,0,20   0,0,1   70
-	// When passing a pointer, it's initial val is NULL fuckface!!!!
-	// Make a new t_camera *
-	// Fill the values
-	// Add it to the cam_list
-	char **sl;
 	int vec_len;
-	// t_list	*camlist;
-	sl = ft_split(line, ' ');
-	if (!sl)
-		return (-1);
-	// if (!camlist)
-	// 	camlist = ft_lstnew(cam);
-	// if (!camlist)
-		// return (-1);
-	// cam->id = CAM;
-	cam->id = 99;
-	printf("ID: %d\n", cam->id);
-	// cam->id = CAM;
-	// ass_coords(sl[1], &cam->coords);
-	// vec_len = ft_vec_len(cam->coords);
-	// cam->vect_coords.x = cam->coords.x / vec_len;
-	// cam->vect_coords.y = cam->coords.y / vec_len;
-	// cam->vect_coords.z = cam->coords.z / vec_len;
-	// cam->fov = ft_atoi(sl[3]);
-	// if (cam->fov < 0)
-	// 	cam->fov = 0;
-	// else if (cam->fov > 180)
-	// 	cam->fov = 180;
+	t_camera *cam_node;
 	
+	cam_node = malloc(sizeof(t_camera));
+	cam_node->id = CAMERA;
+	ass_coords(spl_str[1], &cam_node->coords);
+	
+	// What is best prectice for this? If 3d vect isn't correct??? Error? Or Assign the correct version???
+	vec_len = ft_vec_len(cam_node->coords);
+	cam_node->vect_coords.x = cam_node->coords.x / vec_len;
+	cam_node->vect_coords.y = cam_node->coords.y / vec_len;
+	cam_node->vect_coords.z = cam_node->coords.z / vec_len;
+	cam_node->fov = ft_atoi(spl_str[3]);
+	
+	if (cam_node->fov < 0)
+		cam_node->fov = 0;
+	else if (cam_node->fov > 180)
+		cam_node->fov = 180;
+		
+	ft_lstadd_front(cam, ft_lstnew(cam_node));
 	return (0);
 }
 
-int	parse(char *line, t_env *env)
+int	parse(t_env *env)
 {
-	if (line[0] == '\n')
+	if (*env->spl_str[0] == '\n')
 		return (0);
-	if (*line == 'R')
-		return(parse_res(line, &env->res));
-	else if (*line == 'A')
-		return(parse_amb_light(line, &env->amb_light));
-	else if (*line == 'c')
-		return(parse_cam(line, env->camera));
-
-
+	if (**env->spl_str == 'R')
+		return(parse_res(env->spl_str, &env->res));
+	else if (**env->spl_str == 'A')
+		return(parse_amb_light(env->spl_str, &env->amb_light));
+	else if (**env->spl_str == 'c')
+		return(parse_cam(env->spl_str, &env->camera));
+	// else if (**env->spl_str == 'l')
+	
 	// if tree by identifier
 		// if identifier
 			// pass indentified struct to corresponding function

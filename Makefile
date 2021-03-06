@@ -12,14 +12,15 @@ OBJ = main.o\
 	gnl/get_next_line_utils.o\
 	parse/parse.o\
 	utils/ft_free.o\
-	utils/ass_colors.o
+	utils/ass_colors.o\
+	utils/ft_errors.o
 
 all: $(NAME)
 
 # Move the dynamic lib to root dir and compile
 $(NAME): $(OBJ)
 		cd mlx && $(MAKE)
-		cd libft && echo "make bonus"
+		cd libft && $(MAKE)
 		$(CC) $(CFLAGS) $(OBJ) $(LIBS)  -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 
 %.o: %.c

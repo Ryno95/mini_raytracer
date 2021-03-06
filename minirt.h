@@ -6,7 +6,7 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/03 10:09:33 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/03/05 22:02:08 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/03/06 21:42:10 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 // What is ambient lighting?? (kinda like the sun, awlways constant, present lighting)
 // What is 3d normalized vector?? Normalizes the vector distance ex. point x:1,y:0 & x:0,y:1 nrm3dvec = x:0,7,y:0,7 (draw it out)
 // Using ENUM for the project??
-enum multi_opts{camera, light_src, sphere, plane, sqaure, cylinder, triangle};
-enum env{CAM, LIGHT_SRC};
+enum multi_opts{CAMERA, LIGHT, SPHERE, PLANE, SQAURE, CYLINDER, TRIANGLE};
+// enum env{CAM, LIGHT_SRC};
 
 
 // Defining of structs
@@ -84,9 +84,10 @@ typedef struct	s_light_src
 		// Struct containing all enviroment structs
 typedef struct	s_env
 {
+	char		**spl_str;
 	t_res		res;
 	t_amb_light amb_light;
-	t_camera	*camera;
+	t_list		*camera;
 	t_light_src	*light_src;
 }				t_env;
 	
@@ -137,7 +138,7 @@ typedef struct	s_shapes
 
 typedef struct 	s_data
 {
-	t_list		*list[7];
+	char		**spl_str;
 	t_res		res;
 	t_amb_light amb_light;
 	t_camera	*camera;
@@ -148,9 +149,10 @@ typedef struct 	s_data
 	t_cylinder	*cyl;
 }				t_data;
 
-int		parse(char *line, t_env *env);
+int		parse(t_env *env);
 char	**ft_split_sset(char const *s, char *set);
 void	free_split(char **split_array);
 void	ass_colors(char *str, t_rgb *cols);
 void	ass_coords(char *str, t_coord *coords);
 float	ft_vec_len(t_coord coords);
+void	ft_parse_error(char *err_desc);

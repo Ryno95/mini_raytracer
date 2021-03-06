@@ -6,7 +6,7 @@
 #    By: rmeiboom <marvin@codam.nl>                   +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/10/27 21:14:05 by rmeiboom      #+#    #+#                  #
-#    Updated: 2021/03/05 16:54:32 by rmeiboom      ########   odam.nl          #
+#    Updated: 2021/03/06 12:35:56 by rmeiboom      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,8 +48,7 @@ BASIC_OBJ_FILES = 	ft_toupper.o\
 					ft_putnbr_fd.o\
 					ft_strmapi.o\
 					ft_itoa.o\
-
-BONUS_OBJ_FILES = 	ft_lstnew.o\
+					ft_lstnew.o\
 					ft_lstadd_front.o\
 					ft_lstsize.o\
 					ft_lstlast.o\
