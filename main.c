@@ -6,7 +6,7 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/03 13:28:19 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/03/06 21:47:02 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/03/06 22:42:39 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,16 @@ int	main(int argc, char *argv[])
 		if (!env.spl_str)
 			return (-1);
 		printf("parse: %d\n", parse(&env));
+		free_split(env.spl_str);
 		free(line);
 		// printf("VEC_COORDS: %d\n", ((t_camera*)(env.camera->content))->fov);
 	}
-	
 	// printf("HERE\n");
-	printf("FOV: %d\n", ((t_camera*)(env.camera->next->next->content))->fov);
+	printf("FOV: %d\n", ((t_camera*)(env.cam_list->content))->fov);
 	printf("RGB: %d\n", env.amb_light.colors.r);
 	printf("RESX: %d\n", env.res.x);
+	ft_lstclear(&env.light, free);
+	ft_lstclear(&env.cam_list, free);
 	// printf("VEC_COORDS: %f\n", ((t_camera*)(env.camera->content))->vect_coords.y);
 	// printf("VEC_COORDS: %f\n", ((t_camera*)(env.camera->content))->vect_coords.z);
 	// Use GNL to read from the .rt file
@@ -67,5 +69,6 @@ int	main(int argc, char *argv[])
 		// struct for containing all shapes?
 	
 	// ** Use the example the to see which data types are usd for the numbers ex. int, float, etc 
-	// while(1);
+	while(1);
+	return (0);
 }

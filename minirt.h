@@ -6,7 +6,7 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/03 10:09:33 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/03/06 21:42:10 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/03/06 22:39:41 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,14 +72,14 @@ typedef struct	s_camera
 }				t_camera;
 	
 		// Light source
-typedef struct	s_light_src
+typedef struct	s_light
 {
 	unsigned char	id; // l
 	t_coord			coords;
 	float			brightness;
 	t_rgb			colors;
 	
-}				t_light_src;
+}				t_light;
 
 		// Struct containing all enviroment structs
 typedef struct	s_env
@@ -87,8 +87,8 @@ typedef struct	s_env
 	char		**spl_str;
 	t_res		res;
 	t_amb_light amb_light;
-	t_list		*camera;
-	t_light_src	*light_src;
+	t_list		*cam_list;
+	t_list		*light;
 }				t_env;
 	
 	// Structs for shapes
@@ -142,7 +142,7 @@ typedef struct 	s_data
 	t_res		res;
 	t_amb_light amb_light;
 	t_camera	*camera;
-	t_light_src	*light_src;
+	t_list		*light;
 	t_sphere 	*sphere;
 	t_plane		*plane;
 	t_square	*square;
