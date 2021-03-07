@@ -11,9 +11,12 @@ OBJ = main.o\
 	gnl/get_next_line.o\
 	gnl/get_next_line_utils.o\
 	parse/parse.o\
+	parse/parse_env.o\
+	parse/parse_shapes.o\
 	utils/ft_free.o\
-	utils/ass_colors.o\
-	utils/ft_errors.o
+	utils/ft_parse_utils.o\
+	utils/ft_errors.o\
+	utils/ft_math_utils.o
 
 all: $(NAME)
 

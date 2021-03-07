@@ -1,22 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_lists.c                                         :+:    :+:            */
+/*   ft_math_utils.c                                    :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: rmeiboom <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2021/03/05 20:48:25 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/03/05 20:59:28 by rmeiboom      ########   odam.nl         */
+/*   Created: 2021/03/07 20:49:30 by rmeiboom      #+#    #+#                 */
+/*   Updated: 2021/03/07 20:57:22 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-// void	*ft_lstlast(void *node)
-// {
-// 	void *cursor;
-// 	if (!node)
-// 		return ;
+#include "../minirt.h"
+
+float	ft_round_fl(float num, int decimals)
+{
+	float  rounded_nbr;
+	if (decimals == 0)
+		return (num);
+
+	rounded_nbr = ((int)((num * pow(10, decimals)) + 0.5)) / pow(10, decimals);
 	
-// 	cursor = node;
-// 	while (node->next != NULL)
-// 		cursor = cursor->next;
-// }
+	return (rounded_nbr);
+}
+
+float	ft_vec_len(t_coord coords)
+{
+	return(sqrt(pow((coords.x), 2) + pow((coords.y), 2) + pow((coords.z), 2)));	
+}

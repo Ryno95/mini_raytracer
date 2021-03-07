@@ -6,7 +6,7 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/03 10:09:33 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/03/07 13:29:42 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/03/07 21:09:09 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,10 +81,8 @@ typedef struct	s_light
 	
 }				t_light;
 
-		// Struct containing all enviroment structs
 	
-	// Structs for shapes
-		// Sphere
+// Structs for shapes
 typedef struct s_sphere
 {
 	unsigned char	id;
@@ -93,7 +91,6 @@ typedef struct s_sphere
 	t_rgb			colors;
 }				t_sphere;
 
-		// Plane
 typedef struct s_plane
 {
 	unsigned char	id;
@@ -102,7 +99,6 @@ typedef struct s_plane
 	t_rgb			colors;
 }				t_plane;
 
-		// Square
 typedef struct s_square
 {
 	unsigned char	id;
@@ -111,7 +107,6 @@ typedef struct s_square
 	float			side_size;
 	t_rgb			colors;
 }				t_square;
-
 
 typedef struct s_cylinder
 {
@@ -154,7 +149,6 @@ typedef struct	s_env
 	t_list		*triangle_lst;
 }				t_env;
 
-
 typedef struct 	s_data
 {
 	char		**spl_str;
@@ -168,10 +162,33 @@ typedef struct 	s_data
 	t_cylinder	*cyl;
 }				t_data;
 
+// parse/parse.c
 int		parse(t_env *env);
-char	**ft_split_sset(char const *s, char *set);
+
+// parse/parse_env.c
+int	parse_res(char **spl_str, t_res *res);
+int	parse_amb_light(char **spl_str, t_amb_light *am_lt);
+int	parse_cam(char **spl_str, t_list **cam);
+int parse_light(char **split, t_list **light_lst);
+
+// parse/parse_shapes.c
+int	parse_sphere(char **split, t_list **sphere_lst);
+int parse_plane(char **split, t_list **plane_lst);
+int parse_square(char **split, t_list **square_lst);
+int parse_cylinder(char **split, t_list **cylinder_lst);
+int parse_triangle(char **split, t_list **triangle_lst);
+
+// utils/ft_free.c
 void	free_split(char **split_array);
+
+// utils/parse_utils.c
 void	ass_colors(char *str, t_rgb *cols);
 void	ass_coords(char *str, t_coord *coords);
-float	ft_vec_len(t_coord coords);
+int		ft_str_arr_len(char **str_array);
+
+// utils/ft_errors.c
 void	ft_parse_error(char *err_desc);
+
+// Utils/ft_math_utils.c
+float	ft_vec_len(t_coord coords);
+float	ft_round_fl(float num, int decimals);
