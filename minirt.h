@@ -6,7 +6,7 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/03 10:09:33 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/03/06 22:44:52 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/03/07 13:29:42 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 // What is ambient lighting?? (kinda like the sun, awlways constant, present lighting)
 // What is 3d normalized vector?? Normalizes the vector distance ex. point x:1,y:0 & x:0,y:1 nrm3dvec = x:0,7,y:0,7 (draw it out)
 // Using ENUM for the project??
-enum multi_opts{CAMERA, LIGHT, SPHERE, PLANE, SQAURE, CYLINDER, TRIANGLE};
+enum multi_opts{CAMERA, LIGHT, SPHERE, PLANE, SQUARE, CYLINDER, TRIANGLE};
 // enum env{CAM, LIGHT_SRC};
 
 
@@ -82,14 +82,6 @@ typedef struct	s_light
 }				t_light;
 
 		// Struct containing all enviroment structs
-typedef struct	s_env
-{
-	char		**spl_str;
-	t_res		res;
-	t_amb_light amb_light;
-	t_list		*cam_list;
-	t_list		*light;
-}				t_env;
 	
 	// Structs for shapes
 		// Sphere
@@ -116,6 +108,7 @@ typedef struct s_square
 	unsigned char	id;
 	t_coord			coords;
 	t_coord			vect_coords;
+	float			side_size;
 	t_rgb			colors;
 }				t_square;
 
@@ -125,8 +118,19 @@ typedef struct s_cylinder
 	unsigned char	id;
 	t_coord			coords;
 	t_coord			vect_coords;
+	float			diamtr;
+	float			height;
 	t_rgb			colors;
 }				t_cylinder;
+
+typedef struct 	s_triangle
+{
+	unsigned char	id;
+	t_coord			frst_pnt;
+	t_coord			scnd_pnt;
+	t_coord			thrd_pnt;
+	t_rgb			colors;
+}				t_triangle;
 
 typedef struct	s_shapes
 {
@@ -135,6 +139,21 @@ typedef struct	s_shapes
 	t_square	*square;
 	t_cylinder	*cyl;
 }				t_shapes;
+
+typedef struct	s_env
+{
+	char		**spl_str;
+	t_res		res;
+	t_amb_light amb_light;
+	t_list		*cam_list;
+	t_list		*light;
+	t_list		*sphere_lst;
+	t_list		*plane_lst;
+	t_list		*square_lst;
+	t_list		*cylinder_lst;
+	t_list		*triangle_lst;
+}				t_env;
+
 
 typedef struct 	s_data
 {

@@ -6,7 +6,7 @@
 /*   By: rmeiboom <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/05 17:03:23 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/03/05 20:36:44 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/03/07 11:48:17 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,7 @@ void	ass_coords(char *str, t_coord *coords)
 		coords->x = ft_atof(sl[0]);
 	if (ft_atof(sl[1]) > 0)
 		coords->y = ft_atof(sl[1]);
-	if (ft_atof(sl[2]) > 0)
-		coords->z = ft_atof(sl[2]);
+	coords->z = ft_atof(sl[2]);
 	free_split(sl);
 }
 

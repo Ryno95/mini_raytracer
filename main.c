@@ -6,7 +6,7 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/03 13:28:19 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/03/06 22:42:39 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/03/07 13:35:44 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,16 @@
 
 // Different components or objects to the project
 		// Parsing
+		// Error management
 		// Raytracing calculations
 		// Writing to the window or to a .bmp
-void check_content(void *ptr)
-{
-	
-}
 
+// TODO ERROR MANAGEMENT:
+	// VECT_COORDS
+	// SPLIT LENGTH
+	// ROUND FLOAT 2
 int	main(int argc, char *argv[])
 {
-	//  argv[1] .rt file with description of the scene to be created
 	int		fd;
 	char	*line;
 	int		ret = 1;
@@ -39,36 +39,31 @@ int	main(int argc, char *argv[])
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 0)
 	{
-		printf("Open failed\n");
+		printf("Error\nOpen failed\n");
 		exit(1);
 	}
 	while(ret > 0)
 	{
 		ret = get_next_line(fd, &line);
-		env.spl_str = ft_split(line, ' ');
-		if (!env.spl_str)
-			return (-1);
-		printf("parse: %d\n", parse(&env));
-		free_split(env.spl_str);
+		if (*line != '\0')
+		{
+			env.spl_str = ft_split(line, ' ');
+			if (!env.spl_str)
+				return (-1);
+			printf("parse: %d\n", parse(&env));
+			free_split(env.spl_str);
+		}
 		free(line);
-		// printf("VEC_COORDS: %d\n", ((t_camera*)(env.camera->content))->fov);
 	}
-	// printf("HERE\n");
-	printf("FOV: %d\n", ((t_camera*)(env.cam_list->content))->fov);
-	printf("RGB: %d\n", env.amb_light.colors.r);
-	printf("RESX: %d\n", env.res.x);
+	printf("RGB: %d\n", ((t_triangle*)(env.triangle_lst->content))->colors.b);
+
 	ft_lstclear(&env.light, free);
 	ft_lstclear(&env.cam_list, free);
-	// printf("VEC_COORDS: %f\n", ((t_camera*)(env.camera->content))->vect_coords.y);
-	// printf("VEC_COORDS: %f\n", ((t_camera*)(env.camera->content))->vect_coords.z);
-	// Use GNL to read from the .rt file
-	// With each line check the indentifier, parseing similair to printf 
-		// When parsing assign data to fitting struct
-		// One struct for each of the camera, lighting & AmbLight and camera, and then one big struct containing them all
-		// maybe one node struct for each shape?
-		// struct for containing all shapes?
-	
-	// ** Use the example the to see which data types are usd for the numbers ex. int, float, etc 
-	while(1);
+	ft_lstclear(&env.sphere_lst, free);
+	ft_lstclear(&env.plane_lst, free);
+	ft_lstclear(&env.square_lst, free);
+	ft_lstclear(&env.cylinder_lst, free);
+	ft_lstclear(&env.triangle_lst, free);
+	// while(1);
 	return (0);
 }
