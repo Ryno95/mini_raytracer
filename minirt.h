@@ -6,7 +6,7 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/03 10:09:33 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/03/07 21:09:09 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/03/08 21:21:33 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 // What is ambient lighting?? (kinda like the sun, awlways constant, present lighting)
 // What is 3d normalized vector?? Normalizes the vector distance ex. point x:1,y:0 & x:0,y:1 nrm3dvec = x:0,7,y:0,7 (draw it out)
 // Using ENUM for the project??
-enum multi_opts{CAMERA, LIGHT, SPHERE, PLANE, SQUARE, CYLINDER, TRIANGLE};
+enum multi_opts{SPHERE, PLANE, SQUARE, CYLINDER, TRIANGLE};
 // enum env{CAM, LIGHT_SRC};
 
 
@@ -142,6 +142,7 @@ typedef struct	s_env
 	t_amb_light amb_light;
 	t_list		*cam_list;
 	t_list		*light;
+	t_list		*shapes[5];
 	t_list		*sphere_lst;
 	t_list		*plane_lst;
 	t_list		*square_lst;
@@ -162,8 +163,18 @@ typedef struct 	s_data
 	t_cylinder	*cyl;
 }				t_data;
 
+
+typedef	struct	s_img
+{
+	void	*mlx_ptr;
+	void	*img_ptr;
+	void	*wdw_ptr;
+}				t_img;
+
+
 // parse/parse.c
-int		parse(t_env *env);
+int		parse(char *file_name, t_env *env);
+int		parse_tree(t_env *env);
 
 // parse/parse_env.c
 int	parse_res(char **spl_str, t_res *res);

@@ -6,7 +6,7 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/03 13:28:19 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/03/07 13:35:44 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/03/08 21:54:02 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,36 @@
 // Different components or objects to the project
 		// Parsing
 		// Error management
+		// Drawing shapes from structs
+			// Functions for every shape, start KISS!
 		// Raytracing calculations
 		// Writing to the window or to a .bmp
+void	ft_mlx_error(char *str)
+{
+	printf("Error!\n%s\n", str);
+	exit(1);
+}
+
+
+int ft_run_mlx(t_img *img, t_env *env)
+{
+	int i;
+	img->mlx_ptr = mlx_init();
+	if (!img->mlx_ptr)
+		ft_mlx_error("Couldn't init mlx");
+		
+	img->wdw_ptr = mlx_new_window(img->mlx_ptr, env->res.x, env->res.y, "TESTIIEES!");
+	if (!img->wdw_ptr)
+		ft_mlx_error("Couldn't init window");
+	
+	// get_shape();
+		// draw_shapes();
+			// While i < triangle && i < camera
+				// if id == shape
+					// draw_specific_shape
+
+	return (0);
+}
 
 // TODO ERROR MANAGEMENT:
 	// VECT_COORDS
@@ -26,44 +54,28 @@
 	// ROUND FLOAT 2
 int	main(int argc, char *argv[])
 {
-	int		fd;
-	char	*line;
-	int		ret = 1;
+	int		i = 0;
 	static	t_env	env;
+	// t_img			img;
 
 	if (argc != 2)
 	{
 		printf("Usage: ./executable scene.rt");
 		return (-1);
 	}
-	fd = open(argv[1], O_RDONLY);
-	if (fd < 0)
-	{
-		printf("Error\nOpen failed\n");
-		exit(1);
-	}
-	while(ret > 0)
-	{
-		ret = get_next_line(fd, &line);
-		if (*line != '\0')
-		{
-			env.spl_str = ft_split(line, ' ');
-			if (!env.spl_str)
-				return (-1);
-			printf("parse: %d\n", parse(&env));
-			free_split(env.spl_str);
-		}
-		free(line);
-	}
-	printf("RGB: %d\n", ((t_triangle*)(env.triangle_lst->content))->colors.b);
-
+	if (parse(argv[1], &env) == -1)
+		ft_parse_error("");
+		
+	// ft_run_mlx(&img, &env);
+	
 	ft_lstclear(&env.light, free);
 	ft_lstclear(&env.cam_list, free);
-	ft_lstclear(&env.sphere_lst, free);
-	ft_lstclear(&env.plane_lst, free);
-	ft_lstclear(&env.square_lst, free);
-	ft_lstclear(&env.cylinder_lst, free);
-	ft_lstclear(&env.triangle_lst, free);
+	while (i < TRIANGLE)
+	{
+		ft_lstclear(&env.shapes[i], free);
+		i++;
+	}
+	// mlx_loop(img.mlx_ptr);
 	// while(1);
 	return (0);
 }
