@@ -6,13 +6,18 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/03 13:28:19 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/03/08 21:54:02 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/03/09 20:59:30 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 #include <fcntl.h>
 
+// bit shifting = (red * pow(256, ((bits/8) - 1))) + (green * pow(256, ((bits/8) - 1))) + (blue * pow(256, ((bits/8) - 1)));
+unsigned int	create_trgb(int t, int r, int g, int b)
+{
+	return(t << 24 | r << 16 | g << 8 | b);
+}
 
 // Different components or objects to the project
 		// Parsing
