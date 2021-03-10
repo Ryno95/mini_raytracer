@@ -6,7 +6,7 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/03 10:09:33 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/03/08 21:21:33 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/03/10 13:16:00 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,16 @@ enum multi_opts{SPHERE, PLANE, SQUARE, CYLINDER, TRIANGLE};
 
 // Defining of structs
 	// Basics
-typedef struct	s_rgb
+typedef union	u_rgb
 {
-	unsigned char	r;
-	unsigned char	g;
-	unsigned char	b;
+	unsigned int rgb;
+	struct
+	{
+		unsigned char	b;
+		unsigned char	g;
+		unsigned char	r;
+		unsigned char	a;
+	};
 }				t_rgb;
 
 typedef struct	s_coord
@@ -135,6 +140,17 @@ typedef struct	s_shapes
 	t_cylinder	*cyl;
 }				t_shapes;
 
+typedef	struct	s_img
+{
+	void	*mlx_ptr;
+	void	*img_ptr;
+	void	*wdw_ptr;
+	char	*address;
+	int		bits_per_pixel;
+	int		line_size;
+	int		endian;
+}				t_img;
+
 typedef struct	s_env
 {
 	char		**spl_str;
@@ -143,11 +159,19 @@ typedef struct	s_env
 	t_list		*cam_list;
 	t_list		*light;
 	t_list		*shapes[5];
-	t_list		*sphere_lst;
-	t_list		*plane_lst;
-	t_list		*square_lst;
-	t_list		*cylinder_lst;
-	t_list		*triangle_lst;
+	t_img		img;
+	void	*mlx_ptr;
+	void	*img_ptr;
+	void	*wdw_ptr;
+	char	*address;
+	int		bits_per_pixel;
+	int		line_size;
+	int		endian;
+	// t_list		*sphere_lst;
+	// t_list		*plane_lst;
+	// t_list		*square_lst;
+	// t_list		*cylinder_lst;
+	// t_list		*triangle_lst;
 }				t_env;
 
 typedef struct 	s_data
@@ -164,12 +188,6 @@ typedef struct 	s_data
 }				t_data;
 
 
-typedef	struct	s_img
-{
-	void	*mlx_ptr;
-	void	*img_ptr;
-	void	*wdw_ptr;
-}				t_img;
 
 
 // parse/parse.c

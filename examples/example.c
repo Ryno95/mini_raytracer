@@ -6,7 +6,7 @@
 /*   By: rmeiboom <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/24 19:19:52 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/03/09 20:19:05 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/03/10 13:07:55 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,8 @@ int draw_img(t_img *img, unsigned int color)
 		my_pixel_put(img, i, img->y, color);
 		i++;
 	}
-	i = img->y - img->height/2;
-	while (i < img->height/2 + img->y)
+	i = img->y - img->height / 2;
+	while (i < img->height / 2 + img->y)
 	{
 		my_pixel_put(img, img->x, i, color);
 		i++;
@@ -122,7 +122,7 @@ int		main(void)
 	if (!window)
 		return (-1);
 
-	img.address = mlx_get_data_addr(img_ptr, &img.bits_per_pixel, &img.line_size, &img.endian);
+	// img.address = mlx_get_data_addr(img_ptr, &img.bits_per_pixel, &img.line_size, &img.endian);
 
 	// these vars will be read from a file
 	// find a more efficient way to store them

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ass_colors.c                                       :+:    :+:            */
+/*   ft_parse_utils.c                                   :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: rmeiboom <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/05 17:03:23 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/03/07 20:59:17 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/03/10 10:42:10 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	ft_str_arr_len(char **str_array)
 	return (i);
 }
 
+// print color funct! TODO!
 void	ass_colors(char *str, t_rgb *cols)
 {
 	char **sl;
@@ -30,12 +31,10 @@ void	ass_colors(char *str, t_rgb *cols)
 	sl = ft_split(str, ',');
 	if (!sl || !cols || ft_str_arr_len(sl) != 3)
 		ft_parse_error("colors, safety checks");
-	if (ft_atoi(sl[0]) > 0)
-		cols->r = ft_atoi(sl[0]);
-	if (ft_atoi(sl[1]) > 0)
-		cols->g = ft_atoi(sl[1]);
-	if (ft_atoi(sl[2]) > 0)
-		cols->b = ft_atoi(sl[2]);
+
+	cols->r = ft_atoi(sl[0]);
+	cols->g = ft_atoi(sl[1]);
+	cols->b = ft_atoi(sl[2]);
 	free_split(sl);
 }
 

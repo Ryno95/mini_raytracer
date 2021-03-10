@@ -6,7 +6,7 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/03 13:27:17 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/03/08 20:44:53 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/03/10 12:21:29 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,10 @@ int parse(char *file_name, t_env *env)
 			env->spl_str = ft_split(line, ' ');
 			if (!env->spl_str)
 				return (-1);
-			printf("parse: %d\n", parse_tree(env));
+			// printf("parse: %d\n", parse_tree(env));
 			free_split(env->spl_str);
 		}
 		free(line);
 	}
-	return (0);
+	return (1);
 }
