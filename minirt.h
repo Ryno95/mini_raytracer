@@ -6,7 +6,7 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/03 10:09:33 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/03/10 13:16:00 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/03/11 22:43:02 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,17 +140,6 @@ typedef struct	s_shapes
 	t_cylinder	*cyl;
 }				t_shapes;
 
-typedef	struct	s_img
-{
-	void	*mlx_ptr;
-	void	*img_ptr;
-	void	*wdw_ptr;
-	char	*address;
-	int		bits_per_pixel;
-	int		line_size;
-	int		endian;
-}				t_img;
-
 typedef struct	s_env
 {
 	char		**spl_str;
@@ -159,19 +148,11 @@ typedef struct	s_env
 	t_list		*cam_list;
 	t_list		*light;
 	t_list		*shapes[5];
-	t_img		img;
-	void	*mlx_ptr;
-	void	*img_ptr;
-	void	*wdw_ptr;
-	char	*address;
-	int		bits_per_pixel;
-	int		line_size;
-	int		endian;
-	// t_list		*sphere_lst;
-	// t_list		*plane_lst;
-	// t_list		*square_lst;
-	// t_list		*cylinder_lst;
-	// t_list		*triangle_lst;
+	t_list		*sphere_lst;
+	t_list		*plane_lst;
+	t_list		*square_lst;
+	t_list		*cylinder_lst;
+	t_list		*triangle_lst;
 }				t_env;
 
 typedef struct 	s_data
@@ -188,24 +169,44 @@ typedef struct 	s_data
 }				t_data;
 
 
+typedef	struct	s_img
+{
+	void	*mlx_ptr;
+	void	*img_ptr;
+	void	*wdw_ptr;
+	char	*address;
+	int		bits_per_pixel;
+	int		line_size;
+	int		endian;
+	int		height;
+	int		width;
+	int		x;
+	int		y;
+}				t_img;
 
+void	ft_mlx_error(char *str);
 
 // parse/parse.c
 int		parse(char *file_name, t_env *env);
 int		parse_tree(t_env *env);
 
 // parse/parse_env.c
-int	parse_res(char **spl_str, t_res *res);
-int	parse_amb_light(char **spl_str, t_amb_light *am_lt);
-int	parse_cam(char **spl_str, t_list **cam);
-int parse_light(char **split, t_list **light_lst);
+int		parse_res(char **spl_str, t_res *res);
+int		parse_amb_light(char **spl_str, t_amb_light *am_lt);
+int		parse_cam(char **spl_str, t_list **cam);
+int		parse_light(char **split, t_list **light_lst);
 
 // parse/parse_shapes.c
-int	parse_sphere(char **split, t_list **sphere_lst);
-int parse_plane(char **split, t_list **plane_lst);
-int parse_square(char **split, t_list **square_lst);
-int parse_cylinder(char **split, t_list **cylinder_lst);
-int parse_triangle(char **split, t_list **triangle_lst);
+int		parse_sphere(char **split, t_list **sphere_lst);
+int		parse_plane(char **split, t_list **plane_lst);
+int		parse_square(char **split, t_list **square_lst);
+int		parse_cylinder(char **split, t_list **cylinder_lst);
+int		parse_triangle(char **split, t_list **triangle_lst);
+
+// window_control/ft_window.c
+int		ft_run_mlx(t_img *img, t_env *env);
+int		keypress(int kc, t_img *img);
+int		my_destroy_window(t_img *img);
 
 // utils/ft_free.c
 void	free_split(char **split_array);
@@ -221,3 +222,10 @@ void	ft_parse_error(char *err_desc);
 // Utils/ft_math_utils.c
 float	ft_vec_len(t_coord coords);
 float	ft_round_fl(float num, int decimals);
+
+// utils/draw_utils.c
+void	my_lstiter(t_list *lst, t_img *img, void (*f)(t_img *, void *));
+void	my_pixel_put(t_img *img, int x, int y, unsigned int colour);
+
+// tracer/draw_shapes.c
+void ft_draw_square(t_img *img, t_square *sqr);

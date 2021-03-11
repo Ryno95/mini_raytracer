@@ -6,7 +6,7 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/03 13:40:31 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/03/10 10:41:52 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/03/07 21:04:07 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	parse_sphere(char **split, t_list **sphere_lst)
 	ass_colors(split[3], &sph_node->colors);
 
 	ft_lstadd_back(sphere_lst, ft_lstnew(sph_node));
-	return (1);
+	return (0);
 }
 
 int parse_plane(char **split, t_list **plane_lst)
@@ -44,7 +44,7 @@ int parse_plane(char **split, t_list **plane_lst)
 
 	ft_lstadd_back(plane_lst, ft_lstnew(plane_node));
 
-	return (1);
+	return (0);
 }
 
 int parse_square(char **split, t_list **square_lst)
@@ -63,7 +63,7 @@ int parse_square(char **split, t_list **square_lst)
 
 	ft_lstadd_back(square_lst, ft_lstnew(square_node));
 
-	return (1);
+	return (0);
 }
 
 int parse_cylinder(char **split, t_list **cylinder_lst)
@@ -83,7 +83,7 @@ int parse_cylinder(char **split, t_list **cylinder_lst)
 
 	ft_lstadd_back(cylinder_lst, ft_lstnew(cylinder_node));
 
-	return (1);
+	return (0);
 }
 
 int parse_triangle(char **split, t_list **triangle_lst)
@@ -104,5 +104,5 @@ int parse_triangle(char **split, t_list **triangle_lst)
 	
 	ft_lstadd_front(triangle_lst, ft_lstnew(tri_node));
 
-	return (1);
+	return (0);
 }

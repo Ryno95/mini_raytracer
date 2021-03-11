@@ -5,25 +5,28 @@ CFLAGS = -Wall -Werror -Wextra
 NAME = minirt
 
 # HEADER = minirt.h
-# LIBS = libft/libft.a
+LIBS = libft/libft.a
 
 OBJ = main.o\
-	# gnl/get_next_line.o\
-	# gnl/get_next_line_utils.o\
-	# parse/parse.o\
-	# parse/parse_env.o\
-	# parse/parse_shapes.o\
-	# utils/ft_free.o\
-	# utils/ft_parse_utils.o\
-	# utils/ft_errors.o\
-	# utils/ft_math_utils.o
+	gnl/get_next_line.o\
+	gnl/get_next_line_utils.o\
+	parse/parse.o\
+	parse/parse_env.o\
+	parse/parse_shapes.o\
+	window_control/ft_window.o\
+	utils/ft_free.o\
+	utils/ft_parse_utils.o\
+	utils/ft_errors.o\
+	utils/ft_math_utils.o\
+	utils/draw_utils.o\
+	tracer/draw_shapes.o
 
 all: $(NAME)
 
 # Move the dynamic lib to root dir and compile
 $(NAME): $(OBJ)
 		cd mlx && $(MAKE)
-		# cd libft && $(MAKE)
+		cd libft && $(MAKE)
 		$(CC) $(CFLAGS) $(OBJ) $(LIBS)  -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 
 %.o: %.c

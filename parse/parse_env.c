@@ -6,7 +6,7 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/03 13:31:58 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/03/10 10:41:26 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/03/08 20:50:55 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	parse_res(char **spl_str, t_res *res)
 	// find a way to check screen max and min
 	res->x = ft_atoi(spl_str[1]);
 	res->y = ft_atoi(spl_str[2]);
-	return (1);
+	return (0);
 }
 
 int	parse_amb_light(char **spl_str, t_amb_light *am_lt)
@@ -37,7 +37,7 @@ int	parse_amb_light(char **spl_str, t_amb_light *am_lt)
 	if (am_lt->ratio > 1 || am_lt->ratio < 0)
 		ft_parse_error("ambient light, ratio out of bounds");
 
-	return (1);
+	return (0);
 }
 
 int	parse_cam(char **spl_str, t_list **cam)
@@ -65,7 +65,7 @@ int	parse_cam(char **spl_str, t_list **cam)
 		cam_node->fov = 180;
 
 	ft_lstadd_front(cam, ft_lstnew(cam_node));
-	return (1);
+	return (0);
 }
 
 int parse_light(char **split, t_list **light_lst)
@@ -86,5 +86,5 @@ int parse_light(char **split, t_list **light_lst)
 
 	ft_lstadd_front(light_lst, ft_lstnew(light_node));
 
-	return (1);
+	return (0);
 }
