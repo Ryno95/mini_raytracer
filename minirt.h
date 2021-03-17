@@ -6,7 +6,7 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/03 10:09:33 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/03/11 22:43:02 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/03/16 21:24:58 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@
 enum multi_opts{SPHERE, PLANE, SQUARE, CYLINDER, TRIANGLE};
 // enum env{CAM, LIGHT_SRC};
 
-
 // Defining of structs
 	// Basics
 typedef union	u_rgb
@@ -35,7 +34,7 @@ typedef union	u_rgb
 		unsigned char	b;
 		unsigned char	g;
 		unsigned char	r;
-		unsigned char	a;
+		unsigned char	t;
 	};
 }				t_rgb;
 
@@ -46,6 +45,11 @@ typedef struct	s_coord
 	float			z;
 }				t_coord;
 
+typedef struct	s_ray
+{
+	t_coord		orientation;
+	t_coord		direction;
+}				t_ray;
 
 	// Structs for the enviroment
 		// Resolution
@@ -228,4 +232,9 @@ void	my_lstiter(t_list *lst, t_img *img, void (*f)(t_img *, void *));
 void	my_pixel_put(t_img *img, int x, int y, unsigned int colour);
 
 // tracer/draw_shapes.c
-void ft_draw_square(t_img *img, t_square *sqr);
+void	ft_draw_square(t_img *img, t_square *sqr);
+
+
+//tracer/ft_tracer.c
+void	ft_raster(t_img *img, t_env *env);
+int		ft_tracer(int i, int j, t_env *env);

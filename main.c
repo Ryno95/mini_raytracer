@@ -6,7 +6,7 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/03 13:28:19 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/03/11 22:44:37 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/03/12 10:41:29 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 // bit shifting = (red * pow(256, ((bits/8) - 1))) + (green * pow(256, ((bits/8) - 1))) + (blue * pow(256, ((bits/8) - 1)));
 unsigned int	create_trgb(int t, int r, int g, int b)
 {
+	// 0x00000000
+	// 0xttrrggbb
 	return(t << 24 | r << 16 | g << 8 | b);
 }
 
@@ -54,7 +56,11 @@ int	main(int argc, char *argv[])
 	// fuck = ((t_square*)(env.shapes[SQUARE]->next->content))->coords.x;
 	// printf("SQUARE2X: %f\n", fuck);
 	// ((t_camera *)(scene->camera->content))->pos.x
+	
 	ft_run_mlx(&img, &env);
+	
+	// printf("%u\n", create_trgb(0,255, 0 ,0));
+	// printf("%u\n", ((t_square*)(env.shapes[SQUARE]->content))->colors.rgb);
 	
 	ft_lstclear(&env.light, free);
 	ft_lstclear(&env.cam_list, free);
@@ -64,7 +70,7 @@ int	main(int argc, char *argv[])
 		i++;
 	}
 	mlx_hook(img.wdw_ptr, 17, 1l << 17, my_destroy_window, &img);
-	// mlx_hook(img.wdw_ptr, 2, 1l << 0, keypress, &img);
+	mlx_hook(img.wdw_ptr, 2, 1l << 0, keypress, &img);
 	mlx_loop(img.mlx_ptr);
 	// while(1);
 	return (0);

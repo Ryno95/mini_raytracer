@@ -6,7 +6,7 @@
 /*   By: rmeiboom <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/11 22:31:15 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/03/11 22:38:27 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/03/14 12:58:02 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int ft_run_mlx(t_img *img, t_env *env)
 
 	img->address = mlx_get_data_addr(img->img_ptr, &img->bits_per_pixel, &img->line_size, &img->endian);
 
+	// ft_tracer(img, env);
 	while (i < TRIANGLE)
 	{
 		if (i == SQUARE)

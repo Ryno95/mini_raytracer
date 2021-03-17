@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ass_colors.c                                       :+:    :+:            */
+/*   ft_parse_utils.c                                   :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: rmeiboom <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/05 17:03:23 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/03/07 20:59:17 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/03/16 21:24:58 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	ass_colors(char *str, t_rgb *cols)
 		cols->g = ft_atoi(sl[1]);
 	if (ft_atoi(sl[2]) > 0)
 		cols->b = ft_atoi(sl[2]);
+	cols->t = 0;
 	free_split(sl);
 }
 

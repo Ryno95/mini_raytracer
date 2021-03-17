@@ -6,13 +6,15 @@
 /*   By: rmeiboom <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/11 22:27:05 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/03/11 22:27:47 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/03/12 10:42:55 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft/libft.h"
 #include "../minirt.h"
 
+
+// devide or min the z coords
 void ft_draw_square(t_img *img, t_square *sqr)
 {
 	int i;
@@ -29,7 +31,7 @@ void ft_draw_square(t_img *img, t_square *sqr)
 		// while j >= smallest x coord &&  j <= biggest x coord
 		while (j <= (sqr->coords.x + (sqr->side_size / 2)))
 		{
-			my_pixel_put(img, j, i, 0x00ffffff);
+			my_pixel_put(img, j, i, sqr->colors.rgb);
 			j++;
 		}
 		i++;
