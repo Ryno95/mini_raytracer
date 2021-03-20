@@ -6,7 +6,7 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/03 13:31:58 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/03/08 20:50:55 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/03/19 10:36:58 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	parse_amb_light(char **spl_str, t_amb_light *am_lt)
 int	parse_cam(char **spl_str, t_list **cam)
 {
 	// c   -50.0,0,20   0,0,1   70
-	int vec_len;
+	int vl;
 	t_camera *cam_node;
 
 	cam_node = malloc(sizeof(t_camera));
@@ -53,10 +53,10 @@ int	parse_cam(char **spl_str, t_list **cam)
 	ass_coords(spl_str[1], &cam_node->coords);
 
 	// What is best prectice for this? If 3d vect isn't correct??? Error? Or Assign the correct version???
-	vec_len = ft_vec_len(cam_node->coords);
-	cam_node->vect_coords.x = cam_node->coords.x / vec_len;
-	cam_node->vect_coords.y = cam_node->coords.y / vec_len;
-	cam_node->vect_coords.z = cam_node->coords.z / vec_len;
+	vl = vec_len(cam_node->coords);
+	cam_node->vect_coords.x = cam_node->coords.x / vl;
+	cam_node->vect_coords.y = cam_node->coords.y / vl;
+	cam_node->vect_coords.z = cam_node->coords.z / vl;
 	cam_node->fov = ft_atoi(spl_str[3]);
 
 	if (cam_node->fov < 0)

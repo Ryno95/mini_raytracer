@@ -6,7 +6,7 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/03 10:09:33 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/03/16 21:24:58 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/03/20 22:12:45 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@
 #include <stdio.h>
 
 # define IDS "RAcl"
+# define ray_max 1e6
+# define ray_min 1e-6
+
 
 // What is ambient lighting?? (kinda like the sun, awlways constant, present lighting)
 // What is 3d normalized vector?? Normalizes the vector distance ex. point x:1,y:0 & x:0,y:1 nrm3dvec = x:0,7,y:0,7 (draw it out)
@@ -45,9 +48,16 @@ typedef struct	s_coord
 	float			z;
 }				t_coord;
 
+typedef struct	s_vec
+{
+	float			x;
+	float			y;
+	float			z;
+}				t_vec;
+
 typedef struct	s_ray
 {
-	t_coord		orientation;
+	t_coord		origin;
 	t_coord		direction;
 }				t_ray;
 
@@ -78,6 +88,7 @@ typedef struct	s_camera
 	t_coord			vect_coords;
 	t_rgb			colors;
 	unsigned char	fov; // [0 - 180]
+	float			focal_length;
 }				t_camera;
 	
 		// Light source
@@ -227,6 +238,18 @@ void	ft_parse_error(char *err_desc);
 float	ft_vec_len(t_coord coords);
 float	ft_round_fl(float num, int decimals);
 
+//utils/vec_utils.c
+float	vec_len(t_coord coords);
+t_vec	vec_add(t_vec a, t_vec b);
+t_vec	vec_minus(t_vec a, t_vec b);
+t_vec	vec_multiply(t_vec a, t_vec b);
+t_vec	vec_divide(t_vec a, t_vec b);
+
+//utils/vec_products.c
+float	dot_product(t_vec a, t_vec b);
+t_vec	cross_product(t_vec a, t_vec b);
+
+
 // utils/draw_utils.c
 void	my_lstiter(t_list *lst, t_img *img, void (*f)(t_img *, void *));
 void	my_pixel_put(t_img *img, int x, int y, unsigned int colour);
@@ -236,5 +259,6 @@ void	ft_draw_square(t_img *img, t_square *sqr);
 
 
 //tracer/ft_tracer.c
-void	ft_raster(t_img *img, t_env *env);
-int		ft_tracer(int i, int j, t_env *env);
+t_ray	ft_build_ray(t_camera *cam, int x, int y);
+int		ft_tracer(int x, int y, t_env *env);
+void	ft_render(t_img *img, t_env *env);

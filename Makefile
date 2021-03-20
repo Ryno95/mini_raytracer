@@ -17,9 +17,11 @@ OBJ = main.o\
 	utils/ft_free.o\
 	utils/ft_parse_utils.o\
 	utils/ft_errors.o\
-	utils/ft_math_utils.o\
 	utils/draw_utils.o\
-	tracer/draw_shapes.o
+	utils/vec_products.o\
+	utils/vec_utils.o\
+	tracer/draw_shapes.o\
+	tracer/tracer.o
 
 all: $(NAME)
 

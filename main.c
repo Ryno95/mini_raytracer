@@ -6,7 +6,7 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/03 13:28:19 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/03/12 10:41:29 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/03/20 22:13:32 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	main(int argc, char *argv[])
 	int		i = 0;
 	static	t_env	env;
 	t_img			img;
-
+	
 	if (argc != 2)
 	{
 		printf("Usage: ./executable scene.rt");
@@ -57,8 +57,8 @@ int	main(int argc, char *argv[])
 	// printf("SQUARE2X: %f\n", fuck);
 	// ((t_camera *)(scene->camera->content))->pos.x
 	
-	ft_run_mlx(&img, &env);
-	
+	// ft_run_mlx(&img, &env);
+	ft_render(&img, &env);
 	// printf("%u\n", create_trgb(0,255, 0 ,0));
 	// printf("%u\n", ((t_square*)(env.shapes[SQUARE]->content))->colors.rgb);
 	
@@ -69,9 +69,9 @@ int	main(int argc, char *argv[])
 		ft_lstclear(&env.shapes[i], free);
 		i++;
 	}
-	mlx_hook(img.wdw_ptr, 17, 1l << 17, my_destroy_window, &img);
-	mlx_hook(img.wdw_ptr, 2, 1l << 0, keypress, &img);
-	mlx_loop(img.mlx_ptr);
+	// mlx_hook(img.wdw_ptr, 17, 1l << 17, my_destroy_window, &img);
+	// mlx_hook(img.wdw_ptr, 2, 1l << 0, keypress, &img);
+	// mlx_loop(img.mlx_ptr);
 	// while(1);
 	return (0);
 }
