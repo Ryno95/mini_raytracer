@@ -6,7 +6,7 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/03 10:09:33 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/03/20 22:12:45 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/03/29 20:01:28 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ typedef struct	s_camera
 	t_coord			vect_coords;
 	t_rgb			colors;
 	unsigned char	fov; // [0 - 180]
-	float			focal_length;
+	float			cam_dist;
 }				t_camera;
 	
 		// Light source
@@ -208,7 +208,7 @@ int		parse_tree(t_env *env);
 // parse/parse_env.c
 int		parse_res(char **spl_str, t_res *res);
 int		parse_amb_light(char **spl_str, t_amb_light *am_lt);
-int		parse_cam(char **spl_str, t_list **cam);
+int		parse_cam(char **spl_str, t_list **cam, t_res *res);
 int		parse_light(char **split, t_list **light_lst);
 
 // parse/parse_shapes.c

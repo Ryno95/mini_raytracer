@@ -6,7 +6,7 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/03 13:27:17 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/03/18 21:02:34 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/03/29 20:12:20 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,12 @@
 	// ROUND FLOAT 2
 int	parse_tree(t_env *env)
 {
-	printf("%s\n", env->spl_str[0]);
 	if (**env->spl_str == 'R')
 		return(parse_res(env->spl_str, &env->res));
 	else if (**env->spl_str == 'A')
 		return(parse_amb_light(env->spl_str, &env->amb_light));
 	else if (**env->spl_str == 'c' && env->spl_str[0][1] != 'y')
-		return(parse_cam(env->spl_str, &env->cam_list));
+		return(parse_cam(env->spl_str, &env->cam_list, &env->res));
 	else if (**env->spl_str == 'l')
 		return(parse_light(env->spl_str, &env->light));
 	else if (ft_strncmp("sp", env->spl_str[0], ft_strlen(env->spl_str[0])) == 0)
@@ -49,6 +48,7 @@ int parse(char *file_name, t_env *env)
 	int		ret;
 
 	ret = 1;
+	printf("ENTERING PARSING\n");
 	fd = open(file_name, O_RDONLY);
 	if (fd < 0)
 		ft_parse_error("Open failed");
@@ -61,7 +61,7 @@ int parse(char *file_name, t_env *env)
 			env->spl_str = ft_split(line, ' ');
 			if (!env->spl_str)
 				return (-1);
-			// printf("parse: %d\n", parse_tree(env));
+			printf("parse: %d\n", parse_tree(env));
 			free_split(env->spl_str);
 		}
 		free(line);

@@ -6,7 +6,7 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/03 13:31:58 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/03/19 10:36:58 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/03/29 20:29:37 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	parse_amb_light(char **spl_str, t_amb_light *am_lt)
 	return (0);
 }
 
-int	parse_cam(char **spl_str, t_list **cam)
+int	parse_cam(char **spl_str, t_list **cam, t_res *res)
 {
 	// c   -50.0,0,20   0,0,1   70
 	int vl;
@@ -58,7 +58,7 @@ int	parse_cam(char **spl_str, t_list **cam)
 	cam_node->vect_coords.y = cam_node->coords.y / vl;
 	cam_node->vect_coords.z = cam_node->coords.z / vl;
 	cam_node->fov = ft_atoi(spl_str[3]);
-
+	cam_node->cam_dist = (res->x / 2) / tan(cam_node->fov / 2);
 	if (cam_node->fov < 0)
 		cam_node->fov = 0;
 	else if (cam_node->fov > 180)

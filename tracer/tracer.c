@@ -6,7 +6,7 @@
 /*   By: rmeiboom <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/07 21:55:32 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/03/20 22:32:35 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/03/29 22:23:05 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,20 @@ t_ray	ft_build_ray(t_camera *cam, int x, int y)
 {
 	t_ray ray;
 	printf("entering ray builder\n");
-	// To calculate a ray you need:
-	// The ray origin(from camera) (O), ray direction (from args) (R) , and a point (P) along the ray [x, y]
-	// P = O + tR  (t = distance from origin to the point)
-	// tan a = opposite_side / ajacent_side
-	// ray.origin = cam->vect_coords;
-	// ray.direction.x = x;
-	// ray.direction.y = y;
+	ray.origin = cam->vect_coords;
+	ray.direction.x = x;
+	ray.direction.y = y;
+	ray.direction.z = cam->cam_dist; // because viewing rastrum is perdpendicular to the ray (90 deg)
 
 	return (ray);
 }
 
 int		ft_intersect(t_ray ray, void *shape_list, unsigned int *col, float *nearest)
 {
+	// To calculate a point on the ray you need:
+	// The ray origin(from camera) (O), ray direction (from args) (R) , and a point (P) along the ray [x, y]
+	// ray in parametric form:
+	// P = O + tR  (t = distance from origin to the point, Az - Bz?)
 	// For the parametric I = R(t) = (1 - t)C +tP
 	// Where:  I = Intersection
 			// t = weighted average (check formula)
@@ -45,8 +46,25 @@ int		ft_intersect(t_ray ray, void *shape_list, unsigned int *col, float *nearest
 			// Iy = Ry(t) = (1 - t)Cy + tPy
 			// Iz = Rz(t) = (1 - t)Cz + tPz
 
-			// Then substitute the above into the line equation: Ax + By +Cz + D = 0;
-	return (1);
+		// Then substitute the above into the line equation: Ax + By +Cz + D = 0;
+	return (-1);
+}
+
+int		ft_check_for_circle(void)
+{
+	
+	// Parametric of a sphere
+	// P.x=cos(θ)sin(ϕ)
+	// P.y=cos(θ)	
+	// P.z=sin(θ)sin(ϕ)
+
+	// to check if a point is inside a sphere centered around the origin
+	// r2 = x2 + y2 (For a point to be inside of a circle it needs to be smaller than sqrt(r2))
+
+	// arbitrary centre:
+	// (x2 - Ox2) + (y2 - Oy2) = r2
+	
+	
 }
 
 int		ft_tracer(int x, int y, t_env *env)
@@ -56,11 +74,12 @@ int		ft_tracer(int x, int y, t_env *env)
 	float nearest = INFINITY;
 	unsigned int color = 0;
 	t_ray	ray;
-
+	
+	// only when cam is on [0;0;Z]
 	x -= env->res.x / 2;
 	y = (env->res.y / 2) - y;
 	// First compute primary ray direction
-	ray = ft_build_ray((t_camera*)(env->cam_list), x, y);
+	ray = ft_build_ray((t_camera*)(env->cam_list->content), x, y);
 	// printf("Entering tracer\n");
 	while (p < TRIANGLE)
 	{
@@ -71,7 +90,7 @@ int		ft_tracer(int x, int y, t_env *env)
 		// in my intersect, iterate over all shapes
 		// my_lstiter(env->shapes[i], img, (void*)ft_draw_square);
 		// also triangle intersect for each triangel in the shape
-		if(ft_intersect(ray, (void*)env->shapes[p], &color, &nearest))
+		if(ft_intersect(ray, (void*)env->shapes[p], &color, &nearest) != -1)
 		{
 			printf("intersection found\n");
 			// If a hit is found compute the illumination
@@ -91,19 +110,19 @@ int		ft_tracer(int x, int y, t_env *env)
 
 void ft_render(t_img *img, t_env *env)
 {
-	int		i, j = 0;
-	int		res_x, res_y = 10; // (width and height)
+	int		i = 0;
+	int		j = 0;
 	printf("Entering rendering\n");
 	// Iterate over all pixels
-	while (i < res_y)
+	while (i < env->res.y)
 	{
 		j = 0;
-		while (j < res_x)
+		while (j < env->res.x)
 		{
 			// First compute primary ray direction
 			// ray = ft_build_ray(i, j);
 			if (ft_tracer(i, j, env))
-				printf("So far so good\n");
+				printf("So far so good:\ni: %d\nj: %d\n", i ,j);
 				// my_pixel_put(img, i, j, 0x00ffffff); // shader function for putting the color
 			j++;
 		}
