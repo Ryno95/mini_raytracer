@@ -6,7 +6,7 @@
 /*   By: rmeiboom <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/07 21:55:32 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/03/29 22:23:05 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/03/30 22:09:49 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,27 @@
 t_ray	ft_build_ray(t_camera *cam, int x, int y)
 {
 	t_ray ray;
+	float vl;
+// PixelNDCx=(Pixelx+0.5)/ImageWidth
+// PixelNDCy=(Pixely+0.5)/ImageHeight.
+
+// PixelScreenx = 2 * PixelNDCx - 1
+// PixelScreeny = 1 - 2 * PixelNDCy
+	vl = sqrt(pow(x, 2) + pow(y, 2));
 	printf("entering ray builder\n");
 	ray.origin = cam->vect_coords;
-	ray.direction.x = x;
-	ray.direction.y = y;
-	ray.direction.z = cam->cam_dist; // because viewing rastrum is perdpendicular to the ray (90 deg)
+	ray.direction.x = x / vl;
+	ray.direction.y = y / vl;
+	ray.direction.z = 1; // because viewing rastrum is perdpendicular to the ray (90 deg)
+	printf("Ray dir x:%f\n y:%f\n z:%f\n", ray.direction.x, ray.direction.y, ray.direction.z);
 
 	return (ray);
 }
 
 int		ft_intersect(t_ray ray, void *shape_list, unsigned int *col, float *nearest)
 {
+	// I think i want to calculate t in P = orig + t * dir
+	// if(intersect() && t > 0)
 	// To calculate a point on the ray you need:
 	// The ray origin(from camera) (O), ray direction (from args) (R) , and a point (P) along the ray [x, y]
 	// ray in parametric form:
@@ -64,7 +74,7 @@ int		ft_check_for_circle(void)
 	// arbitrary centre:
 	// (x2 - Ox2) + (y2 - Oy2) = r2
 	
-	
+	return (1);
 }
 
 int		ft_tracer(int x, int y, t_env *env)
@@ -112,6 +122,14 @@ void ft_render(t_img *img, t_env *env)
 {
 	int		i = 0;
 	int		j = 0;
+	float	local_x;
+	float	local_y;
+	float	scale;
+
+	scale = tan(deg2rad(options.fov * 0.5)); 
+
+	aspect_ratio = env->res.x / env->res.y;
+	
 	printf("Entering rendering\n");
 	// Iterate over all pixels
 	while (i < env->res.y)
@@ -119,6 +137,8 @@ void ft_render(t_img *img, t_env *env)
 		j = 0;
 		while (j < env->res.x)
 		{
+			local_x = (2 * (i + 0.5) / env->res.x * (env->res.x / env->res.y) * scale
+			local_y = (1 - 2 * (j + 0.5) / (float)options.height) * scale; 
 			// First compute primary ray direction
 			// ray = ft_build_ray(i, j);
 			if (ft_tracer(i, j, env))
