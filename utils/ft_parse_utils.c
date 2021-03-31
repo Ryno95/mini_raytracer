@@ -6,7 +6,7 @@
 /*   By: rmeiboom <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/05 17:03:23 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/03/16 21:24:58 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/03/31 16:55:30 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,11 @@ void	ass_colors(char *str, t_rgb *cols)
 void	ass_coords(char *str, t_coord *coords)
 {
 	char **sl;
-
 	sl = ft_split(str, ',');
 	if (!sl || !coords || ft_str_arr_len(sl) != 3)
 		ft_parse_error("coordinates, safety checks");
-	if (ft_atof(sl[0]) > 0)
-		coords->x = ft_atof(sl[0]);
-	if (ft_atof(sl[1]) > 0)
-		coords->y = ft_atof(sl[1]);
+	coords->x = ft_atof(sl[0]);
+	coords->y = ft_atof(sl[1]);
 	coords->z = ft_atof(sl[2]);
 	free_split(sl);
 }

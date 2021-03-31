@@ -6,7 +6,7 @@
 /*   By: rmeiboom <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/18 20:36:36 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/03/18 21:55:17 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/03/31 17:09:29 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,4 +27,24 @@ t_vec	cross_product(t_vec a, t_vec b)
 	c.z = (a.x * b.y) - (a.y * b.x);
 
 	return (c);
+}
+
+t_coord create_pos(float x, float y, float z)
+{
+	t_coord new_pos;
+
+	new_pos.x = x;
+	new_pos.y = y;
+	new_pos.z = z;
+
+	return (new_pos);
+}
+
+void normalize(t_vec *vec)
+{
+	float vl = vec_len(*vec);
+
+	vec->x /= vl;
+	vec->y /= vl;
+	vec->z /= vl;
 }

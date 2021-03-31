@@ -6,7 +6,7 @@
 /*   By: rmeiboom <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/11 22:31:15 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/03/14 12:58:02 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/03/31 14:37:21 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int ft_run_mlx(t_img *img, t_env *env)
 {
-	int i;
+	int i = 0;
 	void *cursor;
 
 	img->mlx_ptr = mlx_init();

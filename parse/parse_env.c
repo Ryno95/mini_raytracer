@@ -6,7 +6,7 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/03 13:31:58 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/03/29 20:29:37 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/03/31 15:02:24 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ int	parse_amb_light(char **spl_str, t_amb_light *am_lt)
 
 int	parse_cam(char **spl_str, t_list **cam, t_res *res)
 {
-	// c   -50.0,0,20   0,0,1   70
 	int vl;
 	t_camera *cam_node;
 

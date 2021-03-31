@@ -6,7 +6,7 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/03 10:09:33 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/03/29 20:01:28 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/03/31 18:03:12 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,13 @@ typedef union	u_rgb
 	};
 }				t_rgb;
 
-typedef struct	s_coord
-{
-	float			x;
-	float			y;
-	float			z;
-}				t_coord;
+
+// typedef struct	s_coord
+// {
+// 	float			x;
+// 	float			y;
+// 	float			z;
+// }				t_coord;
 
 typedef struct	s_vec
 {
@@ -55,10 +56,12 @@ typedef struct	s_vec
 	float			z;
 }				t_vec;
 
+#define t_coord t_vec
+
 typedef struct	s_ray
 {
 	t_coord		origin;
-	t_coord		direction;
+	t_vec		direction;
 }				t_ray;
 
 	// Structs for the enviroment
@@ -237,13 +240,15 @@ void	ft_parse_error(char *err_desc);
 // Utils/ft_math_utils.c
 float	ft_vec_len(t_coord coords);
 float	ft_round_fl(float num, int decimals);
+t_coord create_pos(float x, float y, float z);
+void normalize(t_vec *vec);
 
 //utils/vec_utils.c
 float	vec_len(t_coord coords);
 t_vec	vec_add(t_vec a, t_vec b);
 t_vec	vec_minus(t_vec a, t_vec b);
-t_vec	vec_multiply(t_vec a, t_vec b);
-t_vec	vec_divide(t_vec a, t_vec b);
+t_vec	vec_multiply(t_vec a, float factor);
+t_vec	vec_divide(t_vec a, float factor);
 
 //utils/vec_products.c
 float	dot_product(t_vec a, t_vec b);
@@ -262,3 +267,6 @@ void	ft_draw_square(t_img *img, t_square *sqr);
 t_ray	ft_build_ray(t_camera *cam, int x, int y);
 int		ft_tracer(int x, int y, t_env *env);
 void	ft_render(t_img *img, t_env *env);
+
+//tracer/ft_sphere_intersection.c
+float   ft_sphere(t_sphere *sphere, t_ray *ray);

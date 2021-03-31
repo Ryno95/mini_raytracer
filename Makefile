@@ -21,7 +21,8 @@ OBJ = main.o\
 	utils/vec_products.o\
 	utils/vec_utils.o\
 	tracer/draw_shapes.o\
-	tracer/tracer.o
+	tracer/tracer.o\
+	tracer/ft_sphere_intersection.o
 
 all: $(NAME)
 
@@ -29,10 +30,10 @@ all: $(NAME)
 $(NAME): $(OBJ)
 		cd mlx && $(MAKE)
 		cd libft && $(MAKE)
-		$(CC) $(CFLAGS) $(OBJ) $(LIBS)  -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+		$(CC) $(CFLAGS) $(OBJ) $(LIBS) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 
 %.o: %.c
-		$(CC) -c -o $@ $<
+		$(CC) -c -Wall -Wextra -o $@ $<
 
 clean: 
 		rm -f $(OBJ) libft/*.o
