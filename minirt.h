@@ -6,7 +6,7 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/03 10:09:33 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/03/31 18:03:12 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/04/01 20:35:45 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -269,4 +269,4 @@ int		ft_tracer(int x, int y, t_env *env);
 void	ft_render(t_img *img, t_env *env);
 
 //tracer/ft_sphere_intersection.c
-float   ft_sphere(t_sphere *sphere, t_ray *ray);
+float   ft_sphere_intersect(t_sphere *sphere, t_ray *ray);

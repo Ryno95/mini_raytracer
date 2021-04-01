@@ -6,7 +6,7 @@
 /*   By: rmeiboom <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/11 22:26:53 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/03/11 22:33:22 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/04/01 20:49:21 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	my_pixel_put(t_img *img, int x, int y, unsigned int colour)
 	// offset traverses the correct amount of memory to the stop in the 
 	// img memory where you want to start writing pixel
 	offset = y * img->line_size + x * (img->bits_per_pixel / 8);
-	printf("offset: %d\n", offset);
+	// printf("offset: %d\n", offset);
 	dst = img->address + offset;
 	*(unsigned int *)dst = colour;
 }
