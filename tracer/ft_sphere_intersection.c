@@ -6,13 +6,13 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/31 11:10:49 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/04/02 14:05:14 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/04/02 17:18:17 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minirt.h"
 
-float	ft_sphere_intersect(t_sphere *sphere, t_ray *ray, float *nearest)
+float	ft_sphere_intersect(t_sphere *sphere, t_ray *ray, float *nearest, unsigned int *col)
 {
 	float t = 1e-5;
 	float a; // always 1
@@ -37,8 +37,8 @@ float	ft_sphere_intersect(t_sphere *sphere, t_ray *ray, float *nearest)
 	if (t >= 0 && t < *nearest)
 	{
 		*nearest = t;
+		*col = sphere->colors.rgb;
 		return (1);
 	}
- 
 	return (0);
 }

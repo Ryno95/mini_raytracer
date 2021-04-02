@@ -6,7 +6,7 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/03 13:28:19 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/04/02 13:49:02 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/04/02 17:56:50 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	ft_mlx_error(char *str)
 int	main(int argc, char *argv[])
 {
 	int		i = 0;
+	// float fuck;
 	static	t_env	env;
 	t_img			img;
 	
@@ -39,8 +40,12 @@ int	main(int argc, char *argv[])
 	}
 	if (parse(argv[1], &env) == -1)
 		ft_parse_error("");
-	// fuck = ((t_square*)(env.shapes[SQUARE]->next->content))->coords.x;
-	// printf("SQUARE2X: %f\n", fuck);
+	// while (env.shapes[SPHERE]!= NULL)
+	// {
+	// 	fuck = ((t_sphere*)(env.shapes[SPHERE]->content))->coords.x;
+	// 	printf("SPHERE: %f\n", fuck);
+	// 	env.shapes[SPHERE] = env.shapes[SPHERE]->next;
+	// }
 	// ((t_camera *)(scene->camera->content))->pos.x
 	
 	ft_run_mlx(&img, &env);

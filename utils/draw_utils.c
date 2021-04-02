@@ -6,7 +6,7 @@
 /*   By: rmeiboom <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/11 22:26:53 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/04/02 14:05:23 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/04/02 17:17:20 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@ void	my_pixel_put(t_img *img, int x, int y, unsigned int colour)
 	*(unsigned int *)dst = colour;
 }
 
-void	my_lstiter(t_list *lst, t_img *img, void (*f)(t_img *, void *))
+void	my_lstiter(t_list *lst, t_ray *ray, unsigned int *nearest ,void (*f)(t_list *, t_ray * ,void *))
 {
 	if (!f)
 		return ;
 	while (lst != NULL)
 	{
-		f(img, lst->content);
+		f(lst->content, ray, nearest);
 		lst = lst->next;
 	}
 }
