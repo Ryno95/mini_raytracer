@@ -6,30 +6,16 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/03 13:28:19 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/04/01 20:50:21 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/04/02 13:49:02 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 #include <fcntl.h>
-
-
+// #include "ft_structure.h"
 
 // bit shifting = (red * pow(256, ((bits/8) - 1))) + (green * pow(256, ((bits/8) - 1))) + (blue * pow(256, ((bits/8) - 1)));
-unsigned int	create_trgb(int t, int r, int g, int b)
-{
-	// 0x00000000
-	// 0xttrrggbb
-	return(t << 24 | r << 16 | g << 8 | b);
-}
 
-// Different components or objects to the project
-		// Parsing
-		// Error management
-		// Drawing shapes from structs
-			// Functions for every shape, start KISS!
-		// Raytracing calculations
-		// Writing to the window or to a .bmp
 void	ft_mlx_error(char *str)
 {
 	printf("Error!\n%s\n", str);
