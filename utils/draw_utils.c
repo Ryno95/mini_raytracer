@@ -6,7 +6,7 @@
 /*   By: rmeiboom <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/11 22:26:53 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/04/02 17:17:20 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/04/06 21:53:53 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,11 @@ void	my_lstiter(t_list *lst, t_ray *ray, unsigned int *nearest ,void (*f)(t_list
 		f(lst->content, ray, nearest);
 		lst = lst->next;
 	}
+}
+
+void	color_multi(t_rgb *col, float factor)
+{
+	col->r *= factor;
+	col->g *= factor;
+	col->b *= factor;
 }

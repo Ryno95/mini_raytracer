@@ -22,7 +22,8 @@ OBJ = main.o\
 	utils/vec_utils.o\
 	tracer/draw_shapes.o\
 	tracer/ft_render.o\
-	tracer/ft_sphere_intersection.o
+	tracer/ft_sphere_intersection.o\
+	tracer/ft_plane_intersect.o
 
 all: $(NAME)
 

@@ -6,23 +6,24 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/31 11:10:49 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/04/02 17:18:17 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/04/06 21:56:34 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minirt.h"
 
-float	ft_sphere_intersect(t_sphere *sphere, t_ray *ray, float *nearest, unsigned int *col)
+float	ft_sphere_intersect(t_sphere *sphere, t_ray *ray, float *nearest, t_rgb *col)
 {
 	float t = 1e-5;
 	float a; // always 1
 	float b;
 	float c;
 	float discriminant;
+	t_vec r_ori_min_s_coords = vec_minus(ray->origin, sphere->coords);
 
 	a = dot_product(ray->direction, ray->direction);
-	b = 2 * (dot_product(ray->direction, vec_minus(ray->origin, sphere->coords)));
-	c = dot_product(vec_minus(ray->origin, sphere->coords), vec_minus(ray->origin, sphere->coords)) - (sphere->diam * sphere->diam);
+	b = 2 * (dot_product(ray->direction, r_ori_min_s_coords));
+	c = dot_product(r_ori_min_s_coords, r_ori_min_s_coords) - (sphere->diam * sphere->diam);
 	discriminant = b * b - 4 * a * c;
 	if (discriminant < 0)
 		return (0);
@@ -37,7 +38,7 @@ float	ft_sphere_intersect(t_sphere *sphere, t_ray *ray, float *nearest, unsigned
 	if (t >= 0 && t < *nearest)
 	{
 		*nearest = t;
-		*col = sphere->colors.rgb;
+		*col = sphere->colors;
 		return (1);
 	}
 	return (0);

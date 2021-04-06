@@ -6,7 +6,7 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/03 13:40:31 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/04/02 14:05:51 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/04/06 21:55:45 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ int parse_plane(char **split, t_list **plane_lst)
 	ass_coords(split[1], &plane_node->coords);
 	ass_coords(split[2], &plane_node->vect_coords);
 	ass_colors(split[3], &plane_node->colors);
+	// printf("red:%d, Green:%d, Blue:%d\n", plane_node->colors.r, plane_node->colors.g, plane_node->colors.b);
 
 	ft_lstadd_back(plane_lst, ft_lstnew(plane_node));
 
