@@ -6,7 +6,7 @@
 /*   By: rmeiboom <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/07 21:55:32 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/04/07 19:35:18 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/04/07 19:44:23 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,7 @@ t_rgb	ft_calc_col(t_env *env, t_rgb col, t_vec hitpoint, t_ray shadow_ray)
 	t_rgb color;
 
 	while (i <= PLANE)
-	{
-		if(ft_intersect(shadow_ray, (void*)env->shapes[i], &color, &t, i))
-			
-	}
+		ft_intersect(shadow_ray, (void*)env->shapes[i], &color, &t, i);
 	return (color);
 }
 
