@@ -6,7 +6,7 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/03 10:09:33 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/04/06 21:54:11 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/04/07 17:17:32 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,17 +72,18 @@ t_vec	vec_add(t_vec a, t_vec b);
 t_vec	vec_minus(t_vec a, t_vec b);
 t_vec	vec_multiply(t_vec a, float factor);
 t_vec	vec_divide(t_vec a, float factor);
-void print_vec(t_vec vec);
+void print_vec(t_vec vec, char *description);
 
 //utils/vec_products.c
 float	dot_product(t_vec a, t_vec b);
 t_vec	cross_product(t_vec a, t_vec b);
+t_vec   calc_hitpoint(t_ray *primary_ray, float t);
 
 
 // utils/draw_utils.c
 void	my_lstiter(t_list *lst, t_ray *ray, unsigned int *nearest ,void (*f)(t_list *, t_ray * ,void *));
 void	my_pixel_put(t_img *img, int x, int y, unsigned int colour);
-void	color_multi(t_rgb *col, float factor);
+void	color_multi(t_rgb *col, float factor);
 
 // tracer/draw_shapes.c
 void	ft_draw_square(t_img *img, t_square *sqr);
@@ -94,7 +95,7 @@ int		ft_tracer(int x, int y, t_env *env, t_rgb *color);
 void	ft_render(t_img *img, t_env *env);
 
 //tracer/ft_sphere_intersection.c
-float   ft_sphere_intersect(t_sphere *sphere, t_ray *ray, float *nearest, t_rgb *col);
+float   ft_sphere_intersect(t_sphere *sphere, t_ray *ray, float *nearest, t_rgb *col, void **hit_object);
 
 //tracer/ft_plane_intersect.c
-float	ft_plane_intersect(t_plane *plane, t_ray *ray, float *nearest, t_rgb *col);
+float	ft_plane_intersect(t_plane *plane, t_ray *ray, float *nearest, t_rgb *col, void **hit_object);

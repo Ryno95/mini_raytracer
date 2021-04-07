@@ -6,7 +6,7 @@
 /*   By: rmeiboom <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/02 13:38:01 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/04/05 20:31:26 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/04/07 17:33:43 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,15 @@ typedef struct	s_shapes
 	t_square	*square;
 	t_cylinder	*cyl;
 }				t_shapes;
+
+typedef struct	s_obj
+{
+	int		id;
+	t_coord coords;
+	t_rgb	color;
+	t_vec	norm_vec3d;
+	
+}				t_obj;
 
 typedef struct	s_env
 {

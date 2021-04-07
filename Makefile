@@ -20,10 +20,10 @@ OBJ = main.o\
 	utils/draw_utils.o\
 	utils/vec_products.o\
 	utils/vec_utils.o\
-	tracer/draw_shapes.o\
-	tracer/ft_render.o\
-	tracer/ft_sphere_intersection.o\
-	tracer/ft_plane_intersect.o
+	rendering/draw_shapes.o\
+	rendering/ft_render.o\
+	rendering/ft_sphere_intersection.o\
+	rendering/ft_plane_intersect.o
 
 all: $(NAME)
 

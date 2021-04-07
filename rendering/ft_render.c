@@ -6,62 +6,101 @@
 /*   By: rmeiboom <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/07 21:55:32 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/04/06 22:01:30 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/04/07 19:35:18 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minirt.h"
 
-t_ray	ft_build_ray(t_camera *cam, int x, int y)
+t_ray	ft_primary_ray(t_camera *cam, int x, int y)
 {
 	t_ray ray;
-
+	t_vec dir = create_pos((float)x, (float)y, cam->cam_dist);
+	
 	ray.origin = cam->coords;
-	ray.direction = vec_minus(create_pos((float)x, (float)y, cam->cam_dist), ray.origin);
+	ray.direction = vec_minus(dir, ray.origin);
 	normalize(&ray.direction);
 	return (ray);
 }
 
-int		ft_intersect(t_ray ray, t_list *shape_list, t_rgb *col, float *nearest, int shape)
+t_ray	ft_shadow_ray(t_light *light, t_vec *hitpoint)
 {
-	t_vec point;
+	t_ray ray;
+	
+	ray.origin = *hitpoint;
+	ray.direction = vec_minus(light->coords, ray.origin);
+	normalize(&ray.direction);
+	
+	return (ray);
+}
+
+
+
+t_rgb	ft_calc_col(t_env *env, t_rgb col, t_vec hitpoint, t_ray shadow_ray)
+{
+	int i = 0;
+	float t = INFINITY;
+	t_rgb color;
+
+	while (i <= PLANE)
+	{
+		if(ft_intersect(shadow_ray, (void*)env->shapes[i], &color, &t, i))
+			
+	}
+	return (color);
+}
+
+
+	
+
+void		*ft_intersect(t_ray ray, t_list *shape_list, t_rgb *col, float *nearest, int shape)
+{
+	void	*hit_object;
 	// my_lstiter(shape_list, &ray, nearest, (void*)ft_sphere_intersect);
 	
 	if (!shape_list)
-		return (-1);
+		return (NULL);
+	hit_object = NULL;
 	while (shape_list != NULL)
 	{
 		if (shape == SPHERE)
-			ft_sphere_intersect((t_sphere*)shape_list->content, &ray, nearest, col);
+			ft_sphere_intersect((t_sphere*)shape_list->content, &ray, nearest, col, &hit_object);
 		else if (shape == PLANE)
-			ft_plane_intersect((t_plane*)shape_list->content, &ray, nearest, col);
+			ft_plane_intersect((t_plane*)shape_list->content, &ray, nearest, col, &hit_object);
 		shape_list = shape_list->next;
 	}
-		
-	if (*nearest < INFINITY)
-		return (1);
-	return (0);
+
+	return (hit_object);
 }
 
 int		ft_tracer(int x, int y, t_env *env, t_rgb *color)
 {
 	int i = 0;
 	float nearest = INFINITY;
-	void *ptr;
-	t_ray	ray;
+	void *hit_obj = NULL;
+	t_vec hitpoint;
+	// t_vec hitpoint = orig + dir * nearest
+	t_ray	primary_ray;
+	t_ray	shadow_ray;
 	
 	// only when cam is on [0;0;Z]
 	x = x - env->res.x / 2;
 	y = env->res.y / 2 - y;
 	
 	// First compute primary ray direction
-	ray = ft_build_ray((t_camera*)(env->cam_list->content), x, y);
+	primary_ray = ft_primary_ray((t_camera*)(env->cam_list->content), x, y);
 	// printf("Entering tracer\n");
 	while (i <= PLANE)
 	{
-		if(ft_intersect(ray, (void*)env->shapes[i], color, &nearest, i));
-			color_multi(color, env->amb_light.ratio);
-		// *color = co
+		hit_obj = ft_intersect(primary_ray, (void*)env->shapes[i], color, &nearest, i);
+		if(hit_obj)
+		{
+			hitpoint = calc_hitpoint(&primary_ray, nearest);
+			shadow_ray = ft_shadow_ray((t_light*)env->light->content, &hitpoint);
+			*color = ft_calc_col(env, *color, hitpoint, shadow_ray);
+			// color_multi(color, env->amb_light.ratio);
+			// printf("hit_obj:%d\n", *(int*)hit_obj);
+		}
 		i++;
 	}
 	return (0);

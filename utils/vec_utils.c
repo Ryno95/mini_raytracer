@@ -6,7 +6,7 @@
 /*   By: rmeiboom <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/07 20:49:30 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/04/02 14:05:36 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/04/07 17:17:22 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@ t_vec	vec_divide(t_vec a, float factor)
 	return (a);
 }
 
-void print_vec(t_vec vec)
+void print_vec(t_vec vec, char *description)
 {
-	printf("VecX: %f\n", vec.x);
-	printf("VecY: %f\n", vec.y);
-	printf("VecZ: %f\n", vec.z);
+	printf("%s.X: %f\n",description ,vec.x);
+	printf("%s.Y: %f\n",description ,vec.y);
+	printf("%s.Z: %f\n",description ,vec.z);
 }
