@@ -6,7 +6,7 @@
 /*   By: rmeiboom <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/05 17:03:23 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/04/05 20:38:54 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/04/09 18:23:14 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,11 @@ void	ass_colors(char *str, t_rgb *cols)
 	sl = ft_split(str, ',');
 	if (!sl || !cols || ft_str_arr_len(sl) != 3)
 		ft_parse_error("colors, safety checks");
-	if (ft_atoi(sl[0]) >= 0)
-		cols->r = ft_atoi(sl[0]);
-	if (ft_atoi(sl[1]) >= 0)
-		cols->g = ft_atoi(sl[1]);
-	if (ft_atoi(sl[2]) >= 0)
-		cols->b = ft_atoi(sl[2]);
+	cols->r = ft_atoi(sl[0]);
+	cols->g = ft_atoi(sl[1]);
+	cols->b = ft_atoi(sl[2]);
 	cols->t = 0;
+	color_check(cols);
 	free_split(sl);
 }
 

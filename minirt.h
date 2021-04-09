@@ -6,7 +6,7 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/03 10:09:33 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/04/07 17:17:32 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/04/09 18:03:45 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	ft_parse_error(char *err_desc);
 float	ft_vec_len(t_coord coords);
 float	ft_round_fl(float num, int decimals);
 t_coord create_pos(float x, float y, float z);
-void normalize(t_vec *vec);
+t_vec 	normalize(t_vec vec);
 
 //utils/vec_utils.c
 float	vec_len(t_coord coords);
@@ -72,7 +72,7 @@ t_vec	vec_add(t_vec a, t_vec b);
 t_vec	vec_minus(t_vec a, t_vec b);
 t_vec	vec_multiply(t_vec a, float factor);
 t_vec	vec_divide(t_vec a, float factor);
-void print_vec(t_vec vec, char *description);
+void	print_vec(t_vec vec, char *description);
 
 //utils/vec_products.c
 float	dot_product(t_vec a, t_vec b);
@@ -84,6 +84,8 @@ t_vec   calc_hitpoint(t_ray *primary_ray, float t);
 void	my_lstiter(t_list *lst, t_ray *ray, unsigned int *nearest ,void (*f)(t_list *, t_ray * ,void *));
 void	my_pixel_put(t_img *img, int x, int y, unsigned int colour);
 void	color_multi(t_rgb *col, float factor);
+t_rgb	color_times_color(t_rgb col, t_rgb factor);
+void	color_check(t_rgb *col);
 
 // tracer/draw_shapes.c
 void	ft_draw_square(t_img *img, t_square *sqr);
@@ -95,7 +97,7 @@ int		ft_tracer(int x, int y, t_env *env, t_rgb *color);
 void	ft_render(t_img *img, t_env *env);
 
 //tracer/ft_sphere_intersection.c
-float   ft_sphere_intersect(t_sphere *sphere, t_ray *ray, float *nearest, t_rgb *col, void **hit_object);
+float	ft_sphere_intersect(t_sphere *sphere, t_ray *ray, t_impact_point *intersection);
 
 //tracer/ft_plane_intersect.c
-float	ft_plane_intersect(t_plane *plane, t_ray *ray, float *nearest, t_rgb *col, void **hit_object);
+float	ft_plane_intersect(t_plane *plane, t_ray *ray, t_impact_point *intersection);

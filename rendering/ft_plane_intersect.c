@@ -6,13 +6,13 @@
 /*   By: rmeiboom <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/03 11:29:17 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/04/07 19:11:52 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/04/09 16:42:19 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minirt.h"
 
-float	ft_plane_intersect(t_plane *plane, t_ray *ray, float *nearest, t_rgb *col, void **hit_object)
+float	ft_plane_intersect(t_plane *plane, t_ray *ray, t_impact_point *intersection)
 {
 	// float a = dot_product(vec_minus(ray->origin, plane->coords), plane->vect_coords);
 	// float b = dot_product(ray->direction, plane->vect_coords);
@@ -30,11 +30,11 @@ float	ft_plane_intersect(t_plane *plane, t_ray *ray, float *nearest, t_rgb *col,
 	
 	// printf("T:%f\n", t);
 	// if (t >= 0 && t < *nearest)
-	if (t < *nearest && t >= 0)
+	if (t < intersection->nearest && t >= 0)
 	{
-		*nearest = t;
-		*col = plane->colors;
-		*hit_object = &plane->id;
+		intersection->nearest = t;
+		intersection->color = plane->colors;
+		intersection->object_id = plane->id;
 		// printf("hitobject: %p\n", hit_object);
 		return (1);
 	}

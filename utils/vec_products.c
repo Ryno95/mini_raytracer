@@ -6,7 +6,7 @@
 /*   By: rmeiboom <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/18 20:36:36 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/04/07 19:16:58 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/04/09 17:17:29 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,15 @@ t_coord create_pos(float x, float y, float z)
 	return (new_pos);
 }
 
-void normalize(t_vec *vec)
+t_vec normalize(t_vec vec)
 {
-	float vl = vec_len(*vec);
+	float vl = vec_len(vec);
 
-	vec->x /= vl;
-	vec->y /= vl;
-	vec->z /= vl;
+	vec.x /= vl;
+	vec.y /= vl;
+	vec.z /= vl;
+
+	return (vec);
 }
 
 t_vec calc_hitpoint(t_ray *primary_ray, float t)

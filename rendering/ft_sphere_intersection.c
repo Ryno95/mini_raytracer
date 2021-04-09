@@ -6,15 +6,15 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/31 11:10:49 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/04/07 19:12:03 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/04/09 17:19:39 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minirt.h"
 
-float	ft_sphere_intersect(t_sphere *sphere, t_ray *ray, float *nearest, t_rgb *col, void **hit_object)
+float	ft_sphere_intersect(t_sphere *sphere, t_ray *ray, t_impact_point *intersection)
 {
-	float t = 1e-5;
+	float t =-1;
 	float a; // always 1
 	float b;
 	float c;
@@ -35,11 +35,14 @@ float	ft_sphere_intersect(t_sphere *sphere, t_ray *ray, float *nearest, t_rgb *c
 	else
 		t = -b / (a * 2);
 	
-	if (t >= 0 && t < *nearest)
+	// printf("T: %f\nNearest: %f\n", t, intersection->nearest);
+	if (t >= 0 && t < intersection->nearest)
 	{
-		*nearest = t;
-		*col = sphere->colors;
-		*hit_object = &sphere->id;
+		intersection->nearest = t;
+		intersection->color = sphere->colors;
+		intersection->object_id = sphere->id;
+		intersection->hitpoint = calc_hitpoint(ray, t);
+		intersection->normal = normalize(vec_minus(intersection->hitpoint, sphere->coords));
 		return (1);
 	}
 	return (0);

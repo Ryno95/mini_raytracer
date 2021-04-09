@@ -6,7 +6,7 @@
 /*   By: rmeiboom <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/02 13:38:01 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/04/07 17:33:43 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/04/09 16:34:47 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,16 @@ typedef struct	s_obj
 	t_vec	norm_vec3d;
 	
 }				t_obj;
+
+typedef struct	s_impact_point
+{
+	t_rgb		color;
+	t_vec		normal;
+	t_coord		hitpoint;
+	int			object_id;
+	float		nearest;
+	
+}				t_impact_point;
 
 typedef struct	s_env
 {
