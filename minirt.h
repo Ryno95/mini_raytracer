@@ -6,7 +6,7 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/03 10:09:33 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/04/09 18:03:45 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/04/10 17:42:47 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ void	my_pixel_put(t_img *img, int x, int y, unsigned int colour);
 void	color_multi(t_rgb *col, float factor);
 t_rgb	color_times_color(t_rgb col, t_rgb factor);
 void	color_check(t_rgb *col);
+t_rgb	colors_add(t_rgb col, t_rgb rgb);
 
 // tracer/draw_shapes.c
 void	ft_draw_square(t_img *img, t_square *sqr);

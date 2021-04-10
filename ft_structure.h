@@ -6,7 +6,7 @@
 /*   By: rmeiboom <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/02 13:38:01 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/04/09 16:34:47 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/04/10 19:25:39 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,11 @@
 
 enum multi_opts{SPHERE, PLANE, SQUARE, CYLINDER, TRIANGLE};
 
-typedef union	u_rgb
+typedef struct	s_rgb
 {
-	unsigned int rgb;
-	struct
-	{
-		unsigned char	b;
-		unsigned char	g;
-		unsigned char	r;
-		unsigned char	t;
-	};
+	float	b;
+	float	g;
+	float	r;
 }				t_rgb;
 
 typedef struct	s_vec
@@ -52,7 +47,6 @@ typedef struct   s_amb_light
 {
 	unsigned char    id; // A
 	float			ratio; // [0.0 - 1.0]
-	// colors, rgb, [0-255]
 	t_rgb			colors;
 }				t_amb_light;
 

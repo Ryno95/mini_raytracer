@@ -6,7 +6,7 @@
 /*   By: rmeiboom <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/11 22:26:53 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/04/09 17:42:10 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/04/10 21:48:10 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,22 @@ void	color_multi(t_rgb *col, float factor)
 	col->b *= factor;
 }
 
+t_rgb	colors_add(t_rgb col, t_rgb rgb)
+{
+	col.r += rgb.r;
+	col.g += rgb.g;
+	col.b += rgb.b;
+	
+	color_check(&col);
+	return (col);
+}
+
 t_rgb	color_times_color(t_rgb col, t_rgb factor)
 {
-	col.r *= factor.r;
-	col.g *= factor.g;
-	col.b *= factor.b;
 
-	color_check(&col);
+	col.r = (col.r * factor.r) / 255;
+	col.g = (col.g * factor.g) / 255;
+	col.b = (col.b * factor.b) / 255;
 
 	return (col);
 }

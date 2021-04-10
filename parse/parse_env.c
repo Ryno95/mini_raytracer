@@ -6,7 +6,7 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/03 13:31:58 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/04/09 18:18:59 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/04/10 21:15:07 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	parse_amb_light(char **spl_str, t_amb_light *am_lt)
 		
 	ass_colors(spl_str[2], &am_lt->colors);
 	color_multi(&am_lt->colors, am_lt->ratio);
-	printf("REd: %d\n", am_lt->colors.r);
+	color_check(&am_lt->colors);
 	return (0);
 }
 
@@ -82,7 +82,7 @@ int parse_light(char **split, t_list **light_lst)
 	if (light_node->brightness < 0 || light_node->brightness > 1)
 		ft_parse_error("light source, brightness ratio");
 	ass_colors(split[3], &light_node->colors);
-	color_multi(&light_node->colors, light_node->brightness);
+	// color_multi(&light_node->colors, light_node->brightness);
 
 	ft_lstadd_front(light_lst, ft_lstnew(light_node));
 	// printf("light COL: %d\n", *light_lst-> );

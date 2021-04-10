@@ -20,7 +20,6 @@ OBJ = main.o\
 	utils/draw_utils.o\
 	utils/vec_products.o\
 	utils/vec_utils.o\
-	rendering/draw_shapes.o\
 	rendering/ft_render.o\
 	rendering/ft_sphere_intersection.o\
 	rendering/ft_plane_intersect.o
