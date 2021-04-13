@@ -6,7 +6,7 @@
 /*   By: rmeiboom <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/07 21:55:32 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/04/10 21:53:56 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/04/13 22:03:59 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,17 +33,29 @@ t_ray	ft_shadow_ray(t_light *light, t_vec *hitpoint)
 
 	
 
-int		ft_intersect(t_ray ray, t_list *shape_list, t_impact_point *intersection, int shape)
+int		ft_intersect(t_ray ray, t_list **shape_list, t_impact_point *intersection)
 {
-	if (!shape_list)
+	int i;
+	t_list *tmp_lst;
+
+
+	i = 0;
+	if (!shape_list || !intersection)
 		return (0);
-	while (shape_list != NULL)
+	while (i <= PLANE)
 	{
-		if (shape == SPHERE)
-			ft_sphere_intersect((t_sphere*)shape_list->content, &ray, intersection);
-		else if (shape == PLANE)
-			ft_plane_intersect((t_plane*)shape_list->content, &ray, intersection);
-		shape_list = shape_list->next;
+		// printf("outerloop\n");
+		tmp_lst = shape_list[i];
+		while (tmp_lst != NULL)
+		{
+			// printf("innerloop\n");
+			if (i == SPHERE)
+				ft_sphere_intersect((t_sphere*)tmp_lst->content, &ray, intersection);
+			else if (i == PLANE)
+				ft_plane_intersect((t_plane*)tmp_lst->content, &ray, intersection);
+			tmp_lst = tmp_lst->next;
+		}
+		i++;
 	}
 	if (intersection->nearest < INFINITY)
 		return (1);
@@ -56,25 +68,35 @@ t_rgb	ft_calculate_color(t_env *env, t_impact_point *intersection, t_ray shadow_
 	float dot;
 	float brightness = ((t_light*)env->light->content)->brightness;
 	t_rgb light;
+	t_impact_point bool_struct;
 	
-	light = ((t_light*)env->light->content)->colors;
-	ret_col = color_times_color(intersection->color, env->amb_light.colors);
-	
-	dot = dot_product(intersection->normal, shadow_ray.direction);
-	if (dot < 0)
-		dot = 0;
+	// iterate through list of objects to determine interobject shadows
+	bool_struct.nearest = INFINITY;
+	if(ft_intersect(shadow_ray, env->shapes, &bool_struct) == 11) // and hitpoint is within range, not behind the ligth
+	{
+		ret_col = bool_struct.color;
+		// color_multi(&ret_col, 0);
+		// printf("shadow sect found\n");
+	}
+	else
+	{ 
+		light = ((t_light*)env->light->content)->colors;
+		ret_col = color_times_color(intersection->color, env->amb_light.colors);
 		
-	color_multi(&light, (brightness * dot));
-	light = color_times_color(light, intersection->color);
-	ret_col = colors_add(ret_col, light);
-	color_check(&ret_col);
-	
+		dot = dot_product(intersection->normal, shadow_ray.direction);
+		if (dot < 0)
+			dot = 0;
+			
+		color_multi(&light, (brightness * dot * 1.5));
+		light = color_times_color(light, intersection->color);
+		ret_col = colors_add(ret_col, light);
+		color_check(&ret_col);
+	}
 	return(ret_col);
 }
 
 int		ft_tracer(int x, int y, t_env *env, t_rgb *color)
 {
-	int i = 0;
 	t_impact_point intersection;
 	t_ray	primary_ray;
 	t_ray	shadow_ray;
@@ -84,16 +106,13 @@ int		ft_tracer(int x, int y, t_env *env, t_rgb *color)
 	intersection.nearest = INFINITY;
 	
 	primary_ray = ft_primary_ray((t_camera*)(env->cam_list->content), x, y);
-	while (i <= PLANE)
+	if(ft_intersect(primary_ray, (void*)env->shapes, &intersection))
 	{
-		
-		if(ft_intersect(primary_ray, (void*)env->shapes[i], &intersection, i))
-		{
-			intersection.hitpoint = calc_hitpoint(&primary_ray, intersection.nearest);
-			shadow_ray = ft_shadow_ray((t_light*)env->light->content, &intersection.hitpoint);
-			*color = ft_calculate_color(env, &intersection, shadow_ray);
-		}
-		i++;
+		// printf("intersection found\n");
+		intersection.hitpoint = calc_hitpoint(&primary_ray, intersection.nearest);
+		shadow_ray = ft_shadow_ray((t_light*)env->light->content, &intersection.hitpoint);
+		*color = ft_calculate_color(env, &intersection, shadow_ray);
+		// *color = intersection.color;
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: rmeiboom <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/24 19:19:52 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/03/09 20:19:05 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/04/12 20:39:54 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 // # define height 400
 // # define witdh 800
 
-
+// gcc example.c -Lmlx -lmlx -framework OpenGL -framework AppKit
 // You'll be using a lot of structs within structs
 // maybe an idea to write one big one and a node struct for linked lists
 typedef struct 	s_img 
