@@ -6,7 +6,7 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/03 13:40:31 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/04/10 16:30:06 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/04/14 14:19:06 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	parse_sphere(char **split, t_list **sphere_lst)
 
 	sph_node->id = SPHERE;
 	ass_coords(split[1], &sph_node->coords);
-	sph_node->diam = ft_atof(split[2]);
+	sph_node->diam = ft_atof(split[2]) / 2;
 	ass_colors(split[3], &sph_node->colors);
 
 	ft_lstadd_back(sphere_lst, ft_lstnew(sph_node));

@@ -6,7 +6,7 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/14 13:40:45 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/04/14 13:49:55 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/04/14 18:22:22 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,31 +21,27 @@ t_ray	ft_shadow_ray(t_light *light, t_vec *hitpoint)
 	return (ray);
 }
 
-t_rgb	ft_shading(t_env *env, t_impact_point *intersection, t_ray shadow_ray)
+t_rgb	ft_shading(t_env *env, t_impact_point *intersection, t_ray shadow_ray, t_light *light)
 {
-	t_rgb ret_col;
-	float dot;
-	float brightness = ((t_light*)env->light->content)->brightness;
-	t_light *light_src = (t_light*)env->light->content;
-	t_rgb light;
+	t_rgb	ret_col;
+	float	dot;
+	t_rgb lite_cols;
 	t_impact_point bool_struct;
-	
-	// // iterate through list of objects to determine interobject shadows
+
 	bool_struct.nearest = INFINITY;
-	if(ft_intersect(shadow_ray, env->shapes, &bool_struct) && bool_struct.nearest < vec_len(vec_minus(light_src->coords, intersection->hitpoint)))
-		ret_col = color_times_color(intersection->color, env->amb_light.colors);
+	ret_col = color_times_color(intersection->color, env->amb_light.colors);
+	if(ft_intersect(shadow_ray, env->shapes, &bool_struct) && bool_struct.nearest < vec_len(vec_minus(light->coords, intersection->hitpoint)))
+		return (ret_col);
 	else
 	{
-		light = ((t_light*)env->light->content)->colors;
-		ret_col = color_times_color(intersection->color, env->amb_light.colors);
-		
+		lite_cols = light->colors;
 		dot = dot_product(intersection->normal, shadow_ray.direction);
 		if (dot < 0)
 			dot = 0;
 			
-		color_multi(&light, (brightness * dot * 1));
-		light = color_times_color(light, intersection->color);
-		ret_col = colors_add(ret_col, light);
+		color_multi(&lite_cols, (light->brightness * dot * 1));
+		lite_cols = color_times_color(lite_cols, intersection->color);
+		ret_col = colors_add(ret_col, lite_cols);
 		color_check(&ret_col);
 	}
 	return(ret_col);

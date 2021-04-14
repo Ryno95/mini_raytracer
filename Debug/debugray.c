@@ -6,7 +6,7 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/14 11:14:39 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/04/14 13:44:22 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/04/14 17:37:15 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int    ft_debugray(int keycode, int x, int y, t_env *env)
 	ft_intersect(ray, env->shapes, &impact);
 	ft_print_color(impact.color);
 	shadow_ray = ft_shadow_ray((t_light*)env->light->content, &impact.hitpoint);
-	color = ft_shading(env, &impact, shadow_ray);
+	// color = ft_shading(env, &impact, shadow_ray);
 
 	// printf("T: %lf\n", impact.nearest);
 	impact.hitpoint = calc_hitpoint(&ray, impact.nearest);

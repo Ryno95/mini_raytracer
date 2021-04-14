@@ -1,19 +1,44 @@
 R 750 750
-c 0,0,-125 0,0,1 70
+c 0,0,-50 0,0,1 70
 
-A 0.3, 190,190,190
+A 0.5, 190,190,190
 
-l 0,0,0 0.85 190,190,190
+l 30,0,-50 0.6 190,190,190
+# l 0,0,50 0.2 190,190,190
+# l -50,0,0 0.2 190,190,190
+# l 50,0,0 0.2 190,190,190
 
-sp 0,0,25 12 255,255,255
 sp 45,0,25 12 255,255,255
+sp 0,0,25 12 255,255,255
 sp -45,0,25 12 255,255,255
 sp 0,45,25 12 255,255,255
 sp 0,-45,25 12 255,255,255
-sp -45,0,25 12 255,255,255
+# sp -45,0,25 12 255,255,255
 
 pl 100,0,0 1,0,0 188,255,214
 pl -100,0,0 1,0,0 188,255,214
 pl 0,100,0 0,1,0 255,210,176
 pl 0,-100,0 0,1,0 255,210,176
 pl 0,0,100 0,0,1 188,166,255
+
+# tr -20,-20,0 20,-20,0 0,20,0 255,255,255
+
+
+# tr 10,20,10 10,10,20 20,10,10 0,0,255
+
+
+
+
+
+
+# # char is letterlijk een character, bv:
+# char one_char = 'F';
+# printf("one_char: %c\n", one_char);
+# # de bovenstaande kan je ook schrijven als:
+# char one_char = 102;
+# printf("one_char: %c\n", one_char);
+
+# # Dus jij moet een manier vinden om meerdere characters op te slaan en te accessen.
+# # Daarom ook de sterretje voor de variable naam, wat dat betekent leer je nog wel.
+# char *multiple_chars = "Felicia";
+# printf("multiple_chars: %s\n", multiple_chars);

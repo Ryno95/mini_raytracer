@@ -6,7 +6,7 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/03 13:31:58 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/04/10 21:15:07 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/04/14 15:53:05 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	parse_cam(char **spl_str, t_list **cam, t_res *res)
 		cam_node->fov = 0;
 	else if (cam_node->fov > 180)
 		cam_node->fov = 180;
-	cam_node->cam_dist = (res->x / 2) / tan((cam_node->fov * (M_PI / 180)) / 2);
+	cam_node->cam_dist = 0.5 * (res->x / 2) / tan((cam_node->fov * (M_PI / 180)) / 2);
 
 	ft_lstadd_front(cam, ft_lstnew(cam_node));
 	return (0);
@@ -82,11 +82,8 @@ int parse_light(char **split, t_list **light_lst)
 	if (light_node->brightness < 0 || light_node->brightness > 1)
 		ft_parse_error("light source, brightness ratio");
 	ass_colors(split[3], &light_node->colors);
-	// color_multi(&light_node->colors, light_node->brightness);
 
 	ft_lstadd_front(light_lst, ft_lstnew(light_node));
-	// printf("light COL: %d\n", *light_lst-> );
-	// printf("light COL: %d\n", *light_lst);
 
 	return (0);
 }

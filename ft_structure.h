@@ -6,13 +6,13 @@
 /*   By: rmeiboom <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/02 13:38:01 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/04/14 11:17:41 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/04/14 17:33:31 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
 
-enum multi_opts{SPHERE, PLANE, SQUARE, CYLINDER, TRIANGLE};
+enum multi_opts{SPHERE, PLANE, TRIANGLE, SQUARE, CYLINDER};
 
 typedef struct	s_rgb
 {
