@@ -1,13 +1,14 @@
 CC = gcc
 
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall  -Wextra #-g -fsanitize=address # remember to add -werror
 
 NAME = minirt
 
 # HEADER = minirt.h
 LIBS = libft/libft.a
 
-OBJ = main.o\
+OBJ = Debug/debugray.o\
+	main.o\
 	gnl/get_next_line.o\
 	gnl/get_next_line_utils.o\
 	parse/parse.o\
@@ -20,9 +21,11 @@ OBJ = main.o\
 	utils/draw_utils.o\
 	utils/vec_products.o\
 	utils/vec_utils.o\
+	utils/ft_color_utils.o\
 	rendering/ft_render.o\
 	rendering/ft_sphere_intersection.o\
-	rendering/ft_plane_intersect.o
+	rendering/ft_plane_intersect.o\
+	rendering/ft_shadowing.o
 
 all: $(NAME)
 
@@ -33,7 +36,7 @@ $(NAME): $(OBJ)
 		$(CC) $(CFLAGS) $(OBJ) $(LIBS) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 
 %.o: %.c
-		$(CC) -c -Wall -Wextra -o $@ $<
+		$(CC) -c $(CFLAGS) -o $@ $<
 
 clean: 
 		rm -f $(OBJ) libft/*.o

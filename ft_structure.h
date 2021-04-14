@@ -6,7 +6,7 @@
 /*   By: rmeiboom <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/02 13:38:01 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/04/10 19:25:39 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/04/14 11:17:41 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,6 +153,7 @@ typedef struct	s_env
 	t_list		*square_lst;
 	t_list		*cylinder_lst;
 	t_list		*triangle_lst;
+	int			debug;
 }				t_env;
 
 typedef struct 	s_data

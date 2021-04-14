@@ -6,7 +6,7 @@
 /*   By: rmeiboom <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/05 17:03:23 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/04/10 19:36:51 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/04/14 13:58:48 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ int	ft_str_arr_len(char **str_array)
 	i = 0;
 	while (str_array && str_array[i] != NULL)
 		i++;
-
 	return (i);
 }
 
@@ -33,7 +32,6 @@ void	ass_colors(char *str, t_rgb *cols)
 	cols->r = ft_atoi(sl[0]);
 	cols->g = ft_atoi(sl[1]);
 	cols->b = ft_atoi(sl[2]);
-	// cols->t = 0;
 	color_check(cols);
 	free_split(sl);
 }

@@ -6,7 +6,7 @@
 /*   By: rmeiboom <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/03 11:29:17 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/04/10 22:16:58 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/04/14 13:32:51 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,11 @@ float	ft_plane_intersect(t_plane *plane, t_ray *ray, t_impact_point *intersectio
 		intersection->nearest = t;
 		intersection->color = plane->colors;
 		intersection->object_id = plane->id;
-		intersection->normal = plane->vect_coords;
+		if (dot_product(plane->vect_coords, ray->direction) > 0)
+			intersection->normal = vec_multiply(plane->vect_coords, -1);
+		else
+			intersection->normal = plane->vect_coords;
 		return (1);
 	}
-	return (1);
+	return (0);
 }
