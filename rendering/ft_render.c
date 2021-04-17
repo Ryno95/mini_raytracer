@@ -6,7 +6,7 @@
 /*   By: rmeiboom <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/07 21:55:32 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/04/14 19:25:09 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/04/17 20:29:16 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int		ft_intersect(t_ray ray, t_list **shape_list, t_impact_point *intersection)
 	i = 0;
 	if (!shape_list || !intersection)
 		return (0);
-	while (i <= PLANE)
+	while (i <= TRIANGLE)
 	{
 		tmp_lst = shape_list[i];
 		while (tmp_lst != NULL)

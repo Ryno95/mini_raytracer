@@ -6,7 +6,7 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/31 11:10:49 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/04/14 14:18:35 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/04/17 20:34:20 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ float	ft_sphere_intersect(t_sphere *sphere, t_ray *ray, t_impact_point *intersec
 
 	if (t >= 0 && t < intersection->nearest)
 	{
+		// printf("SPHEREfound t: %f\n", t);
+
 		intersection->nearest = t;
 		intersection->color = sphere->colors;
 		intersection->object_id = sphere->id;
