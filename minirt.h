@@ -6,7 +6,7 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/03 10:09:33 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/04/14 17:34:39 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/04/21 15:54:50 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ t_ray	ft_primary_ray(t_camera *cam, int x, int y);
 int		ft_intersect(t_ray ray, t_list **shape_list, t_impact_point *intersection);
 int		ft_tracer(int x, int y, t_env *env, t_rgb *color);
 void    ft_render(t_img *img, t_env *env);
+void	ft_print_color(t_rgb vector);
 
 // rendering/ft_shadowing.c
 t_ray	ft_shadow_ray(t_light *light, t_vec *hitpoint);
@@ -122,3 +123,6 @@ int    ft_debugray(int keycode, int x, int y, t_env *scene);
 
 // rendering/ft_triangle.c
 float	ft_triangle_intersect(t_triangle *triangle, t_ray *ray, t_impact_point *intersection);
+
+// rendering/ft_cylinder_intersect.c
+int     ft_cylinder_intersect(t_cylinder *cy, t_ray *ray, t_impact_point *hitp);

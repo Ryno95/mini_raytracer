@@ -26,7 +26,8 @@ OBJ = Debug/debugray.o\
 	rendering/ft_sphere_intersection.o\
 	rendering/ft_plane_intersect.o\
 	rendering/ft_shadowing.o\
-	rendering/ft_triangle_intersection.o
+	rendering/ft_triangle_intersection.o\
+	rendering/ft_cyl_intersect.o
 
 all: $(NAME)
 

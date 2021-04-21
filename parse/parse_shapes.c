@@ -6,7 +6,7 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/03 13:40:31 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/04/14 14:19:06 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/04/21 15:16:49 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,8 @@ int parse_cylinder(char **split, t_list **cylinder_lst)
 
 	cylinder_node->id = CYLINDER;
 	ass_coords(split[1], &cylinder_node->coords);
-	ass_coords(split[2], &cylinder_node->vect_coords);
-	cylinder_node->diamtr = ft_atof(split[3]);
+	ass_coords(split[2], &cylinder_node->normal);
+	cylinder_node->r = ft_atof(split[3])  / 2;
 	cylinder_node->height = ft_atof(split[4]);
 	ass_colors(split[5], &cylinder_node->colors);
 

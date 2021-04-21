@@ -6,13 +6,13 @@
 /*   By: rmeiboom <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/02 13:38:01 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/04/14 17:33:31 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/04/21 15:31:58 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
 
-enum multi_opts{SPHERE, PLANE, TRIANGLE, SQUARE, CYLINDER};
+enum multi_opts{SPHERE, PLANE, TRIANGLE, CYLINDER ,SQUARE};
 
 typedef struct	s_rgb
 {
@@ -98,8 +98,8 @@ typedef struct s_cylinder
 {
 	unsigned char	id;
 	t_coord			coords;
-	t_coord			vect_coords;
-	float			diamtr;
+	t_coord			normal;
+	float			r;
 	float			height;
 	t_rgb			colors;
 }				t_cylinder;
