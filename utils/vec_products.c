@@ -6,14 +6,14 @@
 /*   By: rmeiboom <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/18 20:36:36 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/04/14 12:32:59 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/04/21 19:50:11 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minirt.h"
 
 // range for nroma vects[-1;1]
-float	dot_product(t_vec a, t_vec b)
+double	dot_product(t_vec a, t_vec b)
 {
 	return ((a.x*b.x + a.y*b.y + a.z*b.z));
 }
@@ -29,7 +29,7 @@ t_vec	cross_product(t_vec a, t_vec b)
 	return (c);
 }
 
-t_coord create_pos(float x, float y, float z)
+t_coord create_pos(double x, double y, double z)
 {
 	t_coord new_pos;
 
@@ -42,7 +42,7 @@ t_coord create_pos(float x, float y, float z)
 
 t_vec normalize(t_vec vec)
 {
-	float vl = vec_len(vec);
+	double vl = vec_len(vec);
 
 	vec.x /= vl;
 	vec.y /= vl;
@@ -51,7 +51,7 @@ t_vec normalize(t_vec vec)
 	return (vec);
 }
 
-t_vec calc_hitpoint(t_ray *primary_ray, float t)
+t_vec calc_hitpoint(t_ray *primary_ray, double t)
 {
 	t_vec hit_p;
 	

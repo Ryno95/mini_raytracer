@@ -6,20 +6,19 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/31 11:10:49 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/04/17 20:34:20 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/04/21 20:09:58 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minirt.h"
 
-float	ft_sphere_intersect(t_sphere *sphere, t_ray *ray, t_impact_point *intersection)
+int	ft_sphere_intersect(t_sphere *sphere, t_ray *ray, t_impact_point *intersection)
 {
-	float t = -1;
-	float b;
-	float c;
-	float discriminant;
+	double t = -1;
+	double b;
+	double c;
+	double discriminant;
 	t_vec sub_ori_sph = vec_minus(ray->origin, sphere->coords);
-	// printf("entering sphere intersect\n");
 
 	b = 2 * (dot_product(ray->direction, sub_ori_sph));
 	c = dot_product(sub_ori_sph, sub_ori_sph) - (sphere->diam * sphere->diam);
@@ -32,11 +31,10 @@ float	ft_sphere_intersect(t_sphere *sphere, t_ray *ray, t_impact_point *intersec
 		t = (-b - sqrt(discriminant)) / 2;
 	else
 		t = -b / 2;
-
+	
 	if (t >= 0 && t < intersection->nearest)
 	{
 		// printf("SPHEREfound t: %f\n", t);
-
 		intersection->nearest = t;
 		intersection->color = sphere->colors;
 		intersection->object_id = sphere->id;

@@ -6,7 +6,7 @@
 /*   By: rmeiboom <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/07 21:55:32 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/04/21 15:56:10 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/04/21 20:07:26 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_vec vec_by_vec(t_vec a, t_vec b)
 t_ray	ft_primary_ray(t_camera *cam, int x, int y)
 {
 	t_ray ray;
-	t_vec dir = create_pos((float)x, (float)y, cam->cam_dist);
+	t_vec dir = create_pos((double)x, (double)y, cam->cam_dist);
 
 	ray.origin = cam->coords;
 	ray.direction = normalize(vec_minus(dir, ray.origin));
@@ -44,7 +44,6 @@ int		ft_intersect(t_ray ray, t_list **shape_list, t_impact_point *intersection)
 	int i;
 	t_list *tmp_lst;
 	
-
 	i = 0;
 	if (!shape_list || !intersection)
 		return (0);
@@ -86,7 +85,8 @@ int		ft_tracer(int x, int y, t_env *env, t_rgb *color)
 	if(ft_intersect(primary_ray, (void*)env->shapes, &intersection))
 	{
 		tmp_lst = env->light;
-		intersection.hitpoint = calc_hitpoint(&primary_ray, (intersection.nearest - 0.01));
+		intersection.hitpoint = calc_hitpoint(&primary_ray, (intersection.nearest - 0.005));
+		*color = color_times_color(intersection.color, env->amb_light.colors);
 		while (tmp_lst != NULL)
 		{
 			shadow_ray = ft_shadow_ray((t_light*)tmp_lst->content, &intersection.hitpoint);

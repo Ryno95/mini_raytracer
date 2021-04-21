@@ -6,7 +6,7 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/03 13:28:19 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/04/14 12:28:58 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/04/21 19:48:26 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	ft_mlx_error(char *str)
 
 int	main(int argc, char *argv[])
 {
-	int		i = 0;
 	static	t_env	env;
 	t_img			img;
 	

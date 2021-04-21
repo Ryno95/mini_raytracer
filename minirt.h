@@ -6,7 +6,7 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/03 10:09:33 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/04/21 15:54:50 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/04/21 19:46:57 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,23 +61,23 @@ int		ft_str_arr_len(char **str_array);
 void	ft_parse_error(char *err_desc);
 
 // Utils/ft_math_utils.c
-float	ft_vec_len(t_coord coords);
-float	ft_round_fl(float num, int decimals);
-t_coord create_pos(float x, float y, float z);
+double	ft_vec_len(t_coord coords);
+double	ft_round_fl(double num, int decimals);
+t_coord create_pos(double x, double y, double z);
 t_vec 	normalize(t_vec vec);
 
 //utils/vec_utils.c
-float	vec_len(t_coord coords);
+double	vec_len(t_coord coords);
 t_vec	vec_add(t_vec a, t_vec b);
 t_vec	vec_minus(t_vec a, t_vec b);
-t_vec	vec_multiply(t_vec a, float factor);
-t_vec	vec_divide(t_vec a, float factor);
+t_vec	vec_multiply(t_vec a, double factor);
+t_vec	vec_divide(t_vec a, double factor);
 void	print_vec(t_vec vec, char *description);
 
 //utils/vec_products.c
-float	dot_product(t_vec a, t_vec b);
+double	dot_product(t_vec a, t_vec b);
 t_vec	cross_product(t_vec a, t_vec b);
-t_vec   calc_hitpoint(t_ray *primary_ray, float t);
+t_vec   calc_hitpoint(t_ray *primary_ray, double t);
 
 
 // utils/draw_utils.c
@@ -85,7 +85,7 @@ void	my_lstiter(t_list *lst, t_ray *ray, unsigned int *nearest ,void (*f)(t_list
 void	my_pixel_put(t_img *img, int x, int y, unsigned int colour);
 
 // utils/ft_color_utils.c
-void	color_multi(t_rgb *col, float factor);
+void	color_multi(t_rgb *col, double factor);
 t_rgb	color_times_color(t_rgb col, t_rgb factor);
 void	color_check(t_rgb *col);
 t_rgb	colors_add(t_rgb col, t_rgb rgb);
@@ -101,10 +101,10 @@ int		ft_tracer(int x, int y, t_env *env, t_rgb *color);
 void	ft_render(t_img *img, t_env *env);
 
 // rendering/ft_sphere_intersection.c
-float	ft_sphere_intersect(t_sphere *sphere, t_ray *ray, t_impact_point *intersection);
+int	ft_sphere_intersect(t_sphere *sphere, t_ray *ray, t_impact_point *intersection);
 
 // rendering/ft_plane_intersect.c
-float	ft_plane_intersect(t_plane *plane, t_ray *ray, t_impact_point *intersection);
+int	ft_plane_intersect(t_plane *plane, t_ray *ray, t_impact_point *intersection);
 
 // rendering/ft_render.c
 t_ray	ft_primary_ray(t_camera *cam, int x, int y);
@@ -122,7 +122,7 @@ void	ft_print_vect(t_vec vector, char *pre);
 int    ft_debugray(int keycode, int x, int y, t_env *scene);
 
 // rendering/ft_triangle.c
-float	ft_triangle_intersect(t_triangle *triangle, t_ray *ray, t_impact_point *intersection);
+int	ft_triangle_intersect(t_triangle *triangle, t_ray *ray, t_impact_point *intersection);
 
 // rendering/ft_cylinder_intersect.c
 int     ft_cylinder_intersect(t_cylinder *cy, t_ray *ray, t_impact_point *hitp);

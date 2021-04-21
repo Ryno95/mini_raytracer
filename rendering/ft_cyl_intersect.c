@@ -6,12 +6,27 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/21 10:25:53 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/04/21 14:57:29 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/04/21 20:10:26 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minirt.h"
 
+
+
+
+t_vec   ft_cyl_normal(double r, t_coord hitp, t_coord center)
+{
+    double a;
+    double c;
+    t_vec normal;
+
+    c = pow(vec_len(vec_minus(hitp, center)), 2);
+    a = c - (r * r);
+    
+    normal = vec_minus(hitp, vec_multiply(center, a/a));
+    return (normal);
+}
 int     ft_cylinder_intersect(t_cylinder *cy, t_ray *ray, t_impact_point *hitp)
 {   
     // p = ori + dir + t;
@@ -42,29 +57,31 @@ int     ft_cylinder_intersect(t_cylinder *cy, t_ray *ray, t_impact_point *hitp)
     t_vec dir_x_norm = cross_product(ray->direction, cy->normal);
     t_vec v_x_norm = cross_product(v, cy->normal);
 
-    float a = dot_product(dir_x_norm, dir_x_norm);
-    float b = 2 * dot_product(dir_x_norm, v_x_norm);
-    float c = dot_product(v_x_norm, v_x_norm) - (cy->r * cy->r);
-    float discr = b * b  -  4 * a * c;
-    float t1 = 0;
-    float t2 = 0;
+    double a = dot_product(dir_x_norm, dir_x_norm);
+    double b = 2 * dot_product(dir_x_norm, v_x_norm);
+    double c = dot_product(v_x_norm, v_x_norm) - (cy->r * cy->r);
+    double discr = b * b  -  4 * a * c;
+    double t1 = 0;
+    double t2 = 0;
     if (discr < 0)
         return (0);
 
 
 	t1 = (-b + sqrt(discr)) / 2;
 	t2 = (-b - sqrt(discr)) / 2;
-    if (t2 < t1)
+    if (t2 < t1 && t2 > 0)
         t1 = t2;
 
-    // printf("T: %f\n", t);
     if (t1 < hitp->nearest && t1 >= 0)
 	{
+        // printf("CYLINDERfound t: %lf\n", t1);
 		hitp->nearest = t1;
 		hitp->color = cy->colors;
 		hitp->object_id = cy->id;
         hitp->hitpoint  = calc_hitpoint(ray, t1);
-        hitp->normal = normalize(vec_minus(hitp->hitpoint, cy->coords));
+        hitp->normal = ft_cyl_normal(cy->r,  hitp->hitpoint, cy->coords);
+        if (dot_product(ray->direction, hitp->normal) < 0)
+            hitp->normal = vec_multiply(hitp->normal, -1);
 	    // hitp->normal = cy->normal;
 		return (1);
 	}

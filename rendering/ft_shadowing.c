@@ -6,7 +6,7 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/14 13:40:45 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/04/21 15:57:32 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/04/21 20:08:34 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,16 @@ t_ray	ft_shadow_ray(t_light *light, t_vec *hitpoint)
 t_rgb	ft_shading(t_env *env, t_impact_point *intersection, t_ray shadow_ray, t_light *light)
 {
 	t_rgb	ret_col;
-	float	dot;
+	double	dot;
 	t_rgb lite_cols;
 	t_impact_point bool_struct;
+	t_list	*tmp_lt;
 
+	tmp_lt = env->light;
 	bool_struct.nearest = INFINITY;
 	ret_col = color_times_color(intersection->color, env->amb_light.colors);
-	// ft_print_color(ret_col);
+	// ret_col = intersection->color;
+	// printf("LIGHT %p\n", light);
 	if(ft_intersect(shadow_ray, env->shapes, &bool_struct) && bool_struct.nearest < vec_len(vec_minus(light->coords, intersection->hitpoint)))
 		return (ret_col);
 	else

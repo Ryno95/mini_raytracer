@@ -6,7 +6,7 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/14 17:22:28 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/04/17 21:41:43 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/04/21 20:08:42 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,14 @@ int     ft_is_inside_triangle(t_triangle *tri, t_vec inters_p, t_vec normal)
     return (1);
 }
 
-float	ft_triangle_intersect(t_triangle *triangle, t_ray *ray, t_impact_point *intersection)
+int	ft_triangle_intersect(t_triangle *triangle, t_ray *ray, t_impact_point *intersection)
 {
-    float t = -1;
+    double t = -1;
     
     t_vec frst_side = vec_minus(triangle->scnd_pnt, triangle->frst_pnt);
     t_vec scd_side = vec_minus(triangle->thrd_pnt, triangle->frst_pnt);
     t_vec normal = normalize(cross_product(frst_side, scd_side)); // N
-    float angle = dot_product(normal, ray->direction);
+    double angle = dot_product(normal, ray->direction);
     t_vec point;
 
     if (fabs(angle) < 0.00001) // checks if the triangle and the ray are parallel thus intersection occurs at infinity 
@@ -51,6 +51,7 @@ float	ft_triangle_intersect(t_triangle *triangle, t_ray *ray, t_impact_point *in
     point = calc_hitpoint(ray, t);
     if (t >= 0 && t < intersection->nearest && ft_is_inside_triangle(triangle, point, normal))
     {
+        // printf("TRIANGLEfound t: %f\n", t);
         intersection->nearest = t;
 		intersection->color = triangle->colors;
 		intersection->object_id = triangle->id;

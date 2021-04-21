@@ -6,7 +6,7 @@
 /*   By: rmeiboom <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/02 13:38:01 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/04/21 15:31:58 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/04/21 19:31:22 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,16 @@ enum multi_opts{SPHERE, PLANE, TRIANGLE, CYLINDER ,SQUARE};
 
 typedef struct	s_rgb
 {
-	float	b;
-	float	g;
-	float	r;
+	double	b;
+	double	g;
+	double	r;
 }				t_rgb;
 
 typedef struct	s_vec
 {
-	float			x;
-	float			y;
-	float			z;
+	double			x;
+	double			y;
+	double			z;
 }				t_vec;
 
 #define t_coord t_vec
@@ -46,7 +46,7 @@ typedef struct   s_res
 typedef struct   s_amb_light
 {
 	unsigned char    id; // A
-	float			ratio; // [0.0 - 1.0]
+	double			ratio; // [0.0 - 1.0]
 	t_rgb			colors;
 }				t_amb_light;
 
@@ -57,14 +57,14 @@ typedef struct	s_camera
 	t_vec			vect_coords;
 	t_rgb			colors;
 	unsigned char	fov; // [0 - 180]
-	float			cam_dist;
+	double			cam_dist;
 }				t_camera;
 	
 typedef struct	s_light
 {
 	unsigned char	id; // l
 	t_coord			coords;
-	float			brightness;
+	double			brightness;
 	t_rgb			colors;
 	
 }				t_light;
@@ -72,7 +72,7 @@ typedef struct	s_light
 typedef struct s_sphere
 {
 	unsigned char	id;
-	float			diam;
+	double			diam;
 	t_coord			coords;
 	t_rgb			colors;
 }				t_sphere;
@@ -90,7 +90,7 @@ typedef struct s_square
 	unsigned char	id;
 	t_coord			coords;
 	t_coord			vect_coords;
-	float			side_size;
+	double			side_size;
 	t_rgb			colors;
 }				t_square;
 
@@ -99,8 +99,8 @@ typedef struct s_cylinder
 	unsigned char	id;
 	t_coord			coords;
 	t_coord			normal;
-	float			r;
-	float			height;
+	double			r;
+	double			height;
 	t_rgb			colors;
 }				t_cylinder;
 
@@ -136,7 +136,7 @@ typedef struct	s_impact_point
 	t_vec		normal;
 	t_coord		hitpoint;
 	int			object_id;
-	float		nearest;
+	double		nearest;
 	
 }				t_impact_point;
 
