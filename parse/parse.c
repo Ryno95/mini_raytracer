@@ -6,7 +6,7 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/03 13:27:17 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/04/10 21:15:44 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/04/23 16:36:26 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 // TODO ERROR MANAGEMENT:
 	// VECT_COORDS
 	// SPLIT LENGTH
-	// ROUND FLOAT 2
+	// ROUND double 2
 int	parse_tree(t_env *env)
 {
 	if (**env->spl_str == 'R')

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_cyl_intersect.c                                 :+:    :+:            */
+/*   ft_cylinder_intersect.c                            :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/21 10:25:53 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/04/21 20:10:26 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/04/23 17:15:46 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,14 @@ t_vec   ft_cyl_normal(double r, t_coord hitp, t_coord center)
     normal = vec_minus(hitp, vec_multiply(center, a/a));
     return (normal);
 }
+
+int     ft_in_range(t_cylinder *cy, t_vec *hitp)
+{
+    
+    return (0);
+}
+
+
 int     ft_cylinder_intersect(t_cylinder *cy, t_ray *ray, t_impact_point *hitp)
 {   
     // p = ori + dir + t;
@@ -60,18 +68,20 @@ int     ft_cylinder_intersect(t_cylinder *cy, t_ray *ray, t_impact_point *hitp)
     double a = dot_product(dir_x_norm, dir_x_norm);
     double b = 2 * dot_product(dir_x_norm, v_x_norm);
     double c = dot_product(v_x_norm, v_x_norm) - (cy->r * cy->r);
-    double discr = b * b  -  4 * a * c;
+    double discr = (b * b) - (4 * a * c);
     double t1 = 0;
     double t2 = 0;
     if (discr < 0)
         return (0);
 
 
-	t1 = (-b + sqrt(discr)) / 2;
-	t2 = (-b - sqrt(discr)) / 2;
+	t1 = (-b + sqrt(discr)) / (2 * a);
+	t2 = (-b - sqrt(discr)) / (2 * a);
     if (t2 < t1 && t2 > 0)
         t1 = t2;
 
+    // if (!ft_in_range(cy, &hitp->hitpoint))
+    //     return (0);
     if (t1 < hitp->nearest && t1 >= 0)
 	{
         // printf("CYLINDERfound t: %lf\n", t1);

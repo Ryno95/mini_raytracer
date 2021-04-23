@@ -6,7 +6,7 @@
 /*   By: rmeiboom <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/07 21:55:32 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/04/21 20:07:26 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/04/23 16:36:26 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,14 @@
 // Camera rotation
 // BMP
 // TR. SQ. CY. Intersections
-void	ft_print_color(t_rgb vector)
+
+void ass_hitpoint(double t, t_rgb col, int id, t_impact_point *hit)
 {
-	printf("Color: %lf %lf %lf\n", vector.r, vector.g, vector.b);
+	if (!hit)
+		ft_parse_error("No hitpoint given");
+	hit->nearest = t;
+	hit->color = col;
+	hit->object_id = id;
 }
 
 t_vec vec_by_vec(t_vec a, t_vec b)
@@ -33,7 +38,7 @@ t_ray	ft_primary_ray(t_camera *cam, int x, int y)
 {
 	t_ray ray;
 	t_vec dir = create_pos((double)x, (double)y, cam->cam_dist);
-
+	
 	ray.origin = cam->coords;
 	ray.direction = normalize(vec_minus(dir, ray.origin));
 	return (ray);
@@ -43,7 +48,8 @@ int		ft_intersect(t_ray ray, t_list **shape_list, t_impact_point *intersection)
 {
 	int i;
 	t_list *tmp_lst;
-	
+
+
 	i = 0;
 	if (!shape_list || !intersection)
 		return (0);
@@ -58,6 +64,8 @@ int		ft_intersect(t_ray ray, t_list **shape_list, t_impact_point *intersection)
 				ft_plane_intersect((t_plane*)tmp_lst->content, &ray, intersection);
 			else if (i == TRIANGLE)
 				ft_triangle_intersect((t_triangle*)tmp_lst->content, &ray, intersection);
+			else if (i == SQUARE)
+				ft_square_intersect((t_square*)tmp_lst->content, &ray, intersection);
 			else if (i == CYLINDER)
 				ft_cylinder_intersect((t_cylinder*)tmp_lst->content, &ray, intersection);
 			tmp_lst = tmp_lst->next;
@@ -85,16 +93,24 @@ int		ft_tracer(int x, int y, t_env *env, t_rgb *color)
 	if(ft_intersect(primary_ray, (void*)env->shapes, &intersection))
 	{
 		tmp_lst = env->light;
-		intersection.hitpoint = calc_hitpoint(&primary_ray, (intersection.nearest - 0.005));
-		*color = color_times_color(intersection.color, env->amb_light.colors);
+		intersection.hitpoint = calc_hitpoint(&primary_ray, (intersection.nearest - 0.001));
 		while (tmp_lst != NULL)
 		{
+			int i = 1;
 			shadow_ray = ft_shadow_ray((t_light*)tmp_lst->content, &intersection.hitpoint);
+			
+			
+			// *color = intersection.color;
+
+			
 			*color = colors_add(*color, ft_shading(env, &intersection, shadow_ray, (t_light*)tmp_lst->content));
 			color_check(color);
 			tmp_lst = tmp_lst->next;
+			// printf("lightp: %p\n", tmp_lst);
+			// printf("lightp: %p\n", tmp_lst);
+			// printf("i: %d\n", i);
+			i++;
 		}
-		// ft_print_color(*color);
 	}
 	return (0);
 }

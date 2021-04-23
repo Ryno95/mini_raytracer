@@ -23,21 +23,21 @@
 // void	ft_parse_error(char *err_desc);
 
 // // Utils/ft_math_utils.c
-// float	ft_vec_len(t_coord coords);
-// float	ft_round_fl(float num, int decimals);
-// t_coord create_pos(float x, float y, float z);
+// double	ft_vec_len(t_coord coords);
+// double	ft_round_fl(double num, int decimals);
+// t_coord create_pos(double x, double y, double z);
 // void normalize(t_vec *vec);
 
 // //utils/vec_utils.c
-// float	vec_len(t_coord coords);
+// double	vec_len(t_coord coords);
 // t_vec	vec_add(t_vec a, t_vec b);
 // t_vec	vec_minus(t_vec a, t_vec b);
-// t_vec	vec_multiply(t_vec a, float factor);
-// t_vec	vec_divide(t_vec a, float factor);
+// t_vec	vec_multiply(t_vec a, double factor);
+// t_vec	vec_divide(t_vec a, double factor);
 // void 	print_vec(t_vec vec);
 
 // //utils/vec_products.c
-// float	dot_product(t_vec a, t_vec b);
+// double	dot_product(t_vec a, t_vec b);
 // t_vec	cross_product(t_vec a, t_vec b);
 
 

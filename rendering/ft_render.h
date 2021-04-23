@@ -22,4 +22,4 @@
 // void	ft_render(t_img *img, t_env *env);
 
 // //tracer/ft_sphere_intersection.c
-// float   ft_sphere_intersect(t_sphere *sphere, t_ray *ray, float *nearest);
+// double   ft_sphere_intersect(t_sphere *sphere, t_ray *ray, double *nearest);

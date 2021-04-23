@@ -6,7 +6,7 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/03 13:31:58 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/04/14 15:53:05 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/04/23 16:47:29 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,7 @@ int	parse_cam(char **spl_str, t_list **cam, t_res *res)
 
 	// What is best prectice for this? If 3d vect isn't correct??? Error? Or Assign the correct version???
 	vl = vec_len(cam_node->coords);
-	cam_node->vect_coords.x = cam_node->coords.x / vl;
-	cam_node->vect_coords.y = cam_node->coords.y / vl;
-	cam_node->vect_coords.z = cam_node->coords.z / vl;
+	ass_coords(spl_str[2], &cam_node->vect_coords);
 	cam_node->fov = ft_atoi(spl_str[3]);
 	if (cam_node->fov < 0)
 		cam_node->fov = 0;
