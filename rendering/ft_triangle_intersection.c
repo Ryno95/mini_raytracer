@@ -6,7 +6,7 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/14 17:22:28 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/04/23 16:36:26 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/04/23 19:23:01 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int     ft_is_inside_triangle(t_triangle *tri, t_vec inters_p, t_vec normal)
     return (1);
 }
 
-double	ft_triangle_intersect(t_triangle *triangle, t_ray *ray, t_impact_point *intersection)
+double	ft_triangle_intersect(t_triangle *triangle, t_ray *ray, t_hit *intersection)
 {
     double t = -1;
     

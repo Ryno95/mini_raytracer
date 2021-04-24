@@ -6,7 +6,7 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/03 13:31:58 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/04/23 16:47:29 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/04/24 17:55:25 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,8 @@ int parse_light(char **split, t_list **light_lst)
 	if (light_node->brightness < 0 || light_node->brightness > 1)
 		ft_parse_error("light source, brightness ratio");
 	ass_colors(split[3], &light_node->colors);
-
+	// color_multi(&light_node->colors, light_node->brightness);
+	// ft_print_color(light_node->colors);
 	ft_lstadd_front(light_lst, ft_lstnew(light_node));
 
 	return (0);

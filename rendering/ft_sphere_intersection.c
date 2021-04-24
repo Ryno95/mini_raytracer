@@ -6,13 +6,13 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/31 11:10:49 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/04/23 16:36:26 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/04/23 19:23:01 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minirt.h"
 
-double	ft_sphere_intersect(t_sphere *sphere, t_ray *ray, t_impact_point *intersection)
+double	ft_sphere_intersect(t_sphere *sphere, t_ray *ray, t_hit *intersection)
 {
 	double t = -1;
 	double b;

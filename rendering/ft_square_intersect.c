@@ -6,7 +6,7 @@
 /*   By: rmeiboom <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/18 10:44:42 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/04/23 16:36:26 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/04/23 19:23:01 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int		ft_is_inside_square(t_square *sq, t_vec hitp)
 	return (0);
 }
 
-int		ft_square_intersect(t_square *sq, t_ray *ray, t_impact_point *intersect)
+int		ft_square_intersect(t_square *sq, t_ray *ray, t_hit *intersect)
 {
 	double denominator = dot_product(sq->vect_coords, ray->direction);
 	// if (denominator <= 0.00001)

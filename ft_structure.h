@@ -6,7 +6,7 @@
 /*   By: rmeiboom <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/02 13:38:01 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/04/23 16:38:29 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/04/23 19:23:01 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ enum multi_opts{SPHERE, PLANE, TRIANGLE, SQUARE, CYLINDER};
 
 typedef struct	s_rgb
 {
-	int	b;
-	int	g;
-	int	r;
+	float	b;
+	float	g;
+	float	r;
 }				t_rgb;
 
 typedef struct	s_vec
@@ -138,7 +138,7 @@ typedef struct	s_impact_point
 	int			object_id;
 	double		nearest;
 	
-}				t_impact_point;
+}				t_hit;
 
 typedef struct	s_env
 {

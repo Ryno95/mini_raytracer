@@ -6,13 +6,13 @@
 /*   By: rmeiboom <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/03 11:29:17 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/04/23 16:36:26 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/04/23 19:23:01 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minirt.h"
 
-double	ft_plane_intersect(t_plane *plane, t_ray *ray, t_impact_point *intersection)
+double	ft_plane_intersect(t_plane *plane, t_ray *ray, t_hit *intersection)
 {
 	double denominator = dot_product(plane->vect_coords, ray->direction);
 	t_vec diff = vec_minus(plane->coords ,ray->origin);

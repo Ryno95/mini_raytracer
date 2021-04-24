@@ -6,7 +6,7 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/21 10:25:53 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/04/23 17:15:46 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/04/24 17:59:36 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int     ft_in_range(t_cylinder *cy, t_vec *hitp)
 }
 
 
-int     ft_cylinder_intersect(t_cylinder *cy, t_ray *ray, t_impact_point *hitp)
+int     ft_cylinder_intersect(t_cylinder *cy, t_ray *ray, t_hit *hitp)
 {   
     // p = ori + dir + t;
 
@@ -90,8 +90,8 @@ int     ft_cylinder_intersect(t_cylinder *cy, t_ray *ray, t_impact_point *hitp)
 		hitp->object_id = cy->id;
         hitp->hitpoint  = calc_hitpoint(ray, t1);
         hitp->normal = ft_cyl_normal(cy->r,  hitp->hitpoint, cy->coords);
-        if (dot_product(ray->direction, hitp->normal) < 0)
-            hitp->normal = vec_multiply(hitp->normal, -1);
+        // if (dot_product(ray->direction, hitp->normal) < 0)
+        //     hitp->normal = vec_multiply(hitp->normal, -1);
 	    // hitp->normal = cy->normal;
 		return (1);
 	}

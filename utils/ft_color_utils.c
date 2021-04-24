@@ -6,7 +6,7 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/14 13:46:56 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/04/23 16:36:26 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/04/23 22:33:26 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,15 @@ void	color_check(t_rgb *col)
 {
 	if (col->r > 255)
 		col->r = 255;
-	else if (col->r < 0)
+	else if (col->r < 0.0001)
 		col->r = 0;
 	if (col->g > 255)
 		col->g = 255;
-	else if (col->g < 0)
+	else if (col->g < 0.0001)
 		col->g = 0;
 	if (col->b > 255)
 		col->b = 255;
-	else if (col->b < 0)
+	else if (col->b < 0.0001)
 		col->b = 0;
 }
 
@@ -38,6 +38,7 @@ void	color_multi(t_rgb *col, double factor)
 	col->r *= factor;
 	col->g *= factor;
 	col->b *= factor;
+	color_check(col);
 }
 
 t_rgb	colors_add(t_rgb col, t_rgb rgb)

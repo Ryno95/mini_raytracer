@@ -6,7 +6,7 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/14 11:14:39 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/04/14 17:37:15 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/04/23 19:23:01 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_print_color(t_rgb vector)
 {
-	printf("Color: %lf %lf %lf\n", vector.r, vector.g, vector.b);
+	printf("Color: %f %f %f\n", vector.r, vector.g, vector.b);
 }
 
 void	ft_print_vect(t_vec vector, char *pre)
@@ -25,13 +25,13 @@ void	ft_print_vect(t_vec vector, char *pre)
 int    ft_debugray(int keycode, int x, int y, t_env *env)
 {
 	t_ray 			ray;
-	t_impact_point 	impact;
+	t_hit 	impact;
 	t_rgb			color;
 	t_ray			shadow_ray;
 	t_camera		*camera = ((t_camera*)(env->cam_list->content));
 	
 	env->debug = 1;
-	// impact = (t_impact_point *)ft_calloc(sizeof(t_impact_point), 1);
+	// impact = (t_hit *)ft_calloc(sizeof(t_hit), 1);
 	impact.nearest = INFINITY;
 	// ray = (t_ray *)ft_calloc(sizeof(t_ray), 1);
 	// printf("x:%d\ny:%d\n", x, y);
