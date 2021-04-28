@@ -22,6 +22,7 @@ OBJ = Debug/debugray.o\
 	utils/vec_products.o\
 	utils/vec_utils.o\
 	utils/ft_color_utils.o\
+	utils/ft_matrices.o\
 	rendering/ft_render.o\
 	rendering/ft_sphere_intersection.o\
 	rendering/ft_plane_intersect.o\

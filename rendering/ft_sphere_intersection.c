@@ -6,7 +6,7 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/31 11:10:49 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/04/23 19:23:01 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/04/28 18:32:50 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,13 @@ double	ft_sphere_intersect(t_sphere *sphere, t_ray *ray, t_hit *intersection)
 
 	if (t >= 0 && t < intersection->nearest)
 	{
-		// printf("SPHEREfound t: %f\n", t);
 		// ass_hitpoint(t, sphere->colors, sphere->id, intersection);
 		intersection->nearest = t;
 		intersection->color = sphere->colors;
 		intersection->object_id = sphere->id;
 		intersection->hitpoint = calc_hitpoint(ray, t);
 		intersection->normal = normalize(vec_minus(intersection->hitpoint, sphere->coords));
+		// ft_print_vect(intersection->normal, "SPHERENORMAL!!!!");
 		return (1);
 	}
 	return (0);

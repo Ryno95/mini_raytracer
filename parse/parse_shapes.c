@@ -6,7 +6,7 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/03 13:40:31 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/04/23 16:21:32 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/04/28 11:07:56 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,6 @@ int parse_plane(char **split, t_list **plane_lst)
 	ass_coords(split[1], &plane_node->coords);
 	ass_coords(split[2], &plane_node->vect_coords);
 	ass_colors(split[3], &plane_node->colors);
-	// printf("red:%d, Green:%d, Blue:%d\n", plane_node->colors.r, plane_node->colors.g, plane_node->colors.b);
-
 	ft_lstadd_back(plane_lst, ft_lstnew(plane_node));
 
 	return (0);
@@ -96,13 +94,11 @@ int parse_triangle(char **split, t_list **triangle_lst)
 		ft_parse_error("triangle, safety checks");
 
 	tri_node->id = TRIANGLE;
-	// See if you can dinamically assign the points
-	// while (i <= 3)
 	ass_coords(split[1], &tri_node->frst_pnt);
 	ass_coords(split[2], &tri_node->scnd_pnt);
 	ass_coords(split[3], &tri_node->thrd_pnt);
 	ass_colors(split[4], &tri_node->colors);
-	
+
 	ft_lstadd_front(triangle_lst, ft_lstnew(tri_node));
 
 	return (0);

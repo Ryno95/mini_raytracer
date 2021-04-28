@@ -6,17 +6,13 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/03 13:27:17 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/04/23 16:36:26 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/04/28 11:06:59 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minirt.h"
 #include <fcntl.h>
 
-// TODO ERROR MANAGEMENT:
-	// VECT_COORDS
-	// SPLIT LENGTH
-	// ROUND double 2
 int	parse_tree(t_env *env)
 {
 	if (**env->spl_str == 'R')
@@ -48,7 +44,6 @@ int parse(char *file_name, t_env *env)
 	int		ret;
 
 	ret = 1;
-	printf("ENTERING PARSING\n");
 	fd = open(file_name, O_RDONLY);
 	if (fd < 0)
 		ft_parse_error("Open failed");

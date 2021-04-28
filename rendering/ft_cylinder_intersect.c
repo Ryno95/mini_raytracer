@@ -6,7 +6,7 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/21 10:25:53 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/04/24 17:59:36 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/04/28 18:41:04 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,21 @@
 
 
 
-t_vec   ft_cyl_normal(double r, t_coord hitp, t_coord center)
+t_vec   ft_cyl_normal(double r, t_coord hitp, t_coord center, t_vec ori)
 {
     double a;
     double c;
     t_vec normal;
-
-    c = pow(vec_len(vec_minus(hitp, center)), 2);
-    a = c - (r * r);
+    t_vec center_hitp = vec_minus(hitp, center);
+    a = dot_product(center_hitp, ori); // use for height check
+    t_vec translate = vec_add(center, vec_multiply(ori, a));
+    normal = normalize(vec_minus(hitp, translate));
+    // c = pow(vec_len(vec_minus(hitp, center)), 2);
+    // a = c - (r * r);
     
-    normal = vec_minus(hitp, vec_multiply(center, a/a));
+    // normal = vec_minus(vec_multiply(center, a/a), hitp);
+    
+    
     return (normal);
 }
 
@@ -89,7 +94,7 @@ int     ft_cylinder_intersect(t_cylinder *cy, t_ray *ray, t_hit *hitp)
 		hitp->color = cy->colors;
 		hitp->object_id = cy->id;
         hitp->hitpoint  = calc_hitpoint(ray, t1);
-        hitp->normal = ft_cyl_normal(cy->r,  hitp->hitpoint, cy->coords);
+        hitp->normal = normalize(ft_cyl_normal(cy->r,  hitp->hitpoint, cy->coords, cy->normal));
         // if (dot_product(ray->direction, hitp->normal) < 0)
         //     hitp->normal = vec_multiply(hitp->normal, -1);
 	    // hitp->normal = cy->normal;

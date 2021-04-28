@@ -6,7 +6,7 @@
 /*   By: rmeiboom <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/02 13:38:01 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/04/23 19:23:01 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/04/28 16:56:29 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,26 @@ typedef struct	s_vec
 }				t_vec;
 
 #define t_coord t_vec
+
+typedef struct 	s_vec4d
+{
+	double		x;
+	double		y;
+	double		z;
+	double		w;
+}				t_vec4d;
+
+typedef union  s_matrix3x3
+{
+    double m[3][3];
+	struct
+	{
+		t_vec right;
+		t_vec up;
+		t_vec forward;
+	};
+	
+}               t_matrix3x3;
 
 typedef struct	s_ray
 {

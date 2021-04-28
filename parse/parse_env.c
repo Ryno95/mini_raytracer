@@ -6,7 +6,7 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/03 13:31:58 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/04/24 17:55:25 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/04/28 17:07:36 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 // check that values are positive where needed
 int	parse_res(char **spl_str, t_res *res)
 {
-	// R 1920 1080
 	if (!spl_str || !res || ft_str_arr_len(spl_str) != 3)
 		ft_parse_error("resolution, safety checks");
 	res->id = spl_str[0][0];
@@ -34,7 +33,7 @@ int	parse_amb_light(char **spl_str, t_amb_light *am_lt)
 	am_lt->ratio = ft_atof(spl_str[1]);
 	if (am_lt->ratio > 1 || am_lt->ratio < 0)
 		ft_parse_error("ambient light, ratio out of bounds");
-		
+
 	ass_colors(spl_str[2], &am_lt->colors);
 	color_multi(&am_lt->colors, am_lt->ratio);
 	color_check(&am_lt->colors);
@@ -52,9 +51,8 @@ int	parse_cam(char **spl_str, t_list **cam, t_res *res)
 	cam_node->id = 'c';
 	ass_coords(spl_str[1], &cam_node->coords);
 
-	// What is best prectice for this? If 3d vect isn't correct??? Error? Or Assign the correct version???
-	vl = vec_len(cam_node->coords);
 	ass_coords(spl_str[2], &cam_node->vect_coords);
+	cam_node ->vect_coords = normalize(cam_node->vect_coords);
 	cam_node->fov = ft_atoi(spl_str[3]);
 	if (cam_node->fov < 0)
 		cam_node->fov = 0;
@@ -75,13 +73,11 @@ int parse_light(char **split, t_list **light_lst)
 
 	light_node->id = 'l';
 	ass_coords(split[1], &light_node->coords);
-	
+
 	light_node->brightness = ft_atof(split[2]);
 	if (light_node->brightness < 0 || light_node->brightness > 1)
 		ft_parse_error("light source, brightness ratio");
 	ass_colors(split[3], &light_node->colors);
-	// color_multi(&light_node->colors, light_node->brightness);
-	// ft_print_color(light_node->colors);
 	ft_lstadd_front(light_lst, ft_lstnew(light_node));
 
 	return (0);

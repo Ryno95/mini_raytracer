@@ -6,7 +6,7 @@
 /*   By: rmeiboom <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/07 21:55:32 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/04/24 18:00:27 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/04/28 19:36:59 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,21 @@ t_vec vec_by_vec(t_vec a, t_vec b)
 	return (a);
 }
 
-t_ray	ft_primary_ray(t_camera *cam, int x, int y)
+t_ray	ft_primary_ray(t_camera *cam, double x, double y, double z)
 {
 	t_ray ray;
-	t_vec dir = create_pos((double)x, (double)y, cam->cam_dist);
+
+	t_matrix3x3 matrix;
+
+ 	// z /= tan(cam->fov * 0.5);
+	 z = cam->cam_dist;
+	t_vec dir = create_pos((double)x, (double)y, z * 2);
+	matrix.forward = cam->vect_coords;
+	matrix.right = normalize(cross_product(matrix.forward, create_pos(0, -1, 0)));
+	if (vec_len(matrix.right) == 0)
+		matrix.right = create_pos(1,0,0);
+	matrix.up = cross_product(matrix.forward, matrix.right);
+	dir = ft_vec_multi_matrix(matrix, dir);
 	
 	ray.origin = cam->coords;
 	ray.direction = normalize(vec_minus(dir, ray.origin));
@@ -48,7 +59,6 @@ int		ft_intersect(t_ray ray, t_list **shape_list, t_hit *intersection)
 {
 	int i;
 	t_list *tmp_lst;
-
 
 	i = 0;
 	if (!shape_list || !intersection)
@@ -85,21 +95,19 @@ t_rgb		ft_tracer(int x, int y, t_env *env)
 	t_list	*tmp_lst;
 	t_rgb	color;
 	
-	// only when cam is on [0;0;Z]
 	x = x - env->res.x / 2;
 	y = env->res.y / 2 - y;
+	// double z = env->res.y / 2;
+	double z = 00;
 	intersection.nearest = INFINITY;
 	
 	color_multi(&color, 0);
-	primary_ray = ft_primary_ray((t_camera*)(env->cam_list->content), x, y);
+	primary_ray = ft_primary_ray((t_camera*)(env->cam_list->content), x, y, z);
 	if(ft_intersect(primary_ray, (void*)env->shapes, &intersection))
 	{
 		intersection.hitpoint = calc_hitpoint(&primary_ray, (intersection.nearest - 0.001));
 		color = ft_shader(env, &intersection);
-		// color = color_times_color(intersection.color, env->amb_light.colors);
-		// ft_print_color(color);
 	}
-	
 	return (color);
 }
 
@@ -115,11 +123,7 @@ void ft_render(t_img *img, t_env *env)
 		j = 0;
 		while (j < env->res.x)
 		{
-			color.r = 0;
-			color.g = 0;
-			color.b = 0;
 			color = ft_tracer(j, i, env);
-			// ft_print_color(color);
 			my_pixel_put(img, j, i, create_trgb(0, color.r, color.g, color.b));
 			j++;
 		}
