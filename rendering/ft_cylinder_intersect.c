@@ -6,7 +6,7 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/21 10:25:53 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/04/29 21:18:13 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/04/29 21:59:08 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int     ft_in_range(t_cylinder *cy, double t,  t_ray *ray)
     b = (a * a) - (c * c);
     b = sqrt(b);
     // printf("B: %lf\n", b);
-    if (b < cy->height/2)
+    if (b < cy->height/2 && b > cy->height/-2)
         return (1);
     
     return (0);
