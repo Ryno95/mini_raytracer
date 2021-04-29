@@ -6,7 +6,7 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/03 10:09:33 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/04/28 16:59:17 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/04/29 20:23:11 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,4 +136,5 @@ double	ft_triangle_intersect(t_triangle *triangle, t_ray *ray, t_hit *intersecti
 int		ft_square_intersect(t_square *sq, t_ray *ray, t_hit *intersect);
 
 // rednering/ft_cylinder_intersect.c
-int	ft_cylinder_intersect(t_cylinder *cy, t_ray *ray, t_hit *hitp);
+int		ft_cylinder_intersect(t_cylinder *cy, t_ray *ray, t_hit *hitp);
+int     ft_in_range(t_cylinder *cy, double t,  t_ray *ray);

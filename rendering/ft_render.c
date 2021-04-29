@@ -6,7 +6,7 @@
 /*   By: rmeiboom <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/07 21:55:32 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/04/28 19:36:59 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/04/29 20:36:58 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ t_rgb		ft_tracer(int x, int y, t_env *env)
 	x = x - env->res.x / 2;
 	y = env->res.y / 2 - y;
 	// double z = env->res.y / 2;
-	double z = 00;
+	double z = 0;
 	intersection.nearest = INFINITY;
 	
 	color_multi(&color, 0);

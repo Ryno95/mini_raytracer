@@ -6,14 +6,11 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/21 10:25:53 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/04/28 18:41:04 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/04/29 21:18:13 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minirt.h"
-
-
-
 
 t_vec   ft_cyl_normal(double r, t_coord hitp, t_coord center, t_vec ori)
 {
@@ -33,8 +30,22 @@ t_vec   ft_cyl_normal(double r, t_coord hitp, t_coord center, t_vec ori)
     return (normal);
 }
 
-int     ft_in_range(t_cylinder *cy, t_vec *hitp)
+int     ft_in_range(t_cylinder *cy, double t,  t_ray *ray)
 {
+    t_vec hitp;
+    double a;
+    double b;
+    double c;
+    
+    hitp = calc_hitpoint(ray, t);
+    a = vec_len(vec_minus(hitp, cy->coords));
+    c = cy->r;
+
+    b = (a * a) - (c * c);
+    b = sqrt(b);
+    // printf("B: %lf\n", b);
+    if (b < cy->height/2)
+        return (1);
     
     return (0);
 }
@@ -82,12 +93,13 @@ int     ft_cylinder_intersect(t_cylinder *cy, t_ray *ray, t_hit *hitp)
 
 	t1 = (-b + sqrt(discr)) / (2 * a);
 	t2 = (-b - sqrt(discr)) / (2 * a);
-    if (t2 < t1 && t2 > 0)
+    if (t2 < t1 && t2 > 0 && ft_in_range(cy, t2, ray))
         t1 = t2;
+     
 
     // if (!ft_in_range(cy, &hitp->hitpoint))
     //     return (0);
-    if (t1 < hitp->nearest && t1 >= 0)
+    if (t1 < hitp->nearest && t1 >= 0 && ft_in_range(cy, t1, ray))
 	{
         // printf("CYLINDERfound t: %lf\n", t1);
 		hitp->nearest = t1;
