@@ -6,7 +6,7 @@
 /*   By: rmeiboom <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/07 21:55:32 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/04/30 17:43:01 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/04/30 18:10:07 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ t_rgb		ft_tracer(int x, int y, t_env *env)
 	y = env->res.y / 2 - y;
 	intersection.near = INFINITY;
 
-	color_multi(&color, 0);
+	ft_color_multi(&color, 0);
 	primary_ray = ft_primary_ray((t_camera*)(env->cam_list->content), x, y);
 	if(ft_intersect(primary_ray, (void*)env->shapes, &intersection))
 	{
@@ -103,7 +103,7 @@ void ft_render(t_img *img, t_env *env)
 {
 	int		i;
 	int		j;
-	t_rgb 	color;
+	t_rgb 	col;
 
 	i = 0;
 	while (i < env->res.y)
@@ -111,8 +111,8 @@ void ft_render(t_img *img, t_env *env)
 		j = 0;
 		while (j < env->res.x)
 		{
-			color = ft_tracer(j, i, env);
-			my_pixel_put(img, j, i, create_trgb(0, color.r, color.g, color.b));
+			col = ft_tracer(j, i, env);
+			my_pixel_put(img, j, i, ft_create_trgb(0, col.r, col.g, col.b));
 			j++;
 		}
 		i++;

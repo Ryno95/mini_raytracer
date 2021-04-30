@@ -6,7 +6,7 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/03 13:31:58 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/04/30 17:43:01 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/04/30 18:08:49 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ int	parse_amb_light(char **spl_str, t_amb_light *am_lt)
 	if (am_lt->ratio > 1 || am_lt->ratio < 0)
 		ft_parse_error("ambient light, invalid brightness ratio");
 	ass_colors(spl_str[2], &am_lt->colors);
-	color_multi(&am_lt->colors, am_lt->ratio);
-	color_check(&am_lt->colors);
+	ft_color_multi(&am_lt->colors, am_lt->ratio);
+	ft_color_check(&am_lt->colors);
 	return (0);
 }
 

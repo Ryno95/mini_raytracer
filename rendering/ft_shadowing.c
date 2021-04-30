@@ -6,7 +6,7 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/14 13:40:45 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/04/30 17:43:01 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/04/30 18:07:03 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,10 @@ t_rgb	ft_shader(t_env *env, t_hit *hitp)
 		{
 			intensity = dot_product(shadow_ray.direction, hitp->normal);
 			intensity = intensity * light->brightness;
-			color_multi(&truelight, intensity);
-			total_lights = colors_add(total_lights, truelight);
+			ft_color_multi(&truelight, intensity);
+			total_lights = ft_colors_add(total_lights, truelight);
 		}
 		cursor = cursor->next;
 	}
-	return (color_times_color(hitp->color, total_lights));
+	return (ft_color_times_color(hitp->color, total_lights));
 }

@@ -6,18 +6,18 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/14 13:46:56 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/04/30 17:45:29 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/04/30 18:09:27 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/ft_structure.h"
 
-int	create_trgb(int t, int r, int g, int b)
+int	ft_create_trgb(int t, int r, int g, int b)
 {
 	return (t << 24 | r << 16 | g << 8 | b);
 }
 
-void	color_check(t_rgb *col)
+void	ft_color_check(t_rgb *col)
 {
 	if (col->r > 255)
 		col->r = 255;
@@ -33,24 +33,24 @@ void	color_check(t_rgb *col)
 		col->b = 0;
 }
 
-void	color_multi(t_rgb *col, double factor)
+void	ft_color_multi(t_rgb *col, double factor)
 {
 	col->r *= factor;
 	col->g *= factor;
 	col->b *= factor;
-	color_check(col);
+	ft_color_check(col);
 }
 
-t_rgb	colors_add(t_rgb col, t_rgb rgb)
+t_rgb	ft_colors_add(t_rgb col, t_rgb rgb)
 {
 	col.r += rgb.r;
 	col.g += rgb.g;
 	col.b += rgb.b;
-	color_check(&col);
+	ft_color_check(&col);
 	return (col);
 }
 
-t_rgb	color_times_color(t_rgb col, t_rgb factor)
+t_rgb	ft_color_times_color(t_rgb col, t_rgb factor)
 {
 	col.r = (col.r * factor.r) / 255;
 	col.g = (col.g * factor.g) / 255;

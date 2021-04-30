@@ -6,11 +6,12 @@
 /*   By: rmeiboom <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/11 22:31:15 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/04/30 17:43:01 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/04/30 18:02:36 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/minirt.h"
+#include "../mlx/mlx.h"
 
 int	ft_run_mlx(t_img *img, t_env *env)
 {

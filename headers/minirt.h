@@ -6,7 +6,7 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/03 10:09:33 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/04/30 17:44:17 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/04/30 18:06:49 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,10 @@
 #include "ft_structure.h"
 #include "../gnl/get_next_line.h"
 #include "../libft/libft.h"
-#include "../mlx/mlx.h"
 
 # define IDS "RAcl"
 # define ray_max 1e6
 # define ray_min 1e-6
-
 
 void	ft_mlx_error(char *str);
 
@@ -86,11 +84,11 @@ void	my_lstiter(t_list *lst, t_ray *ray, unsigned int *nearest ,void (*f)(t_list
 void	my_pixel_put(t_img *img, int x, int y, unsigned int colour);
 
 // utils/ft_color_utils.c
-void	color_multi(t_rgb *col, double factor);
-t_rgb	color_times_color(t_rgb col, t_rgb factor);
-void	color_check(t_rgb *col);
-t_rgb	colors_add(t_rgb col, t_rgb rgb);
-int		create_trgb(int t, int r, int g, int b);
+void	ft_color_multi(t_rgb *col, double factor);
+t_rgb	ft_color_times_color(t_rgb col, t_rgb factor);
+void	ft_color_check(t_rgb *col);
+t_rgb	ft_colors_add(t_rgb col, t_rgb rgb);
+int		ft_create_trgb(int t, int r, int g, int b);
 
 // rendering/draw_shapes.c
 void	ft_draw_square(t_img *img, t_square *sqr);
