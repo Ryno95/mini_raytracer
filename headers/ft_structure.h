@@ -6,11 +6,11 @@
 /*   By: rmeiboom <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/02 13:38:01 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/04/28 16:56:29 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/04/30 17:44:44 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/libft.h"
+#include "../libft/libft.h"
 
 enum multi_opts{SPHERE, PLANE, TRIANGLE, SQUARE, CYLINDER};
 
@@ -37,6 +37,16 @@ typedef struct 	s_vec4d
 	double		z;
 	double		w;
 }				t_vec4d;
+
+typedef struct	s_quadratic
+{
+	double a;
+	double b;
+	double c;
+	double discrim;
+	double t1;
+	double t2;
+}				t_quadratic;
 
 typedef union  s_matrix3x3
 {
@@ -93,7 +103,7 @@ typedef struct s_sphere
 {
 	unsigned char	id;
 	double			diam;
-	t_coord			coords;
+	t_coord			center;
 	t_rgb			colors;
 }				t_sphere;
 
@@ -101,15 +111,15 @@ typedef struct s_plane
 {
 	unsigned char	id;
 	t_coord			coords;
-	t_coord			vect_coords;
+	t_coord			orient;
 	t_rgb			colors;
 }				t_plane;
 
 typedef struct s_square
 {
 	unsigned char	id;
-	t_coord			coords;
-	t_coord			vect_coords;
+	t_coord			center;
+	t_coord			orient;
 	double			side_size;
 	t_rgb			colors;
 }				t_square;
@@ -117,8 +127,8 @@ typedef struct s_square
 typedef struct s_cylinder
 {
 	unsigned char	id;
-	t_coord			coords;
-	t_coord			normal;
+	t_coord			center;
+	t_vec			ori;
 	double			r;
 	double			height;
 	t_rgb			colors;
@@ -156,7 +166,7 @@ typedef struct	s_impact_point
 	t_vec		normal;
 	t_coord		hitpoint;
 	int			object_id;
-	double		nearest;
+	double		near;
 	
 }				t_hit;
 

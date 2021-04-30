@@ -6,11 +6,11 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/14 13:40:45 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/04/28 10:38:45 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/04/30 17:43:01 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minirt.h"
+#include "../headers/minirt.h"
 
 t_ray	ft_shadow_ray(t_light *light, t_vec *hitpoint)
 {
@@ -36,9 +36,9 @@ t_rgb	ft_shader(t_env *env, t_hit *hitp)
 	{
 		light = ((t_light*)(cursor->content));
 		shadow_ray = ft_shadow_ray(light, &hitp->hitpoint);
-		shadow_check.nearest = INFINITY;
+		shadow_check.near = INFINITY;
 		truelight = light->colors;
-		if(!(ft_intersect(shadow_ray, env->shapes, &shadow_check) && shadow_check.nearest < vec_len(vec_minus(light->coords, hitp->hitpoint))))
+		if(!(ft_intersect(shadow_ray, env->shapes, &shadow_check) && shadow_check.near < vec_len(vec_minus(light->coords, hitp->hitpoint))))
 		{
 			intensity = dot_product(shadow_ray.direction, hitp->normal);
 			intensity = intensity * light->brightness;

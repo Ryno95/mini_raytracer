@@ -6,112 +6,76 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/21 10:25:53 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/04/29 21:59:08 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/04/30 17:43:01 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minirt.h"
+#include "../headers/minirt.h"
 
-t_vec   ft_cyl_normal(double r, t_coord hitp, t_coord center, t_vec ori)
+t_vec	ft_cyl_normal(t_coord hitp, t_coord center, t_vec ori)
 {
-    double a;
-    double c;
-    t_vec normal;
-    t_vec center_hitp = vec_minus(hitp, center);
-    a = dot_product(center_hitp, ori); // use for height check
-    t_vec translate = vec_add(center, vec_multiply(ori, a));
-    normal = normalize(vec_minus(hitp, translate));
-    // c = pow(vec_len(vec_minus(hitp, center)), 2);
-    // a = c - (r * r);
-    
-    // normal = vec_minus(vec_multiply(center, a/a), hitp);
-    
-    
-    return (normal);
+	double	a;
+	t_vec	normal;
+	t_vec	center_hitp;
+	t_vec	translate;
+
+	center_hitp = vec_minus(hitp, center);
+	a = dot_product(center_hitp, ori);
+	translate = vec_add(center, vec_multiply(ori, a));
+	normal = normalize(vec_minus(hitp, translate));
+	return (normal);
 }
 
-int     ft_in_range(t_cylinder *cy, double t,  t_ray *ray)
+int	ft_in_range(t_cylinder *cy, double t, t_ray *ray)
 {
-    t_vec hitp;
-    double a;
-    double b;
-    double c;
-    
-    hitp = calc_hitpoint(ray, t);
-    a = vec_len(vec_minus(hitp, cy->coords));
-    c = cy->r;
+	t_vec	hitp;
+	double	a;
+	double	b;
+	double	c;
 
-    b = (a * a) - (c * c);
-    b = sqrt(b);
-    // printf("B: %lf\n", b);
-    if (b < cy->height/2 && b > cy->height/-2)
-        return (1);
-    
-    return (0);
+	hitp = calc_hitpoint(ray, t);
+	a = vec_len(vec_minus(hitp, cy->center));
+	c = cy->r;
+	b = (a * a) - (c * c);
+	b = sqrt(b);
+	if (b < cy->height / 2 && b > cy->height / -2)
+		return (1);
+	return (0);
 }
 
+double	ft_solve_quadratic(t_quadratic quadr, t_cylinder *cy, t_ray *ray)
+{
+	double	t1;
+	double	t2;
 
-int     ft_cylinder_intersect(t_cylinder *cy, t_ray *ray, t_hit *hitp)
-{   
-    // p = ori + dir + t;
+	quadr.discrim = (quadr.b * quadr.b) - (4 * quadr.a * quadr.c);
+	if (quadr.discrim < 0)
+		return (-1);
+	t1 = (-quadr.b + sqrt(quadr.discrim)) / (2 * quadr.a);
+	t2 = (-quadr.b - sqrt(quadr.discrim)) / (2 * quadr.a);
+	if (t2 < t1 && t2 > 0 && ft_in_range(cy, t2, ray))
+		t1 = t2;
+	return (t1);
+}
 
-    // area_of_parralellogram = (P - cyl_center) x cyl_norm = radius (base * r) whre base = 1;
+int	ft_cylinder_intersect(t_cylinder *cy, t_ray *ray, t_hit *hitp)
+{
+	t_quadratic	q;
+	t_vec		dir_x_norm;
+	t_vec		vec_x_norm;
 
-    // length_of_parra: r^2 = ((P - cyl_center) x cyl_norm)^2
-    // subsstitute with line formula:
-    //                  r^2 = ((ori + t * dir - cyl_center) x cyl_norm)^2
-
-    // if: ori + t * dir - cyl_center
-    //      t * dir + (ori - cyl_center)
-    // v = ori - cyl_center;
-        // t * dir + v
-
-    // maal de bovenstaande uit:
-    // r^2 = ((t * dir + v) x cyl_norm)^2
-    // r * r = ((t * dir + v) x cyl_norm).((t * dir + v) x cyl_norm)
-    // r * r = ((t * dir) x cyl_norm)^2 + (v x cyl_norm)^2 + 2(t * dir)) x cyl_norm)*(v x cyl_norm)
-    
-    // a = t^2 . (dir x cyl_norm)^2
-    // b = t . 2(dir x cyl_norm).(v x cyl_norm)
-    // c = (v x cyl_norm) - r^2
-
-    // dir_x_norm = cross_product(ray->dir, cy->normal)
-
-    t_vec v = vec_minus(ray->origin, cy->coords);
-    t_vec dir_x_norm = cross_product(ray->direction, cy->normal);
-    t_vec v_x_norm = cross_product(v, cy->normal);
-
-    double a = dot_product(dir_x_norm, dir_x_norm);
-    double b = 2 * dot_product(dir_x_norm, v_x_norm);
-    double c = dot_product(v_x_norm, v_x_norm) - (cy->r * cy->r);
-    double discr = (b * b) - (4 * a * c);
-    double t1 = 0;
-    double t2 = 0;
-    if (discr < 0)
-        return (0);
-
-
-	t1 = (-b + sqrt(discr)) / (2 * a);
-	t2 = (-b - sqrt(discr)) / (2 * a);
-    if (t2 < t1 && t2 > 0 && ft_in_range(cy, t2, ray))
-        t1 = t2;
-     
-
-    // if (!ft_in_range(cy, &hitp->hitpoint))
-    //     return (0);
-    if (t1 < hitp->nearest && t1 >= 0 && ft_in_range(cy, t1, ray))
+	dir_x_norm = cross_product(ray->direction, cy->ori);
+	vec_x_norm = cross_product(vec_minus(ray->origin, cy->center), cy->ori);
+	q.a = dot_product(dir_x_norm, dir_x_norm);
+	q.b = 2 * dot_product(dir_x_norm, vec_x_norm);
+	q.c = dot_product(vec_x_norm, vec_x_norm) - (cy->r * cy->r);
+	q.t1 = ft_solve_quadratic(q, cy, ray);
+	if (q.t1 < hitp->near && q.t1 >= 0 && ft_in_range(cy, q.t1, ray))
 	{
-        // printf("CYLINDERfound t: %lf\n", t1);
-		hitp->nearest = t1;
-		hitp->color = cy->colors;
-		hitp->object_id = cy->id;
-        hitp->hitpoint  = calc_hitpoint(ray, t1);
-        hitp->normal = normalize(ft_cyl_normal(cy->r,  hitp->hitpoint, cy->coords, cy->normal));
-        // if (dot_product(ray->direction, hitp->normal) < 0)
-        //     hitp->normal = vec_multiply(hitp->normal, -1);
-	    // hitp->normal = cy->normal;
+		ass_hitpoint(q.t1, cy->colors, cy->id, hitp);
+		hitp->hitpoint = calc_hitpoint(ray, q.t1);
+		hitp->normal = ft_cyl_normal(hitp->hitpoint, cy->center, cy->ori);
 		return (1);
 	}
-    
-    return (0);
+	return (0);
 }

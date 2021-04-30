@@ -6,11 +6,11 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/14 13:46:56 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/04/23 22:33:26 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/04/30 17:45:29 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ft_structure.h"
+#include "../headers/ft_structure.h"
 
 int	create_trgb(int t, int r, int g, int b)
 {

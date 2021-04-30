@@ -6,15 +6,15 @@
 /*   By: rmeiboom <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/05 17:03:23 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/04/14 13:58:48 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/04/30 17:43:01 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minirt.h"
+#include "../headers/minirt.h"
 
 int	ft_str_arr_len(char **str_array)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str_array && str_array[i] != NULL)
@@ -24,7 +24,7 @@ int	ft_str_arr_len(char **str_array)
 
 void	ass_colors(char *str, t_rgb *cols)
 {
-	char **sl;
+	char	**sl;
 
 	sl = ft_split(str, ',');
 	if (!sl || !cols || ft_str_arr_len(sl) != 3)
@@ -38,7 +38,10 @@ void	ass_colors(char *str, t_rgb *cols)
 
 void	ass_coords(char *str, t_coord *coords)
 {
-	char **sl;
+	char	**sl;
+
+	if (!str)
+		ft_parse_error("coordinates, no input string");
 	sl = ft_split(str, ',');
 	if (!sl || !coords || ft_str_arr_len(sl) != 3)
 		ft_parse_error("coordinates, safety checks");

@@ -6,19 +6,16 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/03 10:09:33 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/04/29 20:23:11 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/04/30 17:44:17 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "gnl/get_next_line.h"
-#include "libft/libft.h"
-#include "ft_structure.h"
-// #include "./parse/ft_parse.h"
-// #include "./tracer/ft_render.h"
-// #include "./utils/ft_utils.h"
-#include <math.h>
-#include "mlx/mlx.h"
 #include <stdio.h>
+#include <math.h>
+#include "ft_structure.h"
+#include "../gnl/get_next_line.h"
+#include "../libft/libft.h"
+#include "../mlx/mlx.h"
 
 # define IDS "RAcl"
 # define ray_max 1e6
@@ -112,7 +109,7 @@ double	ft_plane_intersect(t_plane *plane, t_ray *ray, t_hit *intersection);
 
 // rendering/ft_render.c
 void	ass_hitpoint(double t, t_rgb col, int id, t_hit *hit);
-t_ray	ft_primary_ray(t_camera *cam, double x, double y, double z);
+t_ray	ft_primary_ray(t_camera *cam, double x, double y);
 int		ft_intersect(t_ray ray, t_list **shape_list, t_hit *intersection);
 t_rgb	ft_tracer(int x, int y, t_env *env);
 void    ft_render(t_img *img, t_env *env);
@@ -126,11 +123,11 @@ t_rgb	ft_shader(t_env *env, t_hit *hitp);
 
 // debug/debugray.c
 void	ft_print_vect(t_vec vector, char *pre);
-int    ft_debugray(int keycode, int x, int y, t_env *scene);
+// int    ft_debugray(int keycode, int x, int y, t_env *scene);
 void	ft_print_color(t_rgb vector);
 
 // rendering/ft_triangle.c
-double	ft_triangle_intersect(t_triangle *triangle, t_ray *ray, t_hit *intersection);
+double	ft_triangle_intersect(t_triangle *triangle, t_ray *ray, t_hit *hitp);
 
 // rednering/ft_square_intersect.c
 int		ft_square_intersect(t_square *sq, t_ray *ray, t_hit *intersect);

@@ -6,40 +6,43 @@
 /*   By: rmeiboom <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/18 10:44:42 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/04/23 19:23:01 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/04/30 17:43:01 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minirt.h"
+#include "../headers/minirt.h"
 
-int		ft_is_inside_square(t_square *sq, t_vec hitp)
+int	ft_is_inside_square(t_square *sq, t_vec hitp)
 {
-	t_vec dist;
-	double border;
+	t_vec	d;
+	double	border;
 
-	dist = vec_minus(hitp, sq->coords);
+	d = vec_minus(hitp, sq->center);
 	border = sq->side_size * 0.5;
-	if (fabs(dist.x) <= border && fabs(dist.y) <= border && fabs(dist.z) <= border)
+	if (fabs(d.x) <= border && fabs(d.y) <= border && fabs(d.z) <= border)
 		return (1);
 	return (0);
 }
 
-int		ft_square_intersect(t_square *sq, t_ray *ray, t_hit *intersect)
+int	ft_square_intersect(t_square *sq, t_ray *ray, t_hit *hitp)
 {
-	double denominator = dot_product(sq->vect_coords, ray->direction);
-	// if (denominator <= 0.00001)
-	// 	return (0);
-		
-	t_vec diff = vec_minus(sq->coords ,ray->origin);
-	double t = dot_product(diff, sq->vect_coords) / denominator;
-	t_vec hitp = calc_hitpoint(ray, t);
+	double	denominator;
+	t_vec	diff;
+	double	t;
+	t_vec	hitp_coords;
 
-	if (t < intersect->nearest && t >= 0 && ft_is_inside_square(sq, hitp))
+	denominator = dot_product(sq->orient, ray->direction);
+	if (denominator <= 0.00001)
+		return (0);
+	diff = vec_minus(sq->center, ray->origin);
+	t = dot_product(diff, sq->orient) / denominator;
+	hitp_coords = calc_hitpoint(ray, t);
+	if (t < hitp->near && t >= 0 && ft_is_inside_square(sq, hitp_coords))
 	{
-		ass_hitpoint(t, sq->colors, sq->id, intersect);
-		intersect->normal = sq->vect_coords;
+		ass_hitpoint(t, sq->colors, sq->id, hitp);
+		hitp->normal = sq->orient;
 		if (denominator > 0)
-			intersect->normal = vec_multiply(sq->vect_coords, -1);
+			hitp->normal = vec_multiply(sq->orient, -1);
 		return (1);
 	}
 	return (0);

@@ -6,42 +6,42 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/31 11:10:49 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/04/28 18:32:50 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/04/30 17:43:01 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minirt.h"
+#include "../headers/minirt.h"
 
-double	ft_sphere_intersect(t_sphere *sphere, t_ray *ray, t_hit *intersection)
+double	ft_solve_circle(t_quadratic quad)
 {
-	double t = -1;
-	double b;
-	double c;
-	double discriminant;
-	t_vec ori_cen = vec_minus(ray->origin, sphere->coords);
-	// printf("entering sphere intersect\n");
+	double	t1;
+	double	t2;
 
-	b = 2 * (dot_product(ray->direction, ori_cen));
-	c = dot_product(ori_cen, ori_cen) - (sphere->diam * sphere->diam);
-	discriminant = b * b - 4 * c;
-	if (discriminant < 0)
+	t1 = (-quad.b + sqrt(quad.discrim)) / 2;
+	t2 = (-quad.b - sqrt(quad.discrim)) / 2;
+	if (t2 >= 0 && t2 < t1)
+		t1 = t2;
+	return (t1);
+}
+
+double	ft_sphere_intersect(t_sphere *sphere, t_ray *ray, t_hit *hitp)
+{
+	t_quadratic	quad;
+	double		t;
+	t_vec		ori_cen;
+
+	ori_cen = vec_minus(ray->origin, sphere->center);
+	quad.b = 2 * (dot_product(ray->direction, ori_cen));
+	quad.c = dot_product(ori_cen, ori_cen) - (sphere->diam * sphere->diam);
+	quad.discrim = quad.b * quad.b - 4 * quad.c;
+	if (quad.discrim < 0)
 		return (0);
-	if (b > 0)
-		t = (-b + sqrt(discriminant)) / 2;
-	else if (b < 0)
-		t = (-b - sqrt(discriminant)) / 2;
-	else
-		t = -b / 2;
-
-	if (t >= 0 && t < intersection->nearest)
+	t = ft_solve_circle(quad);
+	if (t >= 0 && t < hitp->near)
 	{
-		// ass_hitpoint(t, sphere->colors, sphere->id, intersection);
-		intersection->nearest = t;
-		intersection->color = sphere->colors;
-		intersection->object_id = sphere->id;
-		intersection->hitpoint = calc_hitpoint(ray, t);
-		intersection->normal = normalize(vec_minus(intersection->hitpoint, sphere->coords));
-		// ft_print_vect(intersection->normal, "SPHERENORMAL!!!!");
+		ass_hitpoint(t, sphere->colors, sphere->id, hitp);
+		hitp->hitpoint = calc_hitpoint(ray, t);
+		hitp->normal = normalize(vec_minus(hitp->hitpoint, sphere->center));
 		return (1);
 	}
 	return (0);

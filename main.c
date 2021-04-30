@@ -6,11 +6,11 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/03 13:28:19 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/04/14 12:28:58 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/04/30 17:43:15 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "headers/minirt.h"
 #include <fcntl.h>
 // #include "ft_structure.h"
 
@@ -22,7 +22,6 @@ void	ft_mlx_error(char *str)
 
 int	main(int argc, char *argv[])
 {
-	int		i = 0;
 	static	t_env	env;
 	t_img			img;
 	
@@ -42,7 +41,7 @@ int	main(int argc, char *argv[])
 	// 	i++;
 	// }
 	// printf("campoint: %p\n", env.cam_list->content);
-	mlx_mouse_hook(img.wdw_ptr, ft_debugray, &env);
+	// mlx_mouse_hook(img.wdw_ptr, ft_debugray, &env);
 	mlx_hook(img.wdw_ptr, 17, 1l << 17, my_destroy_window, &img);
 	mlx_hook(img.wdw_ptr, 2, 1l << 0, keypress, &img);
 	mlx_loop(img.mlx_ptr);

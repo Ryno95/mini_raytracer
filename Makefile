@@ -1,11 +1,17 @@
 CC = gcc
 
-CFLAGS = -Wall  -Wextra #-g -fsanitize=address # remember to add -werror
+CFLAGS = -Wall  -Wextra -Werror -g -fsanitize=address # remember to add -werror
 
 NAME = minirt
 
 # HEADER = minirt.h
 LIBS = libft/libft.a
+
+LIBFTDIR = libft/
+
+MLXDIR = mlx/
+
+GNLDIR = gnl/
 
 OBJ = Debug/debugray.o\
 	main.o\
@@ -33,20 +39,21 @@ OBJ = Debug/debugray.o\
 
 all: $(NAME)
 
-# Move the dynamic lib to root dir and compile
 $(NAME): $(OBJ)
-		cd mlx && $(MAKE)
-		cd libft && $(MAKE)
+		make -C $(LIBFTDIR)
+		make -C $(MLXDIR)		
 		$(CC) $(CFLAGS) $(OBJ) $(LIBS) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 
 %.o: %.c
 		$(CC) -c $(CFLAGS) -o $@ $<
 
 clean: 
-		rm -f $(OBJ) libft/*.o
+		rm -f $(OBJ)
 
 fclean: clean
-		rm -f $(NAME) libft/libft.a
+		rm -f $(NAME)
+		make -C $(LIBFTDIR) fclean
+		make -C $(MLXDIR) clean
 
 re: fclean all
 
