@@ -4,61 +4,17 @@
 #include <sys/types.h>
 #include <sys/uio.h>
 #include <unistd.h>
-typedef struct s_BITMAP_Header {
-	char name[2]; // this should be equal to BM
-	unsigned int size; // should be a variable of size four, sizeof(int) = 4
-	u_int16_t	bmp_defaults1; // set to 0
-	u_int16_t	bmp_defaults2; // set to 0
-	unsigned int offset; // offset from where the image starts in file
-} BITMAP_Header;
+#include <strings.h>
 
-
-
-typedef uint8_t  BYTE;
-typedef uint32_t DWORD;
-typedef int32_t  LONG;
-typedef uint16_t WORD;
-
-/**
- * BITMAPFILEHEADER
- *
- * The BITMAPFILEHEADER structure contains information about the type, size,
- * and layout of a file that contains a DIB [device-independent bitmap].
- *
- * Adapted from http://msdn.microsoft.com/en-us/library/dd183374(VS.85).aspx.
- */
-typedef struct
+typedef struct s_bitmap_file_header
 {
-    char   		  	name[2];
-    unsigned int  	size;
-    int				bmp_def;
-    unsigned int	offset;
+    char   		  	name[2]; // should be "BM"
+    unsigned int  	size; // height * width
+    int				bmp_def; // defaults to 0
+    unsigned int	offset; // info + file header
 } __attribute__((__packed__))
-BITMAPFILEHEADER;
+t_bitmap_file_header;
 
-/**
- * BITMAPINFOHEADER
- *
- * The BITMAPINFOHEADER structure contains information about the
- * dimensions and color format of a DIB [device-independent bitmap].
- *
- * Adapted from http://msdn.microsoft.com/en-us/library/dd183376(VS.85).aspx.
- */
-typedef struct
-{
-    DWORD  biSize;
-    LONG   biWidth;
-    LONG   biHeight;
-    WORD   biPlanes;
-    WORD   biBitCount;
-    DWORD  biCompression;
-    DWORD  biSizeImage;
-    LONG   biXPelsPerMeter;
-    LONG   biYPelsPerMeter;
-    DWORD  biClrUsed;
-    DWORD  biClrImportant;
-} __attribute__((__packed__))
-BITMAPINFOHEADER;
 
 typedef struct 	s_info_header
 {
@@ -73,13 +29,13 @@ typedef struct 	s_info_header
 	int		 ppm_y; // can be zero
 	uint32_t color_used; // 0
 	uint32_t important; // if set to zero every color is important
-}				t_info_header;
+} __attribute__((__packed__)) t_info_header;
 
-void open_bmp_file(void)
+void open_bmp_file(char *filename)
 {
-	BITMAPFILEHEADER bf;
+	t_bitmap_file_header bf;
 	t_info_header bi;
-	FILE *fd = fopen("stadium.bmp", "rb");
+	FILE *fd = fopen(filename,  "rb");
 	if (fd == NULL)
 	{
 		printf("Error opening!\n");
@@ -89,10 +45,10 @@ void open_bmp_file(void)
 	// fread(&bf.size, 2 * sizeof(int), 1, fd);
 	// fread(&bf.offset, sizeof(int), 1, fd);
 	// fread(&bf.bmp_defaults, sizeof(int), 1, fd);
-	// printf("sizeofstruct: %lu\n", sizeof(BITMAPFILEHEADER));
-	fread(&bf, sizeof(BITMAPFILEHEADER), 1, fd);
+	// printf("sizeofstruct: %lu\n", sizeof(t_bitmap_file_header));
+	fread(&bf, sizeof(t_bitmap_file_header) + 2 , 1, fd);
 	fread(&bi, sizeof(t_info_header), 1, fd);
-	// if (rb != sizeof(BITMAPFILEHEADER))
+	// if (rb != sizeof(t_bitmap_file_header))
 	// {
 	// 	printf("Error reading!\n");
 	// 	return ;	
@@ -107,26 +63,53 @@ void open_bmp_file(void)
 	fclose(fd);
 }
 
-int create_bmp_file_header(int width, int height)
+t_bitmap_file_header create_bmp_file_header(int width, int height)
 {
-	BITMAPFILEHEADER fh;
+	t_bitmap_file_header fh;
 
+	bzero(&fh, sizeof(t_bitmap_file_header));
 	fh.name[0] = 'B';
 	fh.name[1] = 'M';
 	fh.bmp_def = 0;
-	fh.size = width * height + sizeof(BITMAPFILEHEADER);
-	fh.offset = sizeof(BITMAPFILEHEADER);
-	printf("struct size: %lu\n", sizeof(BITMAPFILEHEADER));
+	fh.size = width * height * 3;
+	fh.offset = sizeof(t_bitmap_file_header) + sizeof(t_info_header);
+	return (fh);
+	// printf("struct size: %lu\n", sizeof(t_bitmap_file_header));
 }
 
-int create_bmp_info_header(void)
+t_info_header create_bmp_info_header(int width, int height)
 {
-	uint32_t ih_size;
+	t_info_header ih;
+	bzero(&ih, sizeof(t_info_header));
+	ih.info_header_size = 40; //sizeof(t_info_header);
+	ih.width = width;
+	ih.height = height;
+	ih.planes = 1;
+	ih.bit_count = 16;
+	ih.compression = 0;
+	ih.img_size = 0;
+	ih.ppm_x = 0;
+	ih.ppm_y = 0;
+	ih.color_used = 0;
+	ih.important = 0;
 }
 
 int main (void)
 {
-	open_bmp_file();
+	int heigth = 400;
+	int width = 600;
+	t_bitmap_file_header fh = create_bmp_file_header(width, heigth);
+	t_info_header ih = create_bmp_info_header(width, heigth);
+	int fd = open("mybmp.bmp", O_WRONLY | O_CREAT | O_TRUNC, 0664);
+	if (!fd)
+		printf("errror opening");
+	write(fd, &fh, sizeof(t_bitmap_file_header));
+	write(fd, &ih, sizeof(t_info_header));
+	close(fd);
+
+
+	// while()
+	open_bmp_file("mybmp.bmp");
 	// create_bmp_header(100, 100);
 	return (0);
 }
