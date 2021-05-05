@@ -6,7 +6,7 @@
 /*   By: rmeiboom <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/11 22:31:15 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/04/30 18:02:36 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/05/05 16:06:16 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ int	ft_run_mlx(t_img *img, t_env *env)
 		ft_mlx_error("Couldn't init window");
 	img->address = mlx_get_data_addr(img->img_ptr, &img->bits_per_pixel,
 			&img->line_size, &img->endian);
-	ft_render(img, env);
-	mlx_put_image_to_window(img->mlx_ptr, img->wdw_ptr, img->img_ptr, 0, 0);
+	// ft_render(img, env);
+	// mlx_put_image_to_window(img->mlx_ptr, img->wdw_ptr, img->img_ptr, 0, 0);
 	return (0);
 }
 
