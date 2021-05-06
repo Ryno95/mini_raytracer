@@ -6,7 +6,7 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/03 10:09:33 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/05/05 16:58:12 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/05/06 21:49:37 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,8 @@ t_rgb	ft_colors_add(t_rgb col, t_rgb rgb);
 int		ft_create_trgb(int t, int r, int g, int b);
 
 // utils/ft_output_to_bmp.c
-int	create_bmp(char *file_name, t_rgb **cols);
-int	write_bmp_header(int fd, int width, int height);
+int	ft_put_img_to_bmp(char *file_name, int height, int width, t_rgb **col);
+// void write_bmp_header(int fd, int width, int height);
 
 // rendering/draw_shapes.c
 void	ft_draw_square(t_img *img, t_square *sqr);
@@ -114,7 +114,7 @@ void	ass_hitpoint(double t, t_rgb col, int id, t_hit *hit);
 t_ray	ft_primary_ray(t_camera *cam, double x, double y);
 int		ft_intersect(t_ray ray, t_list **shape_list, t_hit *intersection);
 t_rgb	ft_tracer(int x, int y, t_env *env);
-t_rgb   **ft_render(t_img *img, t_env *env);
+t_rgb   **ft_render(t_env *env);
 
 
 // rendering/ft_shadowing.c

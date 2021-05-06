@@ -6,7 +6,7 @@
 /*   By: rmeiboom <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/07 21:55:32 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/05/05 16:56:11 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/05/06 21:32:01 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,14 +99,23 @@ t_rgb		ft_tracer(int x, int y, t_env *env)
 	return (color);
 }
 
-t_rgb **ft_render(t_img *img, t_env *env)
+t_rgb **ft_render(t_env *env)
 {
 	int		i;
 	int		j;
-	int		color;
-	t_rgb 	col;
-	t_rgb	col_array[env->res.y][env->res.x];
+	int k = 0;
+	t_rgb	**col_array;
 
+	col_array = (t_rgb **)malloc(env->res.y * sizeof(t_rgb*));
+	if (!col_array)
+		ft_parse_error("Ohnoooooooo!");
+	while (k < env->res.y)
+	{
+		col_array[k] = (t_rgb*)malloc(env->res.x * env->res.y * sizeof(t_rgb));
+		if (!col_array[k])
+			ft_parse_error("You fucked up!");
+		k++;
+	}
 	i = 0;
 	while (i < env->res.y)
 	{
@@ -114,14 +123,6 @@ t_rgb **ft_render(t_img *img, t_env *env)
 		while (j < env->res.x)
 		{
 			col_array[i][j] = ft_tracer(j, i, env);
-			// color = ft_create_trgb(0, col.r, col.g, col.b);
-			// if (env->save_to_bmp == 1)
-			// {
-			// 	// printf("fd: %d\n", env->fd);
-			// 	write(env->fd, &color, sizeof(int));
-			// }
-			// else
-			// 	my_pixel_put(img, j, i, ft_create_trgb(0, col.r, col.g, col.b));
 			j++;
 		}
 		i++;

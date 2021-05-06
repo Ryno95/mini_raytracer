@@ -5,34 +5,8 @@
 #include <sys/uio.h>
 #include <unistd.h>
 #include <strings.h>
+#include "../headers/minirt.h"
 // #include "../headers/ft_structure.h"
-
-
-
-typedef struct	s_bmp_file_header
-{
-    uint8_t   	name[2]; // should be "BM"
-    uint32_t	file_size; // height * width
-    uint16_t	bmp_def; // defaults to 0
-    uint16_t	bmp_def2; // defaults to 0
-    uint32_t	offset; // info + file header
-}				t_bmp_file_header;
-
-
-typedef struct 	s_bmp_info_header
-{
-	uint32_t info_header_size; // 40
-	uint32_t width; // height and width of res
-	uint32_t height;
-	uint16_t planes; // should be 1
-	uint16_t bit_count;  // 1, 4, 8,16,24 or (32)
-	uint32_t compression; // 0
-	uint32_t img_size; //possible zero or something?
-	uint32_t ppm_x; // can be zero or set to ppmconversionfactor
-	uint32_t ppm_y; // can be zero
-	uint32_t color_used; // 0
-	uint32_t important; // if set to zero every color is important
-}				t_bmp_info_header;
 
 void create_bmp_file_header(t_bmp_file_header *fh, int width, int height)
 {
@@ -166,16 +140,38 @@ void write_bmp_header(int fd, t_bmp_file_header *fh, t_bmp_info_header *ih)
 	// write(fd, ih, sizeof(t_bmp_info_header));
 }
 
-int	create_bmp(char *file_name)
+void ft_write_bmp_data(int fd, int width, int height, t_rgb **col)
+{
+	int x;
+	int y;
+	int color;
+
+	y = height - 1;
+	while (y > -1)
+	{
+		x = 0;
+		while (x < width)
+		{
+			// j = (x + )
+			// color = ft_create_trgb(0, col[i][j].r, col[i][j].g, col[i][j].b);
+			write(fd, &col[y][x], sizeof(int));
+			// write(1, &col[i * height + x], sizeof(t_rgb));
+			x++;
+		}
+		y--;
+	}
+}
+
+int	ft_put_img_to_bmp(char *file_name, int height, int width, t_rgb **col)
 {
 	t_bmp_file_header fh;
 	t_bmp_info_header ih;
-	int		width = 600;
-	int		height = 400;
-	int		size = height * width * 3;
+	int		size;
+	int i;
+
+	size = height * width * 3;
 	char	*white = malloc(size);
 	memset(white, 255, size);
-
 	create_bmp_info_header(&ih, width, height);
 	create_bmp_file_header(&fh, width, height);
 
@@ -183,7 +179,13 @@ int	create_bmp(char *file_name)
 	if (!fd)
 		return (-1);
 	write_bmp_header(fd, &fh, &ih);
-	write(fd, white, size);
+	ft_write_bmp_data(fd, width, height, col);
+	// write(fd, col, size);
+	// while (i < 0)
+	// {
+	// 	write(fd, col, size);
+	// 	i++;
+	// }
 	// int i = 
 	// if (!write(fd, white, size))
 	// 	return (-1);
@@ -191,9 +193,9 @@ int	create_bmp(char *file_name)
 	return (fd);
 }
 
-int main(void)
-{
-	create_bmp("mini.bmp");
-	open_bmp_file("mini.bmp");
-	return (0);
-}
+// int main(void)
+// {
+// 	create_bmp("mini.bmp");
+// 	open_bmp_file("mini.bmp");
+// 	return (0);
+// }

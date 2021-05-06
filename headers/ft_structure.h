@@ -6,7 +6,7 @@
 /*   By: rmeiboom <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/02 13:38:01 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/05/05 15:46:43 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/05/06 21:49:15 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ enum multi_opts{SPHERE, PLANE, TRIANGLE, SQUARE, CYLINDER};
 
 typedef struct	s_rgb
 {
-	float	b;
-	float	g;
-	float	r;
+	int	b;
+	int	g;
+	int	r;
 }				t_rgb;
 
 typedef struct	s_vec
@@ -215,3 +215,29 @@ typedef	struct	s_img
 	int		x;
 	int		y;
 }				t_img;
+
+
+typedef struct	s_bmp_file_header
+{
+    uint8_t   	name[2]; // should be "BM"
+    uint32_t	file_size; // height * width
+    uint16_t	bmp_def; // defaults to 0
+    uint16_t	bmp_def2; // defaults to 0
+    uint32_t	offset; // info + file header
+}				t_bmp_file_header;
+
+
+typedef struct 	s_bmp_info_header
+{
+	uint32_t info_header_size; // 40
+	uint32_t width; // height and width of res
+	uint32_t height;
+	uint16_t planes; // should be 1
+	uint16_t bit_count;  // 1, 4, 8,16,24 or (32)
+	uint32_t compression; // 0
+	uint32_t img_size; //possible zero or something?
+	uint32_t ppm_x; // can be zero or set to ppmconversionfactor
+	uint32_t ppm_y; // can be zero
+	uint32_t color_used; // 0
+	uint32_t important; // if set to zero every color is important
+}				t_bmp_info_header;
