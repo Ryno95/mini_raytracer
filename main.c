@@ -6,7 +6,7 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/03 13:28:19 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/05/06 21:31:10 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/05/07 17:59:38 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,25 @@ void	ft_mlx_error(char *str)
 	exit(1);
 }
 
-void	ft_write_to_window(t_img *img, int height, int width, t_rgb **cols)
+void	ft_put_img_to_window(t_img *img, t_env *env, t_3rgb *cols)
 {
 	int i;
 	int j;
+	int pos;
 	int color;
 
+	if (env->filters.sepia)
+		cols = ft_sepia(cols, env->res.x, env->res.y);
+	else if (env->filters.grayscale)
+		cols = ft_grayscale(cols, env->res.x, env->res.y);
 	i = 0;
-	while (i < height)
+	while (i < env->res.y)
 	{
 		j = 0;
-		while (j < width)
+		while (j < env->res.x)
 		{
-			color = ft_create_trgb(0, cols[i][j].r, cols[i][j].g, cols[i][j].b);
+			pos = i * env->res.x + j;
+			color = ft_create_trgb(0, cols[pos].r, cols[pos].g, cols[pos].b);
 			my_pixel_put(img, j, i, color);
 			j++;
 		}
@@ -47,16 +53,38 @@ int	main(int argc, char *argv[])
 {
 	static	t_env	env;
 	t_img			img;
-	t_rgb			**col_array;
+	t_3rgb			*col_array;
 	
-	printf("argcount: %d\n", argc);
-	if (argc < 2 || argc > 3)
+	if (argc < 2 || argc > 4)
+		ft_parse_error("Usage: ./executable scene.rt [--save] [-filter:s/g]");
+		
+	if (argc == 3)
 	{
-		printf("Usage: ./executable scene.rt");
-		return (-1);
+		if (ft_strncmp(argv[2], "--save", ft_strlen("--save")) == 0)
+			env.save_to_bmp = 1;
+		else if (ft_strncmp(argv[2], "-s", 2) == 0)
+			env.filters.sepia = 1;
+		else if (ft_strncmp(argv[2], "-g", 2) == 0)
+			env.filters.grayscale = 1;
+		else
+			ft_parse_error("Usage: ./executable scene.rt [--save] [-filter:s/g]");
 	}
-	if (argc == 3 && ft_strncmp(argv[2], "--save", ft_strlen("--save")) == 0)
-		env.save_to_bmp = 1;
+
+	if (argc == 4)
+	{
+		if (ft_strncmp(argv[2], "--save", ft_strlen("--save")) == 0)
+		{
+			env.save_to_bmp = 1;
+			if (ft_strncmp(argv[3], "-s", 2) == 0)
+				env.filters.sepia = 1;
+			else if (ft_strncmp(argv[3], "-g", 2) == 0)
+				env.filters.grayscale = 1;
+			else
+				ft_parse_error("Usage: ./executable scene.rt [--save] [-filter:s/g]");
+		}
+		else
+			ft_parse_error("Usage: ./executable scene.rt [--save] [-filter:s/g]");
+	}
 
 	if (parse(argv[1], &env) == -1)
 		ft_parse_error("");
@@ -64,14 +92,13 @@ int	main(int argc, char *argv[])
 	if (env.save_to_bmp != 1)
 		ft_run_mlx(&img, &env);
 	
-	col_array = ft_render(&env);
-	// printf("red:%f\n", col_array[10][10].r);
+	col_array = ft_render(&env, &img);
 	
 	if (env.save_to_bmp == 1)
-		ft_put_img_to_bmp("minirt.bmp", env.res.y, env.res.x, col_array);
+		ft_put_img_to_bmp("minirt.bmp", &env, col_array);
 	else
 	{
-		ft_write_to_window(&img, env.res.y, env.res.x, col_array);
+		ft_put_img_to_window(&img, &env, col_array);
 		mlx_hook(img.wdw_ptr, 17, 1l << 17, my_destroy_window, &img);
 		mlx_hook(img.wdw_ptr, 2, 1l << 0, keypress, &img);
 		mlx_loop(img.mlx_ptr);

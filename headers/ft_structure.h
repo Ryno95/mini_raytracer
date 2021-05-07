@@ -6,7 +6,7 @@
 /*   By: rmeiboom <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/02 13:38:01 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/05/06 21:49:15 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/05/07 17:41:30 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,13 @@ typedef struct	s_rgb
 	int	g;
 	int	r;
 }				t_rgb;
+
+typedef struct	s_3rgb
+{
+	uint8_t	b;
+	uint8_t g;
+	uint8_t r;
+}				t_3rgb;
 
 typedef struct	s_vec
 {
@@ -170,6 +177,12 @@ typedef struct	s_impact_point
 	
 }				t_hit;
 
+typedef struct	s_filters
+{
+	int8_t sepia;
+	int8_t grayscale;
+}				t_filters;	
+
 typedef struct	s_env
 {
 	char		**spl_str;
@@ -186,6 +199,7 @@ typedef struct	s_env
 	int			debug;
 	int			save_to_bmp;
 	int			fd;
+	t_filters	filters;
 }				t_env;
 
 typedef struct 	s_data

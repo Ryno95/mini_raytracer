@@ -6,7 +6,7 @@
 /*   By: rmeiboom <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/07 21:55:32 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/05/06 21:32:01 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/05/07 17:25:20 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,30 +99,32 @@ t_rgb		ft_tracer(int x, int y, t_env *env)
 	return (color);
 }
 
-t_rgb **ft_render(t_env *env)
+t_3rgb *ft_render(t_env *env, t_img *img)
 {
 	int		i;
 	int		j;
-	int k = 0;
-	t_rgb	**col_array;
+	int		k;
+	t_3rgb	*col_array;
+	t_rgb	color;
 
-	col_array = (t_rgb **)malloc(env->res.y * sizeof(t_rgb*));
+	col_array = (t_3rgb *)malloc(env->res.y * env->res.x * sizeof(t_3rgb));
 	if (!col_array)
-		ft_parse_error("Ohnoooooooo!");
-	while (k < env->res.y)
-	{
-		col_array[k] = (t_rgb*)malloc(env->res.x * env->res.y * sizeof(t_rgb));
-		if (!col_array[k])
-			ft_parse_error("You fucked up!");
-		k++;
-	}
+		ft_parse_error("You fucked up!");
 	i = 0;
+	k = 0;
 	while (i < env->res.y)
 	{
 		j = 0;
 		while (j < env->res.x)
 		{
-			col_array[i][j] = ft_tracer(j, i, env);
+			color = ft_tracer(j, i, env);
+			if (env->save_to_bmp == 1)
+				k = (env->res.y - i - 1) * env->res.x + j;
+			else
+				k = i * env->res.x + j;
+			col_array[k].r = (uint8_t)color.r;
+			col_array[k].g = (uint8_t)color.g;
+			col_array[k].b = (uint8_t)color.b;
 			j++;
 		}
 		i++;

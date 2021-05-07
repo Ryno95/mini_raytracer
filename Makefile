@@ -30,6 +30,7 @@ OBJ = Debug/debugray.o\
 	utils/ft_color_utils.o\
 	utils/ft_matrices.o\
 	utils/ft_output_to_bmp.o\
+	utils/ft_filters.o\
 	rendering/ft_render.o\
 	rendering/ft_sphere_intersection.o\
 	rendering/ft_plane_intersect.o\
@@ -50,6 +51,7 @@ $(NAME): $(OBJ)
 
 clean: 
 		rm -f $(OBJ)
+		rm -f minirt.bmp
 
 fclean: clean
 		rm -f $(NAME)

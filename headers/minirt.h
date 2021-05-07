@@ -6,7 +6,7 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/03 10:09:33 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/05/06 21:49:37 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/05/07 17:57:33 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ t_rgb	ft_colors_add(t_rgb col, t_rgb rgb);
 int		ft_create_trgb(int t, int r, int g, int b);
 
 // utils/ft_output_to_bmp.c
-int	ft_put_img_to_bmp(char *file_name, int height, int width, t_rgb **col);
+int	ft_put_img_to_bmp(char *file_name, t_env *env, t_3rgb *col);
 // void write_bmp_header(int fd, int width, int height);
 
 // rendering/draw_shapes.c
@@ -114,7 +114,7 @@ void	ass_hitpoint(double t, t_rgb col, int id, t_hit *hit);
 t_ray	ft_primary_ray(t_camera *cam, double x, double y);
 int		ft_intersect(t_ray ray, t_list **shape_list, t_hit *intersection);
 t_rgb	ft_tracer(int x, int y, t_env *env);
-t_rgb   **ft_render(t_env *env);
+t_3rgb   *ft_render(t_env *env, t_img *img);
 
 
 // rendering/ft_shadowing.c
@@ -137,3 +137,7 @@ int		ft_square_intersect(t_square *sq, t_ray *ray, t_hit *intersect);
 // rednering/ft_cylinder_intersect.c
 int		ft_cylinder_intersect(t_cylinder *cy, t_ray *ray, t_hit *hitp);
 int     ft_in_range(t_cylinder *cy, double t,  t_ray *ray);
+
+//utils/ft_filters.o
+t_3rgb  *ft_grayscale(t_3rgb *colors, int width, int height);
+t_3rgb  *ft_sepia(t_3rgb *col, int width, int height);

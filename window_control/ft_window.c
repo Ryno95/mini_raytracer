@@ -6,7 +6,7 @@
 /*   By: rmeiboom <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/11 22:31:15 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/05/06 19:35:39 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/05/07 10:08:31 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,29 +24,8 @@ int	ft_run_mlx(t_img *img, t_env *env)
 		ft_mlx_error("Couldn't init window");
 	img->address = mlx_get_data_addr(img->img_ptr, &img->bits_per_pixel,
 			&img->line_size, &img->endian);
-	// ft_render(img, env);
-	// mlx_put_image_to_window(img->mlx_ptr, img->wdw_ptr, img->img_ptr, 0, 0);
 	return (0);
 }
-
-// void	ft_write_to_window(t_img *img, int height, int width, t_rgb **cols)
-// {
-// 	int i;
-// 	int j;
-
-// 	i = 0;
-// 	while (i < height)
-// 	{
-// 		j = 0;
-// 		while (j < width)
-// 		{
-// 			my_pixel_put(img, j, i, ft_create_trgb(0, cols[i][j].r, cols[i][j].g, cols[i][j].b));
-// 			j++;
-// 		}
-// 		i++;
-// 	}
-// 	mlx_put_image_to_window(img->mlx_ptr, img->wdw_ptr, img->img_ptr, 0, 0);
-// }
 
 int	keypress(int kc, t_img *img)
 {
