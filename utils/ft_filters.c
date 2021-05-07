@@ -6,12 +6,12 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/05/07 10:37:15 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/05/07 15:49:42 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/05/07 19:43:10 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/minirt.h"
-// grayscale = (r + b + c)  / 3;
+
 t_3rgb 	*ft_grayscale(t_3rgb *colors, int width, int height)
 {
 	int	grayscaled;
@@ -23,7 +23,7 @@ t_3rgb 	*ft_grayscale(t_3rgb *colors, int width, int height)
 	while (i < size)
 	{
 		grayscaled = (colors[i].r + colors[i].g + colors[i].b) / 3;
-		colors[i].r = grayscaled; 
+		colors[i].r = grayscaled;
 		colors[i].g = grayscaled;
 		colors[i].b = grayscaled;
 		i++;
@@ -33,10 +33,11 @@ t_3rgb 	*ft_grayscale(t_3rgb *colors, int width, int height)
 
 t_3rgb	*ft_sepia(t_3rgb *col, int width, int height)
 {
-	t_3rgb sepia[height * width];
-	int i;
-	int size;
+	t_3rgb	*sepia;
+	int		i;
+	int		size;
 
+	sepia = (t_3rgb *)malloc(height * width * sizeof(t_3rgb));
 	i = 0;
 	size = width * height;
 	while (i < size)
@@ -52,6 +53,6 @@ t_3rgb	*ft_sepia(t_3rgb *col, int width, int height)
 			sepia[i].b = col[i].r * 0.272 + col[i].g * 0.534 + col[i].b * 0.131;
 		i++;
 	}
-	col = &sepia[0];
-	return (col);
+	free(col);
+	return (sepia);
 }

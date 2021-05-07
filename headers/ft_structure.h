@@ -6,7 +6,7 @@
 /*   By: rmeiboom <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/02 13:38:01 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/05/07 17:41:30 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/05/07 20:19:21 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,6 +196,7 @@ typedef struct	s_env
 	t_list		*square_lst;
 	t_list		*cylinder_lst;
 	t_list		*triangle_lst;
+	t_3rgb		*col_array;
 	int			debug;
 	int			save_to_bmp;
 	int			fd;

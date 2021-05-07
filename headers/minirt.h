@@ -6,7 +6,7 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/03 10:09:33 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/05/07 17:57:33 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/05/07 20:22:22 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,10 @@ int		parse_triangle(char **split, t_list **triangle_lst);
 
 // window_control/ft_window.c
 int		ft_run_mlx(t_img *img, t_env *env);
-int		keypress(int kc, t_img *img);
+int		keypress(int kc, t_img *img, t_env *env);
 int		my_destroy_window(t_img *img);
 
 // utils/ft_matrices.c
-// t_matrix4x4  ft_matrix_multi(t_matrix4x4 a, t_matrix4x4 b);
 t_vec     ft_vec_multi_matrix(t_matrix3x3 m, t_vec vect);
 
 // utils/ft_free.c
@@ -92,16 +91,9 @@ int		ft_create_trgb(int t, int r, int g, int b);
 
 // utils/ft_output_to_bmp.c
 int	ft_put_img_to_bmp(char *file_name, t_env *env, t_3rgb *col);
-// void write_bmp_header(int fd, int width, int height);
 
 // rendering/draw_shapes.c
 void	ft_draw_square(t_img *img, t_square *sqr);
-
-
-// rendering/ft_tracer.c
-// t_ray	ft_build_ray(t_camera *cam, int x, int y);
-// int		ft_tracer(int x, int y, t_env *env, t_rgb *color);
-// void	ft_render(t_img *img, t_env *env);
 
 // rendering/ft_sphere_intersection.c
 double	ft_sphere_intersect(t_sphere *sphere, t_ray *ray, t_hit *intersection);
@@ -114,13 +106,11 @@ void	ass_hitpoint(double t, t_rgb col, int id, t_hit *hit);
 t_ray	ft_primary_ray(t_camera *cam, double x, double y);
 int		ft_intersect(t_ray ray, t_list **shape_list, t_hit *intersection);
 t_rgb	ft_tracer(int x, int y, t_env *env);
-t_3rgb   *ft_render(t_env *env, t_img *img);
+int     ft_render(t_env *env);
 
 
 // rendering/ft_shadowing.c
 t_ray	ft_shadow_ray(t_light *light, t_vec *hitpoint);
-// t_rgb	ft_shading(t_env *env, t_hit *intersection, t_ray ray, t_light *light);
-// t_rgb	ft_shader(t_env *env, t_hit *hitp);
 t_rgb	ft_shader(t_env *env, t_hit *hitp);
 
 // debug/debugray.c

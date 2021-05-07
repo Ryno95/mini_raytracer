@@ -20,7 +20,6 @@ OBJ = Debug/debugray.o\
 	parse/parse.o\
 	parse/parse_env.o\
 	parse/parse_shapes.o\
-	window_control/ft_window.o\
 	utils/ft_free.o\
 	utils/ft_parse_utils.o\
 	utils/ft_errors.o\
@@ -29,7 +28,6 @@ OBJ = Debug/debugray.o\
 	utils/vec_utils.o\
 	utils/ft_color_utils.o\
 	utils/ft_matrices.o\
-	utils/ft_output_to_bmp.o\
 	utils/ft_filters.o\
 	rendering/ft_render.o\
 	rendering/ft_sphere_intersection.o\
@@ -37,7 +35,9 @@ OBJ = Debug/debugray.o\
 	rendering/ft_shadowing.o\
 	rendering/ft_triangle_intersection.o\
 	rendering/ft_square_intersect.o\
-	rendering/ft_cylinder_intersect.o
+	rendering/ft_cylinder_intersect.o\
+	output/ft_output_to_bmp.o\
+	output/ft_window.o\
 
 all: $(NAME)
 

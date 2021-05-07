@@ -6,7 +6,7 @@
 /*   By: rmeiboom <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/07 21:55:32 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/05/07 17:25:20 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/05/07 20:36:56 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,20 @@ t_ray	ft_primary_ray(t_camera *cam, double x, double y)
 	return (ray);
 }
 
+void	ft_shape_if_tree(int i, t_list *shape, t_hit *hitp, t_ray *ray)
+{
+	if (i == SPHERE)
+		ft_sphere_intersect((t_sphere*)shape->content, ray, hitp);
+	else if (i == PLANE)
+		ft_plane_intersect((t_plane*)shape->content, ray, hitp);
+	else if (i == TRIANGLE)
+		ft_triangle_intersect((t_triangle*)shape->content, ray, hitp);
+	else if (i == SQUARE)
+		ft_square_intersect((t_square*)shape->content, ray, hitp);
+	else if (i == CYLINDER)
+		ft_cylinder_intersect((t_cylinder*)shape->content, ray, hitp);
+}
+
 int		ft_intersect(t_ray ray, t_list **shape_list, t_hit *hitp)
 {
 	int i;
@@ -60,16 +74,7 @@ int		ft_intersect(t_ray ray, t_list **shape_list, t_hit *hitp)
 		tmp = shape_list[i];
 		while (tmp != NULL)
 		{
-			if (i == SPHERE)
-				ft_sphere_intersect((t_sphere*)tmp->content, &ray, hitp);
-			else if (i == PLANE)
-				ft_plane_intersect((t_plane*)tmp->content, &ray, hitp);
-			else if (i == TRIANGLE)
-				ft_triangle_intersect((t_triangle*)tmp->content, &ray, hitp);
-			else if (i == SQUARE)
-				ft_square_intersect((t_square*)tmp->content, &ray, hitp);
-			else if (i == CYLINDER)
-				ft_cylinder_intersect((t_cylinder*)tmp->content, &ray, hitp);
+			ft_shape_if_tree(i, tmp, hitp, &ray);
 			tmp = tmp->next;
 		}
 		i++;
@@ -99,16 +104,15 @@ t_rgb		ft_tracer(int x, int y, t_env *env)
 	return (color);
 }
 
-t_3rgb *ft_render(t_env *env, t_img *img)
+int ft_render(t_env *env)
 {
 	int		i;
 	int		j;
 	int		k;
-	t_3rgb	*col_array;
 	t_rgb	color;
 
-	col_array = (t_3rgb *)malloc(env->res.y * env->res.x * sizeof(t_3rgb));
-	if (!col_array)
+	env->col_array = (t_3rgb *)malloc(env->res.y * env->res.x * sizeof(t_3rgb));
+	if (!env->col_array)
 		ft_parse_error("You fucked up!");
 	i = 0;
 	k = 0;
@@ -122,12 +126,12 @@ t_3rgb *ft_render(t_env *env, t_img *img)
 				k = (env->res.y - i - 1) * env->res.x + j;
 			else
 				k = i * env->res.x + j;
-			col_array[k].r = (uint8_t)color.r;
-			col_array[k].g = (uint8_t)color.g;
-			col_array[k].b = (uint8_t)color.b;
+			env->col_array[k].r = (uint8_t)color.r;
+			env->col_array[k].g = (uint8_t)color.g;
+			env->col_array[k].b = (uint8_t)color.b;
 			j++;
 		}
 		i++;
 	}
-	return (col_array);
+	return (1);
 }

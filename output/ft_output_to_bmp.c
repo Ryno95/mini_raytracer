@@ -6,7 +6,6 @@
 #include <unistd.h>
 #include <strings.h>
 #include "../headers/minirt.h"
-// #include "../headers/ft_structure.h"
 
 void create_bmp_file_header(t_bmp_file_header *fh, int width, int height)
 {
@@ -18,14 +17,13 @@ void create_bmp_file_header(t_bmp_file_header *fh, int width, int height)
 	fh->bmp_def = 0;
 	fh->bmp_def2 = 0;
 	fh->offset = 54;
-	// printf("struct size: %lu\n", sizeof(t_bitmap_file_header));
 }
 
 
 void create_bmp_info_header(t_bmp_info_header *ih, int width, int height)
 {
 	bzero(ih, sizeof(t_bmp_info_header));
-	ih->info_header_size = 40; //sizeof(t_info_header);
+	ih->info_header_size = 40;
 	ih->width = width;
 	ih->height = height;
 	ih->planes = 1;
@@ -56,8 +54,6 @@ int	ft_put_img_to_bmp(char *file_name, t_env *env, t_3rgb *col)
 	if (!fh || !ih)
 		return (-1);
 	size = env->res.y * env->res.x * 3;
-	char	*white = malloc(size);
-	memset(white, 255, size);
 	create_bmp_info_header(ih, env->res.x, env->res.y);
 	create_bmp_file_header(fh, env->res.x, env->res.y);
 	int fd = open(file_name, O_WRONLY | O_CREAT | O_TRUNC, 0664);
@@ -71,13 +67,8 @@ int	ft_put_img_to_bmp(char *file_name, t_env *env, t_3rgb *col)
 		col = ft_grayscale(col, env->res.x, env->res.y);
 	if (write(fd, col, size) < 0)
 		ft_parse_error("ERRRROOOOOOR");
-	// open_bmp_file(file_name);
+	free(fh);
+	free(ih);
 	close(fd);
 	return (fd);
 }
-
-// int main(void)
-// {
-// 	create_bmp("mini.bmp");
-// 	return (0);
-// }

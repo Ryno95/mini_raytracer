@@ -6,7 +6,7 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/03 13:28:19 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/05/07 17:59:38 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/05/07 20:35:59 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,59 +48,66 @@ void	ft_put_img_to_window(t_img *img, t_env *env, t_3rgb *cols)
 	mlx_put_image_to_window(img->mlx_ptr, img->wdw_ptr, img->img_ptr, 0, 0);
 }
 
+void	ft_check_args(int argc, char *argv[], t_env * env)
+{
+	if (argc == 3)
+	{
+		if (ft_strncmp(argv[2], "--save", ft_strlen("--save")) == 0)
+			env->save_to_bmp = 1;
+		else if (ft_strncmp(argv[2], "-s", 2) == 0)
+			env->filters.sepia = 1;
+		else if (ft_strncmp(argv[2], "-g", 2) == 0)
+			env->filters.grayscale = 1;
+		else
+			ft_parse_error("Usage: ./executable scene.rt [--save] [-filter:s/g]");
+	}
+	else if (argc == 4 && ft_strncmp(argv[2], "--save", ft_strlen("--save")) == 0)
+	{
+		env->save_to_bmp = 1;
+		if (ft_strncmp(argv[3], "-s", 2) == 0)
+			env->filters.sepia = 1;
+		else if (ft_strncmp(argv[3], "-g", 2) == 0)
+			env->filters.grayscale = 1;
+		else
+			ft_parse_error("Usage: ./executable scene.rt [--save] [-filter:s/g]");
+	}
+	else
+		ft_parse_error("Usage: ./executable scene.rt [--save] [-filter:s/g]");
+}
+
 
 int	main(int argc, char *argv[])
 {
 	static	t_env	env;
 	t_img			img;
-	t_3rgb			*col_array;
 	
+	printf("argc:%d\n", argc);
 	if (argc < 2 || argc > 4)
 		ft_parse_error("Usage: ./executable scene.rt [--save] [-filter:s/g]");
+	if (argc == 3 || argc == 4)
+		ft_check_args(argc, argv, &env);
 		
-	if (argc == 3)
-	{
-		if (ft_strncmp(argv[2], "--save", ft_strlen("--save")) == 0)
-			env.save_to_bmp = 1;
-		else if (ft_strncmp(argv[2], "-s", 2) == 0)
-			env.filters.sepia = 1;
-		else if (ft_strncmp(argv[2], "-g", 2) == 0)
-			env.filters.grayscale = 1;
-		else
-			ft_parse_error("Usage: ./executable scene.rt [--save] [-filter:s/g]");
-	}
-
-	if (argc == 4)
-	{
-		if (ft_strncmp(argv[2], "--save", ft_strlen("--save")) == 0)
-		{
-			env.save_to_bmp = 1;
-			if (ft_strncmp(argv[3], "-s", 2) == 0)
-				env.filters.sepia = 1;
-			else if (ft_strncmp(argv[3], "-g", 2) == 0)
-				env.filters.grayscale = 1;
-			else
-				ft_parse_error("Usage: ./executable scene.rt [--save] [-filter:s/g]");
-		}
-		else
-			ft_parse_error("Usage: ./executable scene.rt [--save] [-filter:s/g]");
-	}
-
 	if (parse(argv[1], &env) == -1)
 		ft_parse_error("");
-	
+		
 	if (env.save_to_bmp != 1)
 		ft_run_mlx(&img, &env);
-	
-	col_array = ft_render(&env, &img);
-	
+		
+	if(ft_render(&env) != 1)
+		ft_parse_error("Rendering failed");
+	printf("here!\n\n\n");
 	if (env.save_to_bmp == 1)
-		ft_put_img_to_bmp("minirt.bmp", &env, col_array);
+	{
+		ft_put_img_to_bmp("minirt.bmp", &env, env.col_array);
+		close(env.fd);
+		// free(col_array);
+	}
 	else
 	{
-		ft_put_img_to_window(&img, &env, col_array);
+		ft_put_img_to_window(&img, &env, env.col_array);
 		mlx_hook(img.wdw_ptr, 17, 1l << 17, my_destroy_window, &img);
 		mlx_hook(img.wdw_ptr, 2, 1l << 0, keypress, &img);
+		mlx_loop_hook(img.mlx_ptr, ft_render, &env);
 		mlx_loop(img.mlx_ptr);
 	}
 	// while (i < TRIANGLE)
@@ -110,9 +117,7 @@ int	main(int argc, char *argv[])
 	// }
 	// printf("campoint: %p\n", env.cam_list->content);
 	// mlx_mouse_hook(img.wdw_ptr, ft_debugray, &env);
-	if (env.save_to_bmp)
-		close(env.fd);
-	free(col_array);
+
 	// ft_lstclear(&env.light, free);
 	// ft_lstclear(&env.cam_list, free);
 	// if(env.debug)

@@ -6,7 +6,7 @@
 /*   By: rmeiboom <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/11 22:31:15 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/05/07 10:08:31 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/05/07 20:27:59 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,20 +27,20 @@ int	ft_run_mlx(t_img *img, t_env *env)
 	return (0);
 }
 
-int	keypress(int kc, t_img *img)
+int	keypress(int kc, t_img *img, t_env *env)
 {
-	if (kc == 123 || kc == 0)
-		img->x -= 5;
-	else if (kc == 124 || kc == 2)
-		img->x += 5;
-	else if (kc == 125 || kc == 1)
-		img->y += 5;
-	else if (kc == 126 || kc == 13)
-		img->y -= 5;
+	if (kc == 124 || kc == 2)
+	{
+		env->cam_list->next;
+		printf("KEY-PRESSED");
+		// ft_render(env);
+	}
 	else if (kc == 53)
 		my_destroy_window(img);
 	return (0);
 }
+
+
 
 int	my_destroy_window(t_img *img)
 {
