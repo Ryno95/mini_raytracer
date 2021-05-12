@@ -6,14 +6,14 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/21 10:25:53 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/05/12 17:35:38 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/05/12 18:19:45 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/minirt.h"
 #include <math.h>
 
-t_vec	ft_cyl_normal(t_coord hitp, t_coord center, t_vec ori)
+static t_vec	ft_cyl_normal(t_coord hitp, t_coord center, t_vec ori)
 {
 	double	a;
 	t_vec	normal;
@@ -27,7 +27,7 @@ t_vec	ft_cyl_normal(t_coord hitp, t_coord center, t_vec ori)
 	return (normal);
 }
 
-int	ft_in_range(t_cylinder *cy, double t, t_ray *ray)
+static int	ft_in_range(t_cylinder *cy, double t, t_ray *ray)
 {
 	t_vec	hitp;
 	double	a;
@@ -44,16 +44,16 @@ int	ft_in_range(t_cylinder *cy, double t, t_ray *ray)
 	return (0);
 }
 
-double	ft_solve_quadratic(t_quadratic quadr, t_cylinder *cy, t_ray *ray)
+static double	ft_solve_quadratic(t_quadratic qua, t_cylinder *cy, t_ray *ray)
 {
 	double	t1;
 	double	t2;
 
-	quadr.discrim = (quadr.b * quadr.b) - (4 * quadr.a * quadr.c);
-	if (quadr.discrim < 0)
+	qua.discrim = (qua.b * qua.b) - (4 * qua.a * qua.c);
+	if (qua.discrim < 0)
 		return (-1);
-	t1 = (-quadr.b + sqrt(quadr.discrim)) / (2 * quadr.a);
-	t2 = (-quadr.b - sqrt(quadr.discrim)) / (2 * quadr.a);
+	t1 = (-qua.b + sqrt(qua.discrim)) / (2 * qua.a);
+	t2 = (-qua.b - sqrt(qua.discrim)) / (2 * qua.a);
 	if (t2 < t1 && t2 > 0 && ft_in_range(cy, t2, ray))
 		t1 = t2;
 	return (t1);

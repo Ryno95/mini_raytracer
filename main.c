@@ -6,7 +6,7 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/03 13:28:19 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/05/12 17:34:31 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/05/12 19:12:24 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,13 +104,9 @@ void	ft_threading_render(t_env *env)
 	}
 }
 
-
 int	main(int argc, char *argv[])
 {
 	static	t_env	env;
-	// t_img			img;
-	// int i = 0;
-	// t_thread		threads[NUMBER_OF_THREADS];
 	
 	
 	printf("argc:%d\n", argc);
@@ -135,22 +131,12 @@ int	main(int argc, char *argv[])
 	{
 		ft_put_img_to_bmp("minirt.bmp", &env, env.col_array);
 		close(env.fd);
-		// free(env.col_array);
+		free(env.col_array);
 	}
 	else
-		ft_run_mlx(&env);
+		if(!ft_run_mlx(&env))
+			ft_exit(&env, "Error displaying image");
 
-	// while (i < TRIANGLE)
-	// {
-	// 	ft_lstclear(&env.shapes[i], free);
-	// 	i++;
-	// }
-	// printf("campoint: %p\n", env.cam_list->content);
-	// mlx_mouse_hook(img.wdw_ptr, ft_debugray, &env);
-
-	// ft_lstclear(&env.light, free);
-	// ft_lstclear(&env.cam_list, free);
-	// if(env.debug)
 	// while(1);
 	return (0);
 }

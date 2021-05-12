@@ -6,16 +6,13 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/03 10:09:33 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/05/12 17:33:03 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/05/12 19:03:55 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_structure.h"
+#include "ft_defines.h"
 #include "../libft/libft.h"
-
-# define IDS "RAcl"
-# define ray_max 1e6
-# define ray_min 1e-6
 
 void	ft_mlx_error(char *str);
 
@@ -46,6 +43,7 @@ t_vec     ft_vec_multi_matrix(t_matrix3x3 m, t_vec vect);
 
 // utils/ft_free.c
 void	free_split(char **split_array);
+void    ft_exit(t_env *env, char *description);
 
 // utils/parse_utils.c
 void	ass_colors(char *str, t_rgb *cols);
@@ -125,7 +123,6 @@ int		ft_square_intersect(t_square *sq, t_ray *ray, t_hit *intersect);
 
 // rednering/ft_cylinder_intersect.c
 int		ft_cylinder_intersect(t_cylinder *cy, t_ray *ray, t_hit *hitp);
-int     ft_in_range(t_cylinder *cy, double t,  t_ray *ray);
 
 //utils/ft_filters.o
 t_3rgb  *ft_grayscale(t_3rgb *colors, int width, int height);

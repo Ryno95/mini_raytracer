@@ -6,14 +6,14 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/14 17:22:28 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/05/12 17:35:24 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/05/12 18:20:22 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/minirt.h"
 #include <math.h>
 
-int	ft_is_inside_tri(t_triangle *tri, t_vec hitp, t_vec normal)
+static int	ft_is_inside_tri(t_triangle *tri, t_vec hitp, t_vec normal)
 {
 	t_vec	side;
 	t_vec	cross;

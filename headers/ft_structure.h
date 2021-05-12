@@ -6,7 +6,7 @@
 /*   By: rmeiboom <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/02 13:38:01 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/05/12 17:23:42 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/05/12 18:29:12 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,15 +76,15 @@ typedef struct	s_ray
 
 typedef struct   s_res
 {
-	unsigned char	id; // R
+	unsigned char	id;
 	int			    x;
 	int			    y;
 }               t_res;
 
 typedef struct   s_amb_light
 {
-	unsigned char    id; // A
-	double			ratio; // [0.0 - 1.0]
+	unsigned char    id;
+	double			ratio;
 	t_rgb			colors;
 }				t_amb_light;
 
@@ -94,13 +94,13 @@ typedef struct	s_camera
 	t_coord			coords;
 	t_vec			vect_coords;
 	t_rgb			colors;
-	unsigned char	fov; // [0 - 180]
+	unsigned char	fov;
 	double			cam_dist;
 }				t_camera;
 	
 typedef struct	s_light
 {
-	unsigned char	id; // l
+	unsigned char	id;
 	t_coord			coords;
 	double			brightness;
 	t_rgb			colors;
@@ -151,23 +151,6 @@ typedef struct 	s_triangle
 	t_rgb			colors;
 }				t_triangle;
 
-typedef struct	s_shapes
-{
-	t_sphere 	*sphere;
-	t_plane		*plane;
-	t_square	*square;
-	t_cylinder	*cyl;
-}				t_shapes;
-
-typedef struct	s_obj
-{
-	int		id;
-	t_coord coords;
-	t_rgb	color;
-	t_vec	norm_vec3d;
-	
-}				t_obj;
-
 typedef struct	s_impact_point
 {
 	t_rgb		color;
@@ -204,19 +187,6 @@ typedef struct	s_env
 	t_filters	filters;
 }				t_env;
 
-typedef struct 	s_data
-{
-	char		**spl_str;
-	t_res		res;
-	t_amb_light amb_light;
-	t_camera	*camera;
-	t_list		*light;
-	t_sphere 	*sphere;
-	t_plane		*plane;
-	t_square	*square;
-	t_cylinder	*cyl;
-}				t_data;
-
 typedef	struct	s_img
 {
 	void	*mlx_ptr;
@@ -236,11 +206,11 @@ typedef	struct	s_img
 
 typedef struct	s_bmp_file_header
 {
-    uint8_t   	name[2]; // should be "BM"
-    uint32_t	file_size; // height * width
-    uint16_t	bmp_def; // defaults to 0
-    uint16_t	bmp_def2; // defaults to 0
-    uint32_t	offset; // info + file header
+    uint8_t   	name[2];
+    uint32_t	file_size;
+    uint16_t	bmp_def;
+    uint16_t	bmp_def2;
+    uint32_t	offset; 
 }				t_bmp_file_header;
 
 

@@ -6,14 +6,14 @@
 /*   By: rmeiboom <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/18 10:44:42 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/05/12 17:35:33 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/05/12 18:20:15 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/minirt.h"
 #include <math.h>
 
-int	ft_is_inside_square(t_square *sq, t_vec hitp)
+static int	ft_is_inside_square(t_square *sq, t_vec hitp)
 {
 	t_vec	d;
 	double	border;

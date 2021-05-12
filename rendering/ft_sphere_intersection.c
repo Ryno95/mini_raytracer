@@ -6,14 +6,14 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/31 11:10:49 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/05/12 17:35:17 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/05/12 18:20:04 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/minirt.h"
 #include <math.h>
 
-double	ft_solve_circle(t_quadratic quad)
+static double	ft_solve_circle(t_quadratic quad)
 {
 	double	t1;
 	double	t2;
