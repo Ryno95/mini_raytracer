@@ -6,7 +6,7 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/05/07 10:37:15 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/05/07 19:43:10 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/05/12 15:52:38 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,21 +38,22 @@ t_3rgb	*ft_sepia(t_3rgb *col, int width, int height)
 	int		size;
 
 	sepia = (t_3rgb *)malloc(height * width * sizeof(t_3rgb));
+	ft_memcpy(sepia, col, height * width * sizeof(t_3rgb));
 	i = 0;
 	size = width * height;
 	while (i < size)
 	{
-		sepia[i].r = 255;
-		if ((col[i].r * 0.393 + col[i].g * 0.769 + col[i].b * 0.189) <= 255)
-			sepia[i].r = col[i].r * 0.393 + col[i].g * 0.769 + col[i].b * 0.189;
-		sepia[i].g = 255;
-		if ((col[i].r * 0.349 + col[i].g * 0.686 + col[i].b * 0.168) <= 255)
-			sepia[i].g = col[i].r * 0.349 + col[i].g * 0.686 + col[i].b * 0.168;
-		sepia[i].b = 255;
-		if ((col[i].r * 0.272 + col[i].g * 0.534 + col[i].b * 0.131) <= 255)
-			sepia[i].b = col[i].r * 0.272 + col[i].g * 0.534 + col[i].b * 0.131;
+		col[i].r = 255;
+		if ((sepia[i].r * 0.393 + sepia[i].g * 0.769 + sepia[i].b * 0.189) <= 255)
+			col[i].r = sepia[i].r * 0.393 + sepia[i].g * 0.769 + sepia[i].b * 0.189;
+		col[i].g = 255;
+		if ((sepia[i].r * 0.349 + sepia[i].g * 0.686 + sepia[i].b * 0.168) <= 255)
+			col[i].g = sepia[i].r * 0.349 + sepia[i].g * 0.686 + sepia[i].b * 0.168;
+		col[i].b = 255;
+		if ((sepia[i].r * 0.272 + sepia[i].g * 0.534 + sepia[i].b * 0.131) <= 255)
+			col[i].b = sepia[i].r * 0.272 + sepia[i].g * 0.534 + sepia[i].b * 0.131;
 		i++;
 	}
-	free(col);
-	return (sepia);
+	free(sepia);
+	return (col);
 }

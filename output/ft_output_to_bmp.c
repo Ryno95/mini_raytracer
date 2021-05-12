@@ -7,16 +7,17 @@
 #include <strings.h>
 #include "../headers/minirt.h"
 
+#define HEADER_SIZE 54
+#define UNUSED
+
 void create_bmp_file_header(t_bmp_file_header *fh, int width, int height)
 {
 
 	bzero(fh, sizeof(t_bmp_file_header));
 	fh->name[0] = 'B';
 	fh->name[1] = 'M';
-	fh->file_size = width * height * 3 + 54;
-	fh->bmp_def = 0;
-	fh->bmp_def2 = 0;
-	fh->offset = 54;
+	fh->file_size = width * height * 3 + HEADER_SIZE;
+	fh->offset = HEADER_SIZE;
 }
 
 
@@ -28,12 +29,8 @@ void create_bmp_info_header(t_bmp_info_header *ih, int width, int height)
 	ih->height = height;
 	ih->planes = 1;
 	ih->bit_count = 24;
-	ih->compression = 0;
-	ih->img_size = 0;
 	ih->ppm_x = width * height / 20;
 	ih->ppm_y = width * height / 20;
-	ih->color_used = 0;
-	ih->important = 0;
 }
 
 void write_bmp_header(int fd, t_bmp_file_header *fh, t_bmp_info_header *ih)

@@ -6,27 +6,21 @@
 /*   By: rmeiboom <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/07 21:55:32 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/05/07 20:36:56 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/05/12 17:31:45 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/minirt.h"
+#include "math.h"
 
-void	ass_hitpoint(double t, t_rgb col, int id, t_hit *hit)
+int	ass_hitpoint(double t, t_rgb col, int id, t_hit *hit)
 {
 	if (!hit)
-		ft_parse_error("No hitpoint given");
+		return (0);
 	hit->near = t;
 	hit->color = col;
 	hit->object_id = id;
-}
-
-t_vec vec_by_vec(t_vec a, t_vec b)
-{
-	a.x *= b.x;
-	a.y *= b.y;
-	a.z *= b.z;
-	return (a);
+	return (1);
 }
 
 t_ray	ft_primary_ray(t_camera *cam, double x, double y)
@@ -90,8 +84,8 @@ t_rgb		ft_tracer(int x, int y, t_env *env)
 	t_ray	primary_ray;
 	t_rgb	color;
 
-	x = x - env->res.x / 2;
-	y = env->res.y / 2 - y;
+	x = x - env->res.x * 0.5;
+	y = env->res.y * 0.5 - y;
 	intersection.near = INFINITY;
 
 	ft_color_multi(&color, 0);
@@ -113,7 +107,8 @@ int ft_render(t_env *env)
 
 	env->col_array = (t_3rgb *)malloc(env->res.y * env->res.x * sizeof(t_3rgb));
 	if (!env->col_array)
-		ft_parse_error("You fucked up!");
+		return (0);
+				// ft_error("You fucked up!", env);
 	i = 0;
 	k = 0;
 	while (i < env->res.y)

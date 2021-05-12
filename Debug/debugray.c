@@ -6,15 +6,16 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/14 11:14:39 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/04/30 17:43:01 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/05/12 17:34:20 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/minirt.h"
+#include <stdio.h>
 
 void	ft_print_color(t_rgb vector)
 {
-	printf("Color: %f %f %f\n", vector.r, vector.g, vector.b);
+	printf("Color: %d %d %d\n", vector.r, vector.g, vector.b);
 }
 
 void	ft_print_vect(t_vec vector, char *pre)

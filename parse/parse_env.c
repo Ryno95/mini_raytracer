@@ -6,11 +6,12 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/03 13:31:58 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/04/30 18:08:49 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/05/12 17:32:18 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/minirt.h"
+#include <math.h>
 
 // Check max screen res!
 int	parse_res(char **spl_str, t_res *res)

@@ -6,11 +6,12 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/14 13:40:45 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/04/30 18:07:03 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/05/12 17:32:44 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/minirt.h"
+#include <math.h>
 
 t_ray	ft_shadow_ray(t_light *light, t_vec *hitpoint)
 {

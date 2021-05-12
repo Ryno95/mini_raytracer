@@ -6,11 +6,13 @@
 /*   By: rmeiboom <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/07 20:49:30 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/04/30 17:43:01 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/05/12 17:36:00 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/minirt.h"
+#include <math.h>
+#include <stdio.h>
 
 double	vec_len(t_vec vec)
 {
@@ -54,4 +56,12 @@ void	print_vec(t_vec vec, char *description)
 	printf("%s.X: %f\n", description, vec.x);
 	printf("%s.Y: %f\n", description, vec.y);
 	printf("%s.Z: %f\n", description, vec.z);
+}
+
+t_vec vec_by_vec(t_vec a, t_vec b)
+{
+	a.x *= b.x;
+	a.y *= b.y;
+	a.z *= b.z;
+	return (a);
 }

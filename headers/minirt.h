@@ -6,14 +6,11 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/03 10:09:33 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/05/07 20:22:22 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/05/12 17:33:03 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <math.h>
 #include "ft_structure.h"
-#include "../gnl/get_next_line.h"
 #include "../libft/libft.h"
 
 # define IDS "RAcl"
@@ -40,8 +37,8 @@ int		parse_cylinder(char **split, t_list **cylinder_lst);
 int		parse_triangle(char **split, t_list **triangle_lst);
 
 // window_control/ft_window.c
-int		ft_run_mlx(t_img *img, t_env *env);
-int		keypress(int kc, t_img *img, t_env *env);
+int		ft_run_mlx(t_env *env);
+// int		keypress(int kc, t_img *img, t_env *env);
 int		my_destroy_window(t_img *img);
 
 // utils/ft_matrices.c
@@ -71,6 +68,7 @@ t_vec	vec_minus(t_vec a, t_vec b);
 t_vec	vec_multiply(t_vec a, double factor);
 t_vec	vec_divide(t_vec a, double factor);
 void	print_vec(t_vec vec, char *description);
+t_vec   vec_by_vec(t_vec a, t_vec b);
 
 //utils/vec_products.c
 double	dot_product(t_vec a, t_vec b);
@@ -102,11 +100,12 @@ double	ft_sphere_intersect(t_sphere *sphere, t_ray *ray, t_hit *intersection);
 double	ft_plane_intersect(t_plane *plane, t_ray *ray, t_hit *intersection);
 
 // rendering/ft_render.c
-void	ass_hitpoint(double t, t_rgb col, int id, t_hit *hit);
+int     ass_hitpoint(double t, t_rgb col, int id, t_hit *hit);
 t_ray	ft_primary_ray(t_camera *cam, double x, double y);
 int		ft_intersect(t_ray ray, t_list **shape_list, t_hit *intersection);
 t_rgb	ft_tracer(int x, int y, t_env *env);
 int     ft_render(t_env *env);
+void	ft_threading_render(t_env *env);
 
 
 // rendering/ft_shadowing.c

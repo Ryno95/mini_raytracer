@@ -6,11 +6,12 @@
 /*   By: rmeiboom <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/02 13:38:01 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/05/07 20:19:21 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/05/12 17:23:42 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft/libft.h"
+#include <pthread.h>
 
 enum multi_opts{SPHERE, PLANE, TRIANGLE, SQUARE, CYLINDER};
 
@@ -229,6 +230,7 @@ typedef	struct	s_img
 	int		width;
 	int		x;
 	int		y;
+	t_env	*env;
 }				t_img;
 
 
@@ -256,3 +258,11 @@ typedef struct 	s_bmp_info_header
 	uint32_t color_used; // 0
 	uint32_t important; // if set to zero every color is important
 }				t_bmp_info_header;
+
+typedef	struct	s_thread
+{
+	pthread_t	tid;
+	int			id;
+	t_env 		*env;
+}				t_thread;
+

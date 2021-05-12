@@ -6,46 +6,23 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/03 13:28:19 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/05/07 20:35:59 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/05/12 17:34:31 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "headers/minirt.h"
 #include "mlx/mlx.h"
 #include <fcntl.h>
+#include <pthread.h>
+#include <stdio.h>
+
+#define NUMBER_OF_THREADS 4
 // #include "ft_structure.h"
 
 void	ft_mlx_error(char *str)
 {
 	printf("Error!\n%s\n", str);
 	exit(1);
-}
-
-void	ft_put_img_to_window(t_img *img, t_env *env, t_3rgb *cols)
-{
-	int i;
-	int j;
-	int pos;
-	int color;
-
-	if (env->filters.sepia)
-		cols = ft_sepia(cols, env->res.x, env->res.y);
-	else if (env->filters.grayscale)
-		cols = ft_grayscale(cols, env->res.x, env->res.y);
-	i = 0;
-	while (i < env->res.y)
-	{
-		j = 0;
-		while (j < env->res.x)
-		{
-			pos = i * env->res.x + j;
-			color = ft_create_trgb(0, cols[pos].r, cols[pos].g, cols[pos].b);
-			my_pixel_put(img, j, i, color);
-			j++;
-		}
-		i++;
-	}
-	mlx_put_image_to_window(img->mlx_ptr, img->wdw_ptr, img->img_ptr, 0, 0);
 }
 
 void	ft_check_args(int argc, char *argv[], t_env * env)
@@ -76,10 +53,65 @@ void	ft_check_args(int argc, char *argv[], t_env * env)
 }
 
 
+void *ft_thread_render(void *thread_data)
+{
+	int		i;
+	int		j;
+	int		k;
+	t_rgb	color;
+	t_thread *thread = (t_thread *)thread_data; 
+
+	i = thread->id;
+	while (i < thread->env->res.y)
+	{
+		j = 0;
+		while (j < thread->env->res.x)
+		{
+			color = ft_tracer(j, i, thread->env);
+			if (thread->env->save_to_bmp == 1)
+				k = (thread->env->res.y - i - 1) * thread->env->res.x + j;
+			else
+				k = i * thread->env->res.x + j;
+			thread->env->col_array[k].r = (uint8_t)color.r;
+			thread->env->col_array[k].g = (uint8_t)color.g;
+			thread->env->col_array[k].b = (uint8_t)color.b;
+			j++;
+		}
+		i += NUMBER_OF_THREADS;
+	}
+	return (NULL);
+}
+
+void	ft_threading_render(t_env *env)
+{
+	int i;
+	t_thread		threads[NUMBER_OF_THREADS];
+
+	i = 0;
+	while (i < NUMBER_OF_THREADS)
+	{
+		threads[i].env = env;
+		threads[i].id = i;
+		if(pthread_create(&threads[i].tid, NULL, ft_thread_render, (void*)&threads[i]) != 0)
+			ft_parse_error("Threading error");
+		i++;
+	}
+	i = 0;
+	while (i < NUMBER_OF_THREADS)
+	{
+		pthread_join(threads[i].tid, NULL);
+		i++;
+	}
+}
+
+
 int	main(int argc, char *argv[])
 {
 	static	t_env	env;
-	t_img			img;
+	// t_img			img;
+	// int i = 0;
+	// t_thread		threads[NUMBER_OF_THREADS];
+	
 	
 	printf("argc:%d\n", argc);
 	if (argc < 2 || argc > 4)
@@ -89,27 +121,25 @@ int	main(int argc, char *argv[])
 		
 	if (parse(argv[1], &env) == -1)
 		ft_parse_error("");
-		
-	if (env.save_to_bmp != 1)
-		ft_run_mlx(&img, &env);
-		
-	if(ft_render(&env) != 1)
-		ft_parse_error("Rendering failed");
-	printf("here!\n\n\n");
+	
+	env.col_array = (t_3rgb *)malloc(env.res.y * env.res.x * sizeof(t_3rgb));
+	if (!env.col_array)
+		ft_parse_error("You fucked up!");
+
+	ft_threading_render(&env);
+	
+	// if(ft_render(&env) != 1)
+	// 	ft_parse_error("Rendering failed");
+	
 	if (env.save_to_bmp == 1)
 	{
 		ft_put_img_to_bmp("minirt.bmp", &env, env.col_array);
 		close(env.fd);
-		// free(col_array);
+		// free(env.col_array);
 	}
 	else
-	{
-		ft_put_img_to_window(&img, &env, env.col_array);
-		mlx_hook(img.wdw_ptr, 17, 1l << 17, my_destroy_window, &img);
-		mlx_hook(img.wdw_ptr, 2, 1l << 0, keypress, &img);
-		mlx_loop_hook(img.mlx_ptr, ft_render, &env);
-		mlx_loop(img.mlx_ptr);
-	}
+		ft_run_mlx(&env);
+
 	// while (i < TRIANGLE)
 	// {
 	// 	ft_lstclear(&env.shapes[i], free);

@@ -6,7 +6,7 @@
 /*   By: rmeiboom <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/07 20:49:30 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/04/30 18:00:17 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/05/12 17:07:29 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,12 @@ void	print_vec(t_vec vec, char *description)
 	printf("%s.X: %f\n", description, vec.x);
 	printf("%s.Y: %f\n", description, vec.y);
 	printf("%s.Z: %f\n", description, vec.z);
+}
+
+t_vec vec_by_vec(t_vec a, t_vec b)
+{
+	a.x *= b.x;
+	a.y *= b.y;
+	a.z *= b.z;
+	return (a);
 }
