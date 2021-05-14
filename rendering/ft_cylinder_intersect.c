@@ -6,14 +6,14 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/21 10:25:53 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/05/12 18:19:45 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/05/14 17:14:37 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/minirt.h"
 #include <math.h>
 
-static t_vec	ft_cyl_normal(t_coord hitp, t_coord center, t_vec ori)
+static t_vec	ft_cyl_normal(t_vec hitp, t_vec center, t_vec ori)
 {
 	double	a;
 	t_vec	normal;

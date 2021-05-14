@@ -6,16 +6,16 @@
 /*   By: rmeiboom <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/05/13 12:55:47 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/05/13 13:04:17 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/05/14 17:14:37 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/ft_structure.h"
 #include <stdio.h>
 
-t_coord	create_pos(double x, double y, double z)
+t_vec	create_pos(double x, double y, double z)
 {
-	t_coord	new_pos;
+	t_vec	new_pos;
 
 	new_pos.x = x;
 	new_pos.y = y;

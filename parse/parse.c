@@ -6,7 +6,7 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/03 13:27:17 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/05/12 17:30:58 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/05/14 15:48:35 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 int	parse_tree(t_env *env)
 {
 	if (**env->spl_str == 'R')
-		return (parse_res(env->spl_str, &env->res));
+		return (parse_res(env->spl_str, &env->res, env->save_to_bmp));
 	else if (**env->spl_str == 'A')
 		return (parse_amb_light(env->spl_str, &env->amb_light));
 	else if (**env->spl_str == 'c' && env->spl_str[0][1] != 'y')

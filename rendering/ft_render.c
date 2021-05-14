@@ -6,7 +6,7 @@
 /*   By: rmeiboom <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/07 21:55:32 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/05/12 17:31:45 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/05/14 17:14:37 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_ray	ft_primary_ray(t_camera *cam, double x, double y)
 	t_vec		dir;
 
 	dir = create_pos((double)x, (double)y, cam->cam_dist * 2);
-	matrix.forward = cam->vect_coords;
+	matrix.forward = cam->vect_vecs;
 	matrix.right = normalize(cross_product(matrix.forward, create_pos(0, -1, 0)));
 	if (vec_len(matrix.right) == 0)
 		matrix.right = create_pos(1,0,0);

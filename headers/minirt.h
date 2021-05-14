@@ -6,13 +6,15 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/03 10:09:33 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/05/13 13:09:11 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/05/14 17:14:37 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_structure.h"
-#include "ft_defines.h"
-#include "../libft/libft.h"
+#ifndef MINIRT_H
+# define MINIRT_H
+# include "ft_structure.h"
+# include "ft_defines.h"
+# include "../libft/libft.h"
 
 void	ft_mlx_error(char *str);
 
@@ -21,7 +23,7 @@ int		parse(char *file_name, t_env *env);
 int		parse_tree(t_env *env);
 
 // parse/parse_env.c
-int		parse_res(char **spl_str, t_res *res);
+int		parse_res(char **spl_str, t_res *res, int bmp);
 int		parse_amb_light(char **spl_str, t_amb_light *am_lt);
 int		parse_cam(char **spl_str, t_list **cam, t_res *res);
 int		parse_light(char **split, t_list **light_lst);
@@ -37,43 +39,41 @@ int		parse_triangle(char **split, t_list **triangle_lst);
 int		ft_run_mlx(t_env *env);
 
 // utils/ft_matrices.c
-t_vec     ft_vec_multi_matrix(t_matrix3x3 m, t_vec vect);
+t_vec	ft_vec_multi_matrix(t_matrix3x3 m, t_vec vect);
 
 // utils/ft_free.c
 void	free_split(char **split_array);
-void    ft_exit(t_env *env, char *description);
+void	ft_exit(t_env *env, char *description);
 
 // utils/parse_utils.c
 void	ass_colors(char *str, t_rgb *cols);
-void	ass_coords(char *str, t_coord *coords);
+void	ass_coords(char *str, t_vec *coords);
 int		ft_str_arr_len(char **str_array);
 
 // utils/ft_errors.c
 void	ft_parse_error(char *err_desc);
 
 // Utils/ft_math_utils.c
-double	ft_vec_len(t_coord coords);
+double	ft_vec_len(t_vec coords);
 double	ft_round_fl(double num, int decimals);
-t_coord create_pos(double x, double y, double z);
-t_vec 	normalize(t_vec vec);
+t_vec	create_pos(double x, double y, double z);
+t_vec	normalize(t_vec vec);
 
 //utils/vec_utils.c
-double	vec_len(t_coord coords);
+double	vec_len(t_vec coords);
 t_vec	vec_add(t_vec a, t_vec b);
 t_vec	vec_minus(t_vec a, t_vec b);
 t_vec	vec_multiply(t_vec a, double factor);
 t_vec	vec_divide(t_vec a, double factor);
 void	print_vec(t_vec vec, char *description);
-t_vec   vec_by_vec(t_vec a, t_vec b);
+t_vec	vec_by_vec(t_vec a, t_vec b);
 
 //utils/vec_products.c
 double	dot_product(t_vec a, t_vec b);
 t_vec	cross_product(t_vec a, t_vec b);
-t_vec   calc_hitpoint(t_ray *primary_ray, double t);
-
+t_vec	calc_hitpoint(t_ray *primary_ray, double t);
 
 // utils/draw_utils.c
-void	my_lstiter(t_list *lst, t_ray *ray, unsigned int *nearest ,void (*f)(t_list *, t_ray * ,void *));
 void	my_pixel_put(t_img *img, int x, int y, unsigned int colour);
 
 // utils/ft_color_utils.c
@@ -84,7 +84,7 @@ t_rgb	ft_colors_add(t_rgb col, t_rgb rgb);
 int		ft_create_trgb(int t, int r, int g, int b);
 
 // utils/ft_output_to_bmp.c
-int	ft_put_img_to_bmp(char *file_name, t_env *env, t_3rgb *col);
+int		ft_put_img_to_bmp(char *file_name, t_env *env, t_3rgb *col);
 
 // rendering/draw_shapes.c
 void	ft_draw_square(t_img *img, t_square *sqr);
@@ -96,13 +96,12 @@ double	ft_sphere_intersect(t_sphere *sphere, t_ray *ray, t_hit *intersection);
 double	ft_plane_intersect(t_plane *plane, t_ray *ray, t_hit *intersection);
 
 // rendering/ft_render.c
-int     ass_hitpoint(double t, t_rgb col, int id, t_hit *hit);
+int		ass_hitpoint(double t, t_rgb col, int id, t_hit *hit);
 t_ray	ft_primary_ray(t_camera *cam, double x, double y);
 int		ft_intersect(t_ray ray, t_list **shape_list, t_hit *intersection);
 t_rgb	ft_tracer(int x, int y, t_env *env);
-int     ft_render(t_env *env);
+int		ft_render(t_env *env);
 void	ft_threading_render(t_env *env);
-
 
 // rendering/ft_shadowing.c
 t_ray	ft_shadow_ray(t_light *light, t_vec *hitpoint);
@@ -123,5 +122,7 @@ int		ft_square_intersect(t_square *sq, t_ray *ray, t_hit *intersect);
 int		ft_cylinder_intersect(t_cylinder *cy, t_ray *ray, t_hit *hitp);
 
 //utils/ft_filters.o
-t_3rgb  *ft_grayscale(t_3rgb *colors, int width, int height);
-t_3rgb  *ft_sepia(t_3rgb *col, int width, int height);
+t_3rgb	*ft_grayscale(t_3rgb *colors, int width, int height);
+t_3rgb	*ft_sepia(t_3rgb *col, int width, int height);
+
+#endif

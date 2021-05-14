@@ -1,17 +1,30 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   ft_output_to_bmp.c                                 :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2021/05/14 17:47:45 by rmeiboom      #+#    #+#                 */
+/*   Updated: 2021/05/14 17:48:01 by rmeiboom      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdlib.h>
 #include <fcntl.h>
 #include <sys/types.h>
 #include <sys/uio.h>
 #include <unistd.h>
 #include "../headers/minirt.h"
+#include "../headers/ft_defines.h"
 
 void create_bmp_file_header(t_bmp_file_header *fh, int width, int height)
 {
 	ft_bzero(fh, sizeof(t_bmp_file_header));
 	fh->name[0] = 'B';
 	fh->name[1] = 'M';
-	fh->file_size = width * height * 3 + All_HEADER_SIZE;
-	fh->offset = All_HEADER_SIZE;
+	fh->file_size = width * height * 3 + ALL_HEADER_SIZE;
+	fh->offset = ALL_HEADER_SIZE;
 }
 
 

@@ -6,7 +6,7 @@
 /*   By: rmeiboom <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/11 22:31:15 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/05/13 13:08:38 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/05/14 15:44:58 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,10 @@ void	ft_switch_camera(t_img *img)
 
 int	keypress(int kc, t_img *img)
 {
-	if (kc == 124 || kc == 2)
+	if (kc == TAB)
 		ft_switch_camera(img);
 	else 
-	if (kc == 53)
+	if (kc == ESC)
 		ft_destroy_window(img);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/03 13:28:19 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/05/13 13:29:01 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/05/14 17:33:28 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include <stdio.h>
 
 #define NUMBER_OF_THREADS 4
-// #include "ft_structure.h"
+#define FILE_EXTENSION ".rt\0"
 
 void	ft_mlx_error(char *str)
 {
@@ -111,10 +111,11 @@ int	main(int argc, char *argv[])
 	// check .rt extension
 	printf("argc:%d\n", argc);
 	if (argc < 2 || argc > 4)
-		ft_parse_error("Usage: ./executable scene.rt [--save] [-filter:s/g]");
+		ft_parse_error("Usage: ./executable FILE.rt [--save] [-filter:s/g]");
 	if (argc == 3 || argc == 4)
 		ft_check_args(argc, argv, &env);
-		
+	if (ft_strncmp(&argv[1][ft_strlen(argv[1]) - 3], FILE_EXTENSION, 4) != 0)
+		ft_parse_error("Usage: ./executable FILE.rt [--save] [-filter:s/g]");
 	if (parse(argv[1], &env) == -1)
 		ft_parse_error("");
 	
@@ -131,11 +132,13 @@ int	main(int argc, char *argv[])
 	{
 		ft_put_img_to_bmp("minirt.bmp", &env, env.col_array);
 		close(env.fd);
-		free(env.col_array);
+		// free(env.col_array);
+		ft_exit(&env, "Succesfully output to .bmp");
 	}
 	else
 		if(!ft_run_mlx(&env))
 			ft_exit(&env, "Error displaying image");
 
+	while(1);
 	return (0);
 }

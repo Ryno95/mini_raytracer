@@ -1,10 +1,9 @@
 CC = gcc
 
-CFLAGS = -Wall -Werror  -Wextra  -g -fsanitize=address # remember to add -werror
+CFLAGS = -Wall -Werror  -Wextra  -g -fsanitize=address
 
 NAME = minirt
 
-# HEADER = minirt.h
 LIBS = libft/libft.a
 
 LIBFTDIR = libft/
