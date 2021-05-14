@@ -6,7 +6,7 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/03 10:09:33 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/05/12 19:03:55 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/05/13 13:09:11 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,6 @@ int		parse_triangle(char **split, t_list **triangle_lst);
 
 // window_control/ft_window.c
 int		ft_run_mlx(t_env *env);
-// int		keypress(int kc, t_img *img, t_env *env);
-int		my_destroy_window(t_img *img);
 
 // utils/ft_matrices.c
 t_vec     ft_vec_multi_matrix(t_matrix3x3 m, t_vec vect);

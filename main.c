@@ -6,7 +6,7 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/03 13:28:19 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/05/12 19:12:24 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/05/13 13:29:01 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ int	main(int argc, char *argv[])
 {
 	static	t_env	env;
 	
-	
+	// check .rt extension
 	printf("argc:%d\n", argc);
 	if (argc < 2 || argc > 4)
 		ft_parse_error("Usage: ./executable scene.rt [--save] [-filter:s/g]");
@@ -137,6 +137,5 @@ int	main(int argc, char *argv[])
 		if(!ft_run_mlx(&env))
 			ft_exit(&env, "Error displaying image");
 
-	// while(1);
 	return (0);
 }

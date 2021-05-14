@@ -1,6 +1,6 @@
 CC = gcc
 
-CFLAGS = -Wall  -Wextra  -g -fsanitize=address # remember to add -werror
+CFLAGS = -Wall -Werror  -Wextra  -g -fsanitize=address # remember to add -werror
 
 NAME = minirt
 
@@ -25,7 +25,8 @@ OBJ = Debug/debugray.o\
 	utils/ft_errors.o\
 	utils/draw_utils.o\
 	utils/vec_products.o\
-	utils/vec_utils.o\
+	utils/ft_vec_basic_math.o\
+	utils/ft_create_vec.o\
 	utils/ft_color_utils.o\
 	utils/ft_matrices.o\
 	utils/ft_filters.o\

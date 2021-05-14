@@ -6,7 +6,7 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/03 13:31:58 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/05/12 17:32:18 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/05/13 12:51:48 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,12 @@ int	parse_res(char **spl_str, t_res *res)
 {
 	if (!spl_str || !res || ft_str_arr_len(spl_str) != 3)
 		ft_parse_error("resolution, safety checks");
+	if (res->id == 'R')
+		ft_parse_error(", multiple resolutions not allowed");
 	res->id = spl_str[0][0];
 	res->x = ft_atoi(spl_str[1]);
 	res->y = ft_atoi(spl_str[2]);
-	if (res->x < 0 || res->y < 0)
+	if (res->x < 0 || res->y < 0 || res->x > MAX_WIDTH || res->y > MAX_HEIGHT)
 		ft_parse_error("resolution, invalid width and height");
 	return (0);
 }
@@ -30,6 +32,8 @@ int	parse_amb_light(char **spl_str, t_amb_light *am_lt)
 {
 	if (!spl_str || !am_lt || ft_str_arr_len(spl_str) != 3)
 		ft_parse_error("ambient light, safety checks");
+	if (am_lt->id == 'A')
+		ft_parse_error(", multiple ambient lights not allowed");
 	am_lt->id = spl_str[0][0];
 	am_lt->ratio = ft_atof(spl_str[1]);
 	if (am_lt->ratio > 1 || am_lt->ratio < 0)

@@ -1,23 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   vec_utils.c                                        :+:    :+:            */
+/*   ft_vec_basic_math.c                                :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: rmeiboom <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/07 20:49:30 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/05/12 17:36:00 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/05/13 12:58:37 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/minirt.h"
-#include <math.h>
-#include <stdio.h>
-
-double	vec_len(t_vec vec)
-{
-	return (sqrt(pow((vec.x), 2) + pow((vec.y), 2) + pow((vec.z), 2)));
-}
+#include "../headers/ft_structure.h"
 
 t_vec	vec_add(t_vec a, t_vec b)
 {
@@ -49,13 +42,6 @@ t_vec	vec_divide(t_vec a, double factor)
 	a.y /= factor;
 	a.z /= factor;
 	return (a);
-}
-
-void	print_vec(t_vec vec, char *description)
-{
-	printf("%s.X: %f\n", description, vec.x);
-	printf("%s.Y: %f\n", description, vec.y);
-	printf("%s.Z: %f\n", description, vec.z);
 }
 
 t_vec vec_by_vec(t_vec a, t_vec b)

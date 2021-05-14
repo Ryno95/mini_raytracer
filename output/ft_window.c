@@ -6,12 +6,18 @@
 /*   By: rmeiboom <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/11 22:31:15 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/05/12 19:02:43 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/05/13 13:08:38 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/minirt.h"
 #include "../mlx/mlx.h"
+
+int	ft_destroy_window(t_img *img)
+{
+	mlx_destroy_window(img->mlx_ptr, img->wdw_ptr);
+	exit(1);
+}
 
 void	ft_put_img_to_window(t_img *img, t_env *env, t_3rgb *cols)
 {
@@ -55,15 +61,10 @@ int	keypress(int kc, t_img *img)
 		ft_switch_camera(img);
 	else 
 	if (kc == 53)
-		my_destroy_window(img);
+		ft_destroy_window(img);
 	return (0);
 }
 
-int	my_destroy_window(t_img *img)
-{
-	mlx_destroy_window(img->mlx_ptr, img->wdw_ptr);
-	exit(1);
-}
 
 int	ft_run_mlx(t_env *env)
 {
@@ -85,7 +86,7 @@ int	ft_run_mlx(t_env *env)
 			&img->line_size, &img->endian);
 	img->env = env;
 	ft_put_img_to_window(img, img->env, env->col_array);
-	mlx_hook(img->wdw_ptr, 17, 1l << 17, my_destroy_window, img);
+	mlx_hook(img->wdw_ptr, 17, 1l << 17, ft_destroy_window, img);
 	mlx_hook(img->wdw_ptr, 2, 1l << 0, keypress, img);
 	mlx_loop(img->mlx_ptr);
 	return (0);
