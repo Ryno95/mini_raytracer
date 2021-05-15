@@ -6,7 +6,7 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/14 14:07:53 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2020/11/14 15:46:44 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/05/15 11:48:36 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 size_t	ft_strlen(const char *str)
 {
-	size_t i;
+	size_t	i;
 
 	i = 0;
 	while (str[i] != '\0')

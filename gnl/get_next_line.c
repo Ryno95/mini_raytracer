@@ -6,7 +6,7 @@
 /*   By: rmeiboom <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/29 17:34:18 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/03/03 11:34:19 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/05/15 12:18:19 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	ft_bzero(void *str, size_t n)
 	char	*string;
 
 	i = 0;
-	string = (char*)str;
+	string = (char *)str;
 	while (i < n)
 	{
 		string[i] = '\0';
@@ -26,7 +26,7 @@ static void	ft_bzero(void *str, size_t n)
 	}
 }
 
-void		*ft_calloc(size_t count, size_t size)
+void	*ft_calloc(size_t count, size_t size)
 {
 	void	*voidptr;
 	size_t	true_size;
@@ -38,11 +38,13 @@ void		*ft_calloc(size_t count, size_t size)
 	if (!voidptr)
 		return (NULL);
 	else
+	{
 		while (i < true_size)
 		{
-			((char*)voidptr)[i] = '\0';
+			((char *)voidptr)[i] = '\0';
 			i++;
 		}
+	}
 	return (voidptr);
 }
 
@@ -102,11 +104,11 @@ static int	read_until_nl(int fd, char **line, char **leftovers, char **start)
 	return (read_bytes);
 }
 
-int			get_next_line(int fd, char **line)
+int	get_next_line(int fd, char **line)
 {
 	int			read_result;
-	static char *leftovers;
-	static char *start;
+	static char	*leftovers;
+	static char	*start;
 	int			fake_bool;
 	char		*ret_str;
 

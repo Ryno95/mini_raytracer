@@ -6,7 +6,7 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/14 14:07:42 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2020/11/14 17:52:02 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/05/15 11:59:20 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 static int	get_delimiter_count(char const *s, char c)
 {
-	int i;
-	int count;
+	int	i;
+	int	count;
 
 	i = 0;
 	count = 0;
@@ -43,8 +43,8 @@ static void	free_split(char **split_array, int count)
 
 static char	**split_loop(char **splitstr, const char *s, int del_i, char c)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (i < del_i)
@@ -54,7 +54,7 @@ static char	**split_loop(char **splitstr, const char *s, int del_i, char c)
 			s++;
 		while (s[j] != c && s[j] != '\0')
 			j++;
-		splitstr[i] = (char*)malloc(j + 1 * sizeof(char));
+		splitstr[i] = (char *)malloc(j + 1 * sizeof(char));
 		if (splitstr[i] == NULL)
 		{
 			free_split(splitstr, i - 1);
@@ -70,7 +70,7 @@ static char	**split_loop(char **splitstr, const char *s, int del_i, char c)
 	return (splitstr);
 }
 
-char		**ft_split(char const *s, char c)
+char	**ft_split(char const *s, char c)
 {
 	char	**split_strs;
 	int		del_count;
@@ -78,7 +78,7 @@ char		**ft_split(char const *s, char c)
 	if (s == NULL)
 		return (NULL);
 	del_count = get_delimiter_count(s, c);
-	split_strs = (char**)malloc((del_count + 1) * sizeof(char*));
+	split_strs = (char **)malloc((del_count + 1) * sizeof(char *));
 	if (split_strs == NULL)
 		return (NULL);
 	else if (del_count == 0 || s[0] == '\0')

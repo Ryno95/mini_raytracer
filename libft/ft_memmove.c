@@ -6,7 +6,7 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/14 14:07:27 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2020/11/14 16:19:02 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/05/15 11:52:39 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void	*ft_memmove(void *str1, const void *str2, size_t n)
 	char	*src;
 	int		i;
 
-	dest = (char*)str1;
-	src = (char*)str2;
+	dest = (char *)str1;
+	src = (char *)str2;
 	if (dest > src)
 	{
 		i = (int)n - 1;

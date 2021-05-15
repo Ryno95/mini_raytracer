@@ -6,7 +6,7 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/14 17:22:28 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/05/12 18:20:22 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/05/15 13:41:06 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,16 @@ static int	ft_is_inside_tri(t_triangle *tri, t_vec hitp, t_vec normal)
 	t_vec	cross;
 
 	side = vec_minus(tri->scnd_pnt, tri->frst_pnt);
-	cross = cross_product(side, vec_minus(hitp, tri->frst_pnt));
-	if (dot_product(normal, cross) < 0)
+	cross = ft_cross_product(side, vec_minus(hitp, tri->frst_pnt));
+	if (ft_dot_product(normal, cross) < 0)
 		return (0);
 	side = vec_minus(tri->frst_pnt, tri->thrd_pnt);
-	cross = cross_product(side, vec_minus(hitp, tri->thrd_pnt));
-	if (dot_product(normal, cross) < 0)
+	cross = ft_cross_product(side, vec_minus(hitp, tri->thrd_pnt));
+	if (ft_dot_product(normal, cross) < 0)
 		return (0);
 	side = vec_minus(tri->thrd_pnt, tri->scnd_pnt);
-	cross = cross_product(side, vec_minus(hitp, tri->scnd_pnt));
-	if (dot_product(normal, cross) < 0)
+	cross = ft_cross_product(side, vec_minus(hitp, tri->scnd_pnt));
+	if (ft_dot_product(normal, cross) < 0)
 		return (0);
 	return (1);
 }
@@ -43,17 +43,17 @@ double	ft_triangle_intersect(t_triangle *tri, t_ray *ray, t_hit *hitp)
 
 	sides[0] = vec_minus(tri->scnd_pnt, tri->frst_pnt);
 	sides[1] = vec_minus(tri->thrd_pnt, tri->frst_pnt);
-	normal = normalize(cross_product(sides[0], sides[1]));
-	angle = dot_product(normal, ray->direction);
+	normal = ft_normalize(ft_cross_product(sides[0], sides[1]));
+	angle = ft_dot_product(normal, ray->direction);
 	if (fabs(angle) < 0.00001)
 		return (0);
-	t = dot_product(normal, vec_minus(tri->frst_pnt, ray->origin)) / angle;
+	t = ft_dot_product(normal, vec_minus(tri->frst_pnt, ray->origin)) / angle;
 	point = calc_hitpoint(ray, t);
 	if (t >= 0 && t < hitp->near && ft_is_inside_tri(tri, point, normal))
 	{
 		ass_hitpoint(t, tri->colors, tri->id, hitp);
 		hitp->normal = normal;
-		if (dot_product(normal, ray->direction) > 0)
+		if (ft_dot_product(normal, ray->direction) > 0)
 			hitp->normal = vec_multiply(normal, -1);
 		return (1);
 	}		

@@ -6,7 +6,7 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/14 14:07:39 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2020/11/17 18:51:39 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/05/15 11:53:07 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_putnbr_fd(int n, int fd)
 {
-	char		mod;
+	char	mod;
 
 	if (fd < 0)
 		return ;

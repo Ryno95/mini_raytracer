@@ -6,7 +6,7 @@
 /*   By: rmeiboom <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/03 11:29:17 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/04/30 17:43:01 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/05/15 13:41:06 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ double	ft_plane_intersect(t_plane *plane, t_ray *ray, t_hit *hitp)
 	t_vec	diff;
 	double	t;
 
-	denominator = dot_product(plane->orient, ray->direction);
+	denominator = ft_dot_product(plane->orient, ray->direction);
 	diff = vec_minus(plane->coords, ray->origin);
-	t = dot_product(diff, plane->orient) / denominator;
+	t = ft_dot_product(diff, plane->orient) / denominator;
 	if (t < hitp->near && t >= 0)
 	{
 		ass_hitpoint(t, plane->colors, plane->id, hitp);

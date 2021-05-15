@@ -6,7 +6,7 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/14 14:07:49 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2020/11/14 15:24:17 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/05/15 12:15:51 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 size_t	ft_strlcat(char *dst, const char *src, size_t size)
 {
-	size_t dst_len;
-	size_t src_len;
-	size_t i;
+	size_t	dst_len;
+	size_t	src_len;
+	size_t	i;
 
 	i = 0;
 	dst_len = ft_strlen(dst);

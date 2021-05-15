@@ -1,20 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
+/*   main_bonus.c                                       :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: rmeiboom <marvin@codam.nl>                   +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2021/05/15 13:59:15 by rmeiboom      #+#    #+#                 */
+/*   Updated: 2021/05/15 17:36:23 by rmeiboom      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
 /*   main.c                                             :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/03 13:28:19 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/05/15 17:24:43 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/05/15 13:55:56 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "headers/minirt.h"
-#include "mlx/mlx.h"
+#include "../headers/minirt.h"
+#include "../mlx/mlx.h"
 #include <fcntl.h>
 #include <pthread.h>
 #include <stdio.h>
+
+#define NUMBER_OF_THREADS 4
+#define FILE_EXTENSION ".rt\0"
+#define USAGE "Usage: ./executable scene.rt [--save] [-filter:s/g]"
 
 void	ft_mlx_error(char *str)
 {
@@ -59,7 +75,7 @@ void	ft_check_args(int argc, char *argv[], t_env *env)
 		ft_parse_error(USAGE);
 }
 
-void	ft_protection_checks(int argc, char *argv[], t_env *env)
+void ft_protection_checks(int argc,  char *argv[], t_env *env)
 {
 	if (argc < 2 || argc > 4)
 		ft_parse_error("Usage: ./executable FILE.rt [--save] [-filter:s/g]");
@@ -75,19 +91,24 @@ int	main(int argc, char *argv[])
 {
 	static t_env	env;
 
+
 	ft_protection_checks(argc, argv, &env);
 	env.col_array = (t_3rgb *)malloc(env.res.y * env.res.x * sizeof(t_3rgb));
 	if (!env.col_array)
 		ft_parse_error("You fucked up!");
-	if (ft_render(&env) != 1)
-		ft_parse_error("Rendering failed");
+
+	ft_threading_render(&env);
+
 	if (env.save_to_bmp == 1)
 	{
 		ft_put_img_to_bmp("minirt.bmp", &env, env.col_array);
 		close(env.fd);
 		ft_exit(&env, "Succesful output to .bmp");
 	}
-	else if (!ft_run_mlx(&env))
-		ft_exit(&env, "Error displaying image");
+	else
+	{
+		if(!ft_run_mlx(&env))
+			ft_exit(&env, "Error displaying image");
+	}
 	return (0);
 }

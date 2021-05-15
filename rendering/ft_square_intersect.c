@@ -6,7 +6,7 @@
 /*   By: rmeiboom <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/18 10:44:42 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/05/12 18:20:15 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/05/15 13:41:06 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,11 @@ int	ft_square_intersect(t_square *sq, t_ray *ray, t_hit *hitp)
 	double	t;
 	t_vec	hitp_coords;
 
-	denominator = dot_product(sq->orient, ray->direction);
+	denominator = ft_dot_product(sq->orient, ray->direction);
 	if (denominator <= 0.00001)
 		return (0);
 	diff = vec_minus(sq->center, ray->origin);
-	t = dot_product(diff, sq->orient) / denominator;
+	t = ft_dot_product(diff, sq->orient) / denominator;
 	hitp_coords = calc_hitpoint(ray, t);
 	if (t < hitp->near && t >= 0 && ft_is_inside_square(sq, hitp_coords))
 	{

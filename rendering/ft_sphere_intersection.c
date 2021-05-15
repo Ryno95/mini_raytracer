@@ -6,7 +6,7 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/31 11:10:49 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/05/14 17:35:58 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/05/15 17:28:15 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ double	ft_sphere_intersect(t_sphere *sphere, t_ray *ray, t_hit *hitp)
 	t_vec		ori_cen;
 
 	ori_cen = vec_minus(ray->origin, sphere->center);
-	quad.b = 2 * (dot_product(ray->direction, ori_cen));
-	quad.c = dot_product(ori_cen, ori_cen) - (sphere->diam * sphere->diam);
+	quad.b = 2 * (ft_dot_product(ray->direction, ori_cen));
+	quad.c = ft_dot_product(ori_cen, ori_cen) - (sphere->diam * sphere->diam);
 	quad.discrim = quad.b * quad.b - 4 * quad.c;
 	if (quad.discrim < 0)
 		return (0);
@@ -42,7 +42,9 @@ double	ft_sphere_intersect(t_sphere *sphere, t_ray *ray, t_hit *hitp)
 	{
 		ass_hitpoint(t, sphere->colors, sphere->id, hitp);
 		hitp->hitpoint = calc_hitpoint(ray, t);
-		hitp->normal = normalize(vec_minus(hitp->hitpoint, sphere->center));
+		hitp->normal = ft_normalize(vec_minus(hitp->hitpoint, sphere->center));
+		if (ft_dot_product(hitp->normal, ray->direction) > 0)
+			hitp->normal = vec_multiply(hitp->normal, -1);
 		return (1);
 	}
 	return (0);

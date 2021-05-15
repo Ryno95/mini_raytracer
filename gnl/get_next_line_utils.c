@@ -6,7 +6,7 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/25 15:38:30 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/03/03 11:33:59 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/05/15 12:17:06 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 size_t	ft_strlen(const char *str)
 {
-	size_t i;
+	size_t	i;
 
 	i = 0;
 	if (str)
@@ -34,7 +34,7 @@ char	*ft_strchr(const char *s, int c)
 
 	if (!s)
 		return (NULL);
-	str = (char*)s;
+	str = (char *)s;
 	len = ft_strlen(str);
 	i = 0;
 	if (c == '\0' && str[len] == c)
@@ -61,8 +61,8 @@ char	*ft_strdup(const char *s1)
 	size_t		i;
 
 	i = 0;
-	str = (char*)s1;
-	ptr = (char*)ft_calloc(ft_strlen(str) + 1, sizeof(char));
+	str = (char *)s1;
+	ptr = (char *)ft_calloc(ft_strlen(str) + 1, sizeof(char));
 	if (!ptr)
 		return (NULL);
 	while (str[i])
@@ -79,7 +79,7 @@ char	*ft_gnl_strjoin(char *s1, char *s2)
 	size_t	i;
 	char	*joined;
 
-	len1 = ft_strlen((char*)s1);
+	len1 = ft_strlen((char *)s1);
 	i = 0;
 	joined = ft_calloc(sizeof(char), (len1 + ft_strlen(s2) + 1));
 	if (!joined)

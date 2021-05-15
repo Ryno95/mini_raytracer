@@ -6,7 +6,7 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/14 14:07:58 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2020/11/14 14:29:20 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/05/15 11:55:28 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	ft_strnstrcmp(char *s1, char *s2)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (s1[i] == s2[i])
@@ -26,7 +26,7 @@ static int	ft_strnstrcmp(char *s1, char *s2)
 	return (0);
 }
 
-char		*ft_strnstr(const char *haystack, const char *needle, size_t len)
+char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
 	size_t	i;
 	size_t	length;
@@ -35,14 +35,14 @@ char		*ft_strnstr(const char *haystack, const char *needle, size_t len)
 
 	i = 0;
 	if (needle[0] == '\0')
-		return ((char*)haystack);
-	length = ft_strlen((char*)needle);
+		return ((char *)haystack);
+	length = ft_strlen((char *)needle);
 	while (haystack[i] != '\0' && len >= length)
 	{
 		if (haystack[i] == needle[0])
 		{
-			haystack_pos = (char*)&haystack[i];
-			needle_pos = (char*)&needle[0];
+			haystack_pos = (char *)&haystack[i];
+			needle_pos = (char *)&needle[0];
 			if (ft_strnstrcmp(haystack_pos, needle_pos) == 1)
 				return (haystack_pos);
 		}

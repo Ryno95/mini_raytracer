@@ -6,7 +6,7 @@
 /*   By: rmeiboom <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/05 16:19:16 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/05/14 18:10:05 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/05/15 13:44:43 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 float	ft_get_float(char *str, float num)
 {
-	int i;
+	float	i;
 
 	i = 10;
 	while (*str && ft_isdigit(*str))
@@ -26,13 +26,11 @@ float	ft_get_float(char *str, float num)
 	if (*str == '.')
 	{
 		str++;
-		printf("str: %s\n", str);
 		while (*str && ft_isdigit(*str))
 		{
 			num = num + (((*str - 48) / i));
 			str++;
 			i *= 10;
-			printf("num: %f\n",num);
 		}
 	}
 	return (num);
@@ -41,7 +39,7 @@ float	ft_get_float(char *str, float num)
 float	ft_atof(char *str)
 {
 	float	num;
-	int		sign;
+	float	sign;
 
 	sign = 1;
 	num = 0;

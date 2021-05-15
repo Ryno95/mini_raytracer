@@ -6,7 +6,7 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/14 14:07:46 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2020/11/14 16:01:51 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/05/15 11:54:20 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*ft_strdup(const char *s1)
 	size_t		i;
 
 	i = 0;
-	str = (char*)s1;
+	str = (char *)s1;
 	ptr = malloc(ft_strlen(str) + 1);
 	if (!ptr)
 		return (NULL);

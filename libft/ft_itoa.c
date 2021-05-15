@@ -6,7 +6,7 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/14 14:07:03 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2020/11/16 19:21:07 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/05/15 11:51:28 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static char	*mem_alloc(int n)
 	else if (n == 0)
 		str = ft_strdup("0");
 	else
-		str = (char*)malloc(i + 1);
+		str = (char *)malloc(i + 1);
 	return (str);
 }
 
@@ -67,7 +67,7 @@ static void	ft_strrev(char *s)
 	}
 }
 
-char		*ft_itoa(int n)
+char	*ft_itoa(int n)
 {
 	int		nbr;
 	char	*str;

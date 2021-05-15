@@ -6,7 +6,7 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/14 14:07:11 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2020/11/14 14:14:01 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/05/15 11:56:29 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	ft_lstclear(t_list **lst, void (*del)(void*))
 {
-	t_list *cursor;
-	t_list *tmp;
+	t_list	*cursor;
+	t_list	*tmp;
 
 	cursor = *lst;
 	while (cursor != NULL)

@@ -6,7 +6,7 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/05/12 18:15:59 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/05/14 16:22:09 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/05/15 17:22:29 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,9 @@
 # define ID_SQUARE "sq\0"
 # define ID_CYLINDER "cy\0"
 # define ID_TRIANGLE "tr\0"
+
+#define NUMBER_OF_THREADS 4
+#define FILE_EXTENSION ".rt\0"
+#define USAGE "Usage: ./executable scene.rt [--save] [-filter:s/g]"
 
 #endif

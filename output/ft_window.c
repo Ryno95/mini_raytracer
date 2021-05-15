@@ -6,7 +6,7 @@
 /*   By: rmeiboom <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/11 22:31:15 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/05/14 15:44:58 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/05/15 14:13:48 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,6 @@ void	ft_put_img_to_window(t_img *img, t_env *env, t_3rgb *cols)
 	mlx_put_image_to_window(img->mlx_ptr, img->wdw_ptr, img->img_ptr, 0, 0);
 }
 
-void	ft_switch_camera(t_img *img)
-{
-	if (img->env->cam_list->next)
-		img->env->cam_list = img->env->cam_list->next;
-	ft_threading_render(img->env);
-	ft_put_img_to_window(img, img->env, img->env->col_array);
-	return ;
-}
 
 int	keypress(int kc, t_img *img)
 {

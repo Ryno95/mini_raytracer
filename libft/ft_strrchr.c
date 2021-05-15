@@ -6,7 +6,7 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/14 14:08:00 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2020/11/16 20:08:39 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/05/15 11:59:38 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*ft_strrchr(const char *s, int c)
 	int		i;
 	int		len;
 
-	str = (char*)s;
+	str = (char *)s;
 	cursor = NULL;
 	i = 0;
 	len = (int)ft_strlen(str);
