@@ -6,7 +6,7 @@
 /*   By: rmeiboom <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/05/15 13:59:15 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/05/16 16:17:46 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/05/16 21:28:28 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,12 @@
 #include <fcntl.h>
 #include <pthread.h>
 #include <stdio.h>
+
+void	ft_mlx_error(char *str)
+{
+	printf("Error!\n%s\n", str);
+	exit(1);
+}
 
 void	ft_switch_camera(t_img *img)
 {

@@ -6,7 +6,7 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/03 13:31:58 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/05/15 13:40:47 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/05/16 22:21:23 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ int	parse_cam(char **spl_str, t_list **cam, t_res *res)
 		ft_parse_error("wrong camera id");
 	cam_node->id = 'c';
 	ass_coords(spl_str[1], &cam_node->coords);
-	ass_coords(spl_str[2], &cam_node->vect_vecs);
-	cam_node ->vect_vecs = ft_normalize(cam_node->vect_vecs);
+	ass_coords(spl_str[2], &cam_node->ori);
+	cam_node->ori = ft_normalize(cam_node->ori);
 	cam_node->fov = ft_atoi(spl_str[3]);
 	if (cam_node->fov < 0)
 		cam_node->fov = 0;

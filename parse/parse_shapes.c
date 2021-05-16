@@ -6,7 +6,7 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/03 13:40:31 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/05/14 15:42:53 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/05/16 22:24:12 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int	parse_plane(char **split, t_list **plane_lst)
 	plane_node->id = PLANE;
 	ass_coords(split[1], &plane_node->coords);
 	ass_coords(split[2], &plane_node->orient);
+	plane_node->orient = ft_normalize(plane_node->orient);
 	ass_colors(split[3], &plane_node->colors);
 	ft_color_check(&plane_node->colors);
 	ft_lstadd_back(plane_lst, ft_lstnew(plane_node));
@@ -60,6 +61,7 @@ int	parse_square(char **split, t_list **square_lst)
 	square_node->id = SQUARE;
 	ass_coords(split[1], &square_node->center);
 	ass_coords(split[2], &square_node->orient);
+	square_node->orient = ft_normalize(square_node->orient);
 	square_node->side_size = ft_atof(split[3]);
 	ass_colors(split[4], &square_node->colors);
 	ft_color_check(&square_node->colors);
@@ -79,6 +81,7 @@ int	parse_cylinder(char **split, t_list **cylinder_lst)
 	cylinder_node->id = CYLINDER;
 	ass_coords(split[1], &cylinder_node->center);
 	ass_coords(split[2], &cylinder_node->ori);
+	cylinder_node->ori = ft_normalize(cylinder_node->ori);
 	cylinder_node->r = ft_atof(split[3]) / 2;
 	cylinder_node->height = ft_atof(split[4]);
 	ass_colors(split[5], &cylinder_node->colors);

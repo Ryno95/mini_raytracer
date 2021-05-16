@@ -6,7 +6,7 @@
 /*   By: rmeiboom <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/02 13:38:01 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/05/16 15:49:04 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/05/16 22:21:23 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ typedef struct s_camera
 {
 	unsigned char	id;
 	t_vec			coords;
-	t_vec			vect_vecs;
+	t_vec			ori;
 	t_rgb			colors;
 	unsigned char	fov;
 	double			cam_dist;
