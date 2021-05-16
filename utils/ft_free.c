@@ -6,18 +6,17 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/05/12 18:22:02 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/05/14 16:03:07 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/05/16 16:16:22 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include <stdio.h>
 #include <stdlib.h>
 #include "../headers/ft_structure.h"
 
-void ft_exit(t_env *env, char *description)
+void	ft_exit(t_env *env, char *description)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < CYLINDER)
@@ -29,6 +28,7 @@ void ft_exit(t_env *env, char *description)
 	ft_lstclear(&env->cam_list, free);
 	if (env->col_array)
 		free(env->col_array);
+	close(env->fd);
 	printf("%s\n", description);
 	exit(1);
 }

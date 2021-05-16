@@ -6,7 +6,7 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/05/14 17:47:45 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/05/14 17:48:01 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/05/16 16:13:21 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 #include "../headers/minirt.h"
 #include "../headers/ft_defines.h"
 
-void create_bmp_file_header(t_bmp_file_header *fh, int width, int height)
+void	create_bmp_file_header(t_bmp_file_header *fh, int width, int height)
 {
 	ft_bzero(fh, sizeof(t_bmp_file_header));
 	fh->name[0] = 'B';
@@ -27,8 +27,7 @@ void create_bmp_file_header(t_bmp_file_header *fh, int width, int height)
 	fh->offset = ALL_HEADER_SIZE;
 }
 
-
-void create_bmp_info_header(t_bmp_info_header *ih, int width, int height)
+void	create_bmp_info_header(t_bmp_info_header *ih, int width, int height)
 {
 	ft_bzero(ih, sizeof(t_bmp_info_header));
 	ih->info_header_size = INFO_HEADER_SIZE;
@@ -38,22 +37,22 @@ void create_bmp_info_header(t_bmp_info_header *ih, int width, int height)
 	ih->bit_count = BITCOUNT;
 }
 
-int write_bmp_header(int fd, int width, int height)
+int	write_bmp_header(int fd, int width, int height)
 {
-	t_bmp_file_header *fh;
-	t_bmp_info_header *ih;
+	t_bmp_file_header	*fh;
+	t_bmp_info_header	*ih;
 
-	fh = malloc(1 * sizeof(t_bmp_file_header));
-	ih = malloc(1 * sizeof(t_bmp_info_header));
+	fh = (t_bmp_file_header *)malloc(1 * sizeof(t_bmp_file_header));
+	ih = (t_bmp_info_header *)malloc(1 * sizeof(t_bmp_info_header));
 	if (!fh || !ih)
 		return (0);
 	create_bmp_info_header(ih, width, height);
-	create_bmp_file_header(fh, width, height);	
+	create_bmp_file_header(fh, width, height);
 	if (write(fd, fh->name, BMP_NAME_BYTES) != BMP_NAME_BYTES)
 		return (0);
-	if (write(fd, (char*)fh + 4, FILE_HEADER_SIZE - BMP_NAME_BYTES) != 12)
+	if (write(fd, (char *)fh + 4, FILE_HEADER_SIZE - BMP_NAME_BYTES) != 12)
 		return (0);
-	if(write(fd, ih, sizeof(t_bmp_info_header)) != sizeof(t_bmp_info_header))
+	if (write(fd, ih, sizeof(t_bmp_info_header)) != sizeof(t_bmp_info_header))
 		return (0);
 	free(fh);
 	free(ih);

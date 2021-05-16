@@ -6,7 +6,7 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/03 13:28:19 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/05/15 17:24:43 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/05/16 16:09:47 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,12 +78,13 @@ int	main(int argc, char *argv[])
 	ft_protection_checks(argc, argv, &env);
 	env.col_array = (t_3rgb *)malloc(env.res.y * env.res.x * sizeof(t_3rgb));
 	if (!env.col_array)
-		ft_parse_error("You fucked up!");
+		ft_parse_error("Couldn't allocate mem to parse");
 	if (ft_render(&env) != 1)
 		ft_parse_error("Rendering failed");
 	if (env.save_to_bmp == 1)
 	{
-		ft_put_img_to_bmp("minirt.bmp", &env, env.col_array);
+		if(!ft_put_img_to_bmp("minirt.bmp", &env, env.col_array))
+			ft_exit(&env, "Output to bmp failed");
 		close(env.fd);
 		ft_exit(&env, "Succesful output to .bmp");
 	}

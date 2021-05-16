@@ -6,7 +6,7 @@
 /*   By: rmeiboom <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/07 20:49:30 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/05/13 12:58:37 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/05/16 16:01:16 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ t_vec	vec_divide(t_vec a, double factor)
 	return (a);
 }
 
-t_vec vec_by_vec(t_vec a, t_vec b)
+t_vec	vec_by_vec(t_vec a, t_vec b)
 {
 	a.x *= b.x;
 	a.y *= b.y;

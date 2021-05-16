@@ -6,7 +6,7 @@
 /*   By: rmeiboom <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/18 20:36:36 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/05/15 13:41:06 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/05/16 16:02:01 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,3 @@ t_vec	ft_normalize(t_vec vec)
 	vec.z /= vl;
 	return (vec);
 }
-

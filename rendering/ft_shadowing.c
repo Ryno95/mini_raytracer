@@ -6,7 +6,7 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/14 13:40:45 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/05/15 17:56:45 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/05/16 15:49:51 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,42 +16,36 @@
 t_ray	ft_shadow_ray(t_light *light, t_vec *hitpoint)
 {
 	t_ray	ray;
-	
+
 	ray.origin = *hitpoint;
 	ray.direction = ft_normalize(vec_minus(light->coords, ray.origin));
 	return (ray);
 }
 
-static void	ft_calculate_lighting()
-{
-	
-}
-
 t_rgb	ft_shader(t_env *env, t_hit *hitp)
 {
-	t_list *cursor = env->light;
-	t_light *light;
-	t_hit	shadow_check;
-	t_ray	shadow_ray;
-	t_rgb	total_lights;
-	float intensity;
-	t_rgb truelight;
+	t_list			*cursor;
+	double			vect_len;
+	t_light_solver	l;
 
-	total_lights = env->amb_light.colors;
+	cursor = env->light;
+	l.total_lights = env->amb_light.colors;
 	while (cursor)
 	{
-		light = ((t_light *)(cursor->content));
-		shadow_ray = ft_shadow_ray(light, &hitp->hitpoint);
-		shadow_check.near = INFINITY;
-		truelight = light->colors;
-		if(!(ft_intersect(shadow_ray, env->shapes, &shadow_check) && shadow_check.near < ft_vec_len(vec_minus(light->coords, hitp->hitpoint))))
+		l.light = ((t_light *)(cursor->content));
+		l.shadow_ray = ft_shadow_ray(l.light, &hitp->hitpoint);
+		l.shadow_check.near = INFINITY;
+		l.truelight = l.light->colors;
+		vect_len = ft_vec_len(vec_minus(l.light->coords, hitp->hitpoint));
+		if (!(ft_intersect(l.shadow_ray, env->shapes, &l.shadow_check) \
+			&& l.shadow_check.near < vect_len))
 		{
-			intensity = ft_dot_product(shadow_ray.direction, hitp->normal);
-			intensity = intensity * light->brightness;
-			ft_color_multi(&truelight, intensity);
-			total_lights = ft_colors_add(total_lights, truelight);
+			l.intensity = ft_dot_product(l.shadow_ray.direction, hitp->normal);
+			l.intensity = l.intensity * l.light->brightness;
+			ft_color_multi(&l.truelight, l.intensity);
+			l.total_lights = ft_colors_add(l.total_lights, l.truelight);
 		}
 		cursor = cursor->next;
 	}
-	return (ft_color_times_color(hitp->color, total_lights));
+	return (ft_color_times_color(hitp->color, l.total_lights));
 }

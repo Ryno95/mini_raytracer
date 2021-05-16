@@ -6,7 +6,7 @@
 /*   By: rmeiboom <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/11 22:31:15 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/05/15 14:13:48 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/05/16 16:08:09 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ int	ft_destroy_window(t_img *img)
 
 void	ft_put_img_to_window(t_img *img, t_env *env, t_3rgb *cols)
 {
-	int i;
-	int j;
-	int pos;
-	int color;
+	int	i;
+	int	j;
+	int	pos;
+	int	color;
 
 	if (env->filters.sepia)
 		cols = ft_sepia(cols, env->res.x, env->res.y);
@@ -46,23 +46,20 @@ void	ft_put_img_to_window(t_img *img, t_env *env, t_3rgb *cols)
 	mlx_put_image_to_window(img->mlx_ptr, img->wdw_ptr, img->img_ptr, 0, 0);
 }
 
-
 int	keypress(int kc, t_img *img)
 {
 	if (kc == TAB)
 		ft_switch_camera(img);
-	else 
-	if (kc == ESC)
+	else if (kc == ESC)
 		ft_destroy_window(img);
 	return (0);
 }
 
-
 int	ft_run_mlx(t_env *env)
 {
-	t_img *img;
-	
-	img = (t_img*)ft_calloc(sizeof(t_img), 1); // remember to free
+	t_img	*img;
+
+	img = (t_img *)ft_calloc(sizeof(t_img), 1);
 	if (!img)
 		return (0);
 	img->mlx_ptr = mlx_init();
@@ -81,5 +78,5 @@ int	ft_run_mlx(t_env *env)
 	mlx_hook(img->wdw_ptr, 17, 1l << 17, ft_destroy_window, img);
 	mlx_hook(img->wdw_ptr, 2, 1l << 0, keypress, img);
 	mlx_loop(img->mlx_ptr);
-	return (0);
+	return (1);
 }

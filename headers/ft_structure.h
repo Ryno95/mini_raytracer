@@ -6,7 +6,7 @@
 /*   By: rmeiboom <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/02 13:38:01 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/05/14 17:36:58 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/05/16 15:49:04 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,6 +157,16 @@ typedef struct s_impact_point
 	int			object_id;
 	double		near;
 }				t_hit;
+
+typedef struct	s_ligth_solver
+{
+	t_light *light;
+	t_hit	shadow_check;
+	t_ray	shadow_ray;
+	t_rgb	total_lights;
+	float intensity;
+	t_rgb truelight;
+}				t_light_solver;
 
 typedef struct s_filters
 {
