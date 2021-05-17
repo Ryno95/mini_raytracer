@@ -6,7 +6,7 @@
 /*   By: rmeiboom <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/05/15 13:59:15 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/05/16 21:28:28 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/05/17 22:23:14 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	ft_switch_camera(t_img *img)
 {
 	if (img->env->cam_list->next)
 		img->env->cam_list = img->env->cam_list->next;
-	ft_render(img->env);
+	ft_threading_render(img->env);
 	ft_put_img_to_window(img, img->env, img->env->col_array);
 	return ;
 }

@@ -6,7 +6,7 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/05/12 18:15:59 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/05/17 20:16:43 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/05/17 22:25:18 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,6 @@
 # define BITCOUNT 24
 # define BMP_NAME_BYTES 2
 # define FILE_PERMISSIONS 0664
-
-# define MAX_WIDTH 2560
-# define MAX_HEIGHT 1440
 
 # define ESC 53
 # define TAB 48

@@ -6,7 +6,7 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/03 10:09:33 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/05/15 17:41:47 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/05/17 22:45:29 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ int		parse(char *file_name, t_env *env);
 int		parse_tree(t_env *env);
 void	ft_parse_error(char *err_desc);
 
-int		parse_res(char **spl_str, t_res *res, int bmp);
+int		parse_res(char **spl_str, t_res *res);
 int		parse_amb_light(char **spl_str, t_amb_light *am_lt);
-int		parse_cam(char **spl_str, t_list **cam, t_res *res);
+int		parse_cam(char **spl_str, t_list **cam);
 int		parse_light(char **split, t_list **light_lst);
 
 int		parse_sphere(char **split, t_list **sphere_lst);

@@ -6,15 +6,15 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/03 13:31:58 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/05/16 22:21:23 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/05/17 22:45:16 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/minirt.h"
+#include "../mlx/mlx.h"
 #include <math.h>
 
-// Check max screen res!
-int	parse_res(char **spl_str, t_res *res, int bmp)
+int	parse_res(char **spl_str, t_res *res)
 {
 	if (!spl_str || !res || ft_str_arr_len(spl_str) != 3)
 		ft_parse_error("resolution, safety checks");
@@ -23,8 +23,7 @@ int	parse_res(char **spl_str, t_res *res, int bmp)
 	res->id = spl_str[0][0];
 	res->x = ft_atoi(spl_str[1]);
 	res->y = ft_atoi(spl_str[2]);
-	if ((res->x < 0 || res->y < 0) || \
-		((res->x > MAX_WIDTH || res->y > MAX_HEIGHT) && !bmp))
+	if (res->x <= 0 || res->y <= 0)
 		ft_parse_error("resolution, invalid width and height");
 	return (0);
 }
@@ -45,7 +44,7 @@ int	parse_amb_light(char **spl_str, t_amb_light *am_lt)
 	return (0);
 }
 
-int	parse_cam(char **spl_str, t_list **cam, t_res *res)
+int	parse_cam(char **spl_str, t_list **cam)
 {
 	t_camera	*cam_node;
 
@@ -63,8 +62,6 @@ int	parse_cam(char **spl_str, t_list **cam, t_res *res)
 		cam_node->fov = 0;
 	else if (cam_node->fov > 180)
 		cam_node->fov = 180;
-	cam_node->cam_dist = 0.5 * (res->x / 2)
-		/ tan((cam_node->fov * (M_PI / 180)) / 2);
 	ft_lstadd_front(cam, ft_lstnew(cam_node));
 	return (0);
 }
