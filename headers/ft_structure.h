@@ -6,7 +6,7 @@
 /*   By: rmeiboom <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/02 13:38:01 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/05/16 22:21:23 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/05/17 20:17:57 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,14 +158,14 @@ typedef struct s_impact_point
 	double		near;
 }				t_hit;
 
-typedef struct	s_ligth_solver
+typedef struct s_ligth_solver
 {
-	t_light *light;
+	t_light	*light;
 	t_hit	shadow_check;
 	t_ray	shadow_ray;
 	t_rgb	total_lights;
-	float intensity;
-	t_rgb truelight;
+	float 	intensity;
+	t_rgb 	truelight;
 }				t_light_solver;
 
 typedef struct s_filters
@@ -234,7 +234,7 @@ typedef struct s_bmp_info_header
 	uint32_t	important;
 }				t_bmp_info_header;
 
-typedef	struct s_thread
+typedef struct s_thread
 {
 	pthread_t	tid;
 	int			id;

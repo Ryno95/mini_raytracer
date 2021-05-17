@@ -6,12 +6,13 @@
 /*   By: rmeiboom <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/11 22:31:15 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/05/16 16:08:09 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/05/17 17:59:15 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/minirt.h"
 #include "../mlx/mlx.h"
+#include <math.h>
 
 int	ft_destroy_window(t_img *img)
 {

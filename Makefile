@@ -6,7 +6,7 @@
 #    By: rmeiboom <marvin@codam.nl>                   +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/05/15 16:56:30 by rmeiboom      #+#    #+#                  #
-#    Updated: 2021/05/15 17:49:35 by rmeiboom      ########   odam.nl          #
+#    Updated: 2021/05/17 21:56:21 by rmeiboom      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,7 +58,8 @@ all: $(NAME)
 
 $(NAME): $(O_FILES)
 		make -C $(LIBFTDIR)
-		make -C $(MLXDIR)		
+		make -C $(MLXDIR)
+		cp ./mlx/libmlx.dylib .
 		$(CC) $(CFLAGS) $(O_FILES) $(LIBS) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 
 %.o: %.c
@@ -73,6 +74,7 @@ clean:
 
 fclean: clean
 		rm -f $(NAME)
+		rm -f libmlx.dylib
 		make -C $(LIBFTDIR) fclean
 		make -C $(MLXDIR) clean
 

@@ -6,7 +6,7 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/03 13:28:19 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/05/16 16:09:47 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/05/17 21:59:10 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int	main(int argc, char *argv[])
 		ft_parse_error("Rendering failed");
 	if (env.save_to_bmp == 1)
 	{
-		if(!ft_put_img_to_bmp("minirt.bmp", &env, env.col_array))
+		if (!ft_put_img_to_bmp("minirt.bmp", &env, env.col_array))
 			ft_exit(&env, "Output to bmp failed");
 		close(env.fd);
 		ft_exit(&env, "Succesful output to .bmp");
