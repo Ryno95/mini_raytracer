@@ -6,13 +6,13 @@
 #    By: rmeiboom <marvin@codam.nl>                   +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/05/15 16:56:30 by rmeiboom      #+#    #+#                  #
-#    Updated: 2021/05/17 21:56:21 by rmeiboom      ########   odam.nl          #
+#    Updated: 2021/05/29 11:11:54 by rmeiboom      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc
-CFLAGS = -Wall -Werror  -Wextra  -g -fsanitize=address
-NAME = minirt
+CFLAGS = -Wall -Werror -Wextra
+NAME = miniRT
 LIBS = libft/libft.a
 LIBFTDIR = libft/
 MLXDIR = mlx/

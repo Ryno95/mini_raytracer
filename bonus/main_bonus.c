@@ -6,19 +6,7 @@
 /*   By: rmeiboom <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/05/15 13:59:15 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/05/17 22:23:14 by rmeiboom      ########   odam.nl         */
-/*                                                                            */
-/* ************************************************************************** */
-
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2021/03/03 13:28:19 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/05/15 13:55:56 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/05/21 13:42:52 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,10 +75,12 @@ int	main(int argc, char *argv[])
 {
 	static t_env	env;
 
+	ft_bzero((void *)&env, sizeof(t_env));
 	ft_protection_checks(argc, argv, &env);
 	env.col_array = (t_3rgb *)malloc(env.res.y * env.res.x * sizeof(t_3rgb));
 	if (!env.col_array)
 		ft_parse_error("Couldn't allocate mem to parse");
+	ft_check_screen_size(&env);
 	ft_threading_render(&env);
 	if (env.save_to_bmp == 1)
 	{

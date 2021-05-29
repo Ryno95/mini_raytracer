@@ -6,7 +6,7 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/03 13:31:58 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/05/17 22:45:16 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/05/21 12:21:30 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,8 @@ int	parse_cam(char **spl_str, t_list **cam)
 	ass_coords(spl_str[2], &cam_node->ori);
 	cam_node->ori = ft_normalize(cam_node->ori);
 	cam_node->fov = ft_atoi(spl_str[3]);
-	if (cam_node->fov < 0)
-		cam_node->fov = 0;
-	else if (cam_node->fov > 180)
-		cam_node->fov = 180;
+	if (cam_node->fov < 0 || cam_node->fov > 180)
+		ft_parse_error("camera fov should be in range 0-180");
 	ft_lstadd_front(cam, ft_lstnew(cam_node));
 	return (0);
 }

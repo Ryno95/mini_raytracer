@@ -6,7 +6,7 @@
 /*   By: rmeiboom <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/05/15 17:49:40 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/05/17 22:47:25 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/05/29 11:00:51 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,18 +71,21 @@ int	ft_intersect(t_ray ray, t_list **shape_list, t_hit *hitp)
 t_rgb	ft_tracer(int x, int y, t_env *env)
 {
 	t_hit	hitp;
-	t_ray	primary_ray;
+	t_ray	p_ray;
 	t_rgb	color;
 
 	x = x - env->res.x * 0.5;
 	y = env->res.y * 0.5 - y;
 	hitp.near = INFINITY;
 	ft_color_multi(&color, 0);
-	primary_ray = ft_primary_ray((t_camera *)(env->cam_list->content), x, y);
-	if (ft_intersect(primary_ray, (void *)env->shapes, &hitp))
+	if (env->cam_list)
 	{
-		hitp.hitpoint = calc_hitpoint(&primary_ray, (hitp.near - 0.001));
-		color = ft_shader(env, &hitp);
+		p_ray = ft_primary_ray((t_camera *)(env->cam_list->content), x, y);
+		if (ft_intersect(p_ray, (void *)env->shapes, &hitp))
+		{
+			hitp.hitpoint = calc_hitpoint(&p_ray, (hitp.near - 0.001));
+			color = ft_shader(env, &hitp);
+		}	
 	}
 	return (color);
 }

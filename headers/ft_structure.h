@@ -6,7 +6,7 @@
 /*   By: rmeiboom <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/02 13:38:01 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/05/17 20:17:57 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/05/19 10:46:16 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,8 +164,8 @@ typedef struct s_ligth_solver
 	t_hit	shadow_check;
 	t_ray	shadow_ray;
 	t_rgb	total_lights;
-	float 	intensity;
-	t_rgb 	truelight;
+	float	intensity;
+	t_rgb	truelight;
 }				t_light_solver;
 
 typedef struct s_filters
@@ -192,6 +192,7 @@ typedef struct s_env
 	int			save_to_bmp;
 	int			fd;
 	t_filters	filters;
+	void		*mlx_ptr;
 }				t_env;
 
 typedef struct s_img

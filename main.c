@@ -6,7 +6,7 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/03 13:28:19 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/05/17 21:59:10 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/05/19 10:39:06 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,11 @@ void	ft_check_args(int argc, char *argv[], t_env *env)
 void	ft_protection_checks(int argc, char *argv[], t_env *env)
 {
 	if (argc < 2 || argc > 4)
-		ft_parse_error("Usage: ./executable FILE.rt [--save] [-filter:s/g]");
+		ft_parse_error(USAGE);
 	if (argc == 3 || argc == 4)
 		ft_check_args(argc, argv, env);
 	if (ft_strncmp(&argv[1][ft_strlen(argv[1]) - 3], FILE_EXTENSION, 4) != 0)
-		ft_parse_error("Usage: ./executable FILE.rt [--save] [-filter:s/g]");
+		ft_parse_error(USAGE);
 	if (parse(argv[1], env) == -1)
 		ft_parse_error("");
 }
@@ -79,6 +79,7 @@ int	main(int argc, char *argv[])
 	env.col_array = (t_3rgb *)malloc(env.res.y * env.res.x * sizeof(t_3rgb));
 	if (!env.col_array)
 		ft_parse_error("Couldn't allocate mem to parse");
+	ft_check_screen_size(&env);
 	if (ft_render(&env) != 1)
 		ft_parse_error("Rendering failed");
 	if (env.save_to_bmp == 1)

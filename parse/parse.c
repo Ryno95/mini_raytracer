@@ -6,7 +6,7 @@
 /*   By: rmeiboom <rmeiboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/03 13:27:17 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/05/17 22:49:24 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/05/21 13:41:26 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,13 +69,15 @@ int	parse(char *file_name, t_env *env)
 		if (*line != '\0')
 		{
 			env->spl_str = ft_split(line, ' ');
-			if (!env->spl_str)
-				return (-1);
+			if (!env->spl_str || ret < 0)
+				ft_exit(env, "Error\nCan't split invalid line");
 			parse_tree(env);
 			free_split(env->spl_str);
 		}
 		free(line);
 	}
+	if (!env->res.id)
+		ft_exit(env, "Error\nNo resolution given!");
 	ft_calc_cam_dist(env);
 	return (0);
 }

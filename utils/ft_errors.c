@@ -6,7 +6,7 @@
 /*   By: rmeiboom <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/06 21:48:19 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/04/30 11:58:10 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/05/21 12:35:50 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,6 @@
 
 void	ft_parse_error(char *err_desc)
 {
-	printf("Error parsing %s\n", err_desc);
+	printf("Error\n%s\n", err_desc);
 	exit(1);
 }

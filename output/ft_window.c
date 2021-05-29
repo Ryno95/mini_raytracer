@@ -6,28 +6,19 @@
 /*   By: rmeiboom <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/11 22:31:15 by rmeiboom      #+#    #+#                 */
-/*   Updated: 2021/05/17 22:24:34 by rmeiboom      ########   odam.nl         */
+/*   Updated: 2021/05/19 10:49:15 by rmeiboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/minirt.h"
 #include "../mlx/mlx.h"
 #include <math.h>
+#include <stdio.h>
 
 static int	ft_destroy_window(t_img *img)
 {
 	mlx_destroy_window(img->mlx_ptr, img->wdw_ptr);
 	exit(1);
-}
-
-static void	ft_check_window_size(t_img *img, int y, int x)
-{
-	int max_width;
-	int max_height;
-	
-	mlx_get_screen_size(img->mlx_ptr, &max_width, &max_height);
-	if (x > max_width || y > max_height)
-		ft_mlx_error("invalid scrren res");
 }
 
 void	ft_put_img_to_window(t_img *img, t_env *env, t_3rgb *cols)
@@ -73,10 +64,7 @@ int	ft_run_mlx(t_env *env)
 	img = (t_img *)ft_calloc(sizeof(t_img), 1);
 	if (!img)
 		return (0);
-	img->mlx_ptr = mlx_init();
-	if (!img->mlx_ptr)
-		ft_mlx_error("Couldn't init mlx");
-	ft_check_window_size(img, env->res.y, env->res.x);
+	img->mlx_ptr = env->mlx_ptr;
 	img->wdw_ptr = mlx_new_window(img->mlx_ptr, env->res.x, env->res.y, "RT");
 	if (img->img_ptr)
 		mlx_destroy_image(img->mlx_ptr, img->img_ptr);
